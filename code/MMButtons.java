@@ -1,4 +1,3 @@
-
 import org.jsfml.window.*;
 import org.jsfml.window.event.*;
 import org.jsfml.graphics.*;
@@ -15,7 +14,7 @@ public class MMButtons
         rect.setPosition(xPos, yPos); // sets x and y position
         
     }
-    public void Draw(RenderWindow window)
+    public void draw(RenderWindow window)
     {
         window.draw(rect);
     }

@@ -1,19 +1,16 @@
-package MenuMaker;
 import org.jsfml.window.*;
 import org.jsfml.window.event.*;
 import org.jsfml.graphics.*;
 import org.jsfml.system.*;
 
-
-class MenuMaker
+public class MenuMaker
 {
     public static void main(String[] args)
     {   
         int res1 = 1000, res2 = 600; //used for setting resolution of window
         int x = 5, y = 10, xBPos = 100, yBPos = 100;
-        MMWindow window = new MMWindow(res1,res2,"Main menu");
+        RenderWindow window = new MMWindow(res1,res2,"Main menu");
         MMButtons button = new MMButtons(x, y,xBPos, yBPos);
-        
 
         while(window.isOpen())
         {

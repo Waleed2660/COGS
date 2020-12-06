@@ -3,7 +3,7 @@ import org.jsfml.window.event.*;
 import org.jsfml.graphics.*;
 import org.jsfml.system.*;
 
-public class MMWindow
+public class MMWindow extends RenderWindow
 {
     public MMWindow(int res1, int res2, String name)
     {
