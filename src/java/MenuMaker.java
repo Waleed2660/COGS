@@ -8,14 +8,14 @@ public class MenuMaker
     public static void main(String[] args)
     {   
         int res1 = 1000, res2 = 600; //used for setting resolution of window
-        int x = 5, y = 10, xBPos = 100, yBPos = 100; //used for setting button size and position
+        int x = 100, y = 100, xBPos = 100, yBPos = 100; //used for setting button size and position
         MMWindow window = new MMWindow(res1,res2,"Main menu");
         MMButtons button = new MMButtons(x, y,xBPos, yBPos);
 
         while(window.isOpen())
         {
             //add code to display buttons etc here / user interaction
-            window.clear();
+            window.clear(Color.BLUE);
             window.display();
             button.draw(window);
 
