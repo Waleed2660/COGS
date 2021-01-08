@@ -5,6 +5,11 @@ import org.jsfml.system.*;
 
 public class MMWindow extends RenderWindow
 {
+    /** 
+         * Used by MenuMaker
+         * <p>
+         * Used to create the window in the application.
+    */
     public MMWindow(int res1, int res2, String name)
     {
         super();

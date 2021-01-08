@@ -5,6 +5,14 @@ import org.jsfml.system.*;
 
 public class MenuMaker
 {
+    /** 
+         * Creates the main menu (for now very basic)
+         * Must be first called upon game being run.
+         * <p>
+         * MenuMaker makes use of MMButtons and MMwindow
+         * 
+         * @param int user specified resolution 
+    */
     public static void main(String[] args)
     {   
         int res1 = 1024, res2 = 640; //used for setting resolution of window

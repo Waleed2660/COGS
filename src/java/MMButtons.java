@@ -5,6 +5,11 @@ import org.jsfml.system.*;
 
 public class MMButtons extends RectangleShape
 {
+    /** 
+         * Used by MenuMaker
+         * <p>
+         * Extends RectangleShape in order to make shapes that will be used as buttons
+    */
     public MMButtons(float x,float y,float xPos, float yPos)
     {
         super(new Vector2f(x,y)); 
