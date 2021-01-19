@@ -73,7 +73,7 @@ public class MenuMaker
     public void buttonPressed(float MouseX, float MouseY){
         for (TextManager button : buttons) {
             // Starts Game
-            if (button.blinkButton(MouseX, MouseY, Color.RED) && button.getString().equals("Exit")) {
+            if (button.blinkButton(MouseX, MouseY, Color.RED) && button.getString().equals("Start")) {
                 // Level Selector Class can be called here
             } else
                 // Closes Window
