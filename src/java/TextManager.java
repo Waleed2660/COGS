@@ -25,32 +25,18 @@ public class TextManager extends Text{
             this.setFont(arial);
             this.setOrigin(0, 0);          // center of rectangle
             this.setPosition(xPos, yPos);       // sets x and y position
-
-            System.out.println("TEXT: "+ this.getLocalBounds());
         }
 
         /**
          * This method creates Font from given .ttf file
          */
         private void createFont() {
-            String filePath = "resources/arial.ttf";
+            String filePath = "resources/ostrich-regular.ttf";
             try {
                 arial.loadFromFile(Paths.get(filePath));
             } catch (IOException e) {
                 System.out.println("Couldn't load Font for textHandler");
             }
-        }
-
-        /**
-         * Updates Position for text
-         * @param x     width of text
-         * @param y     height of text
-         * @param xPos  Position on x-axis
-         * @param yPos  Position on y-axis
-         */
-        public void updateText(float xPos, float yPos){
-           // this.setPosition(xPos, yPos);       // sets x and y position
-            this.setCharacterSize((int) (xPos/5 * 0.12));
         }
 
     /** Returns true if cursor is within the boundaries of Text Box
