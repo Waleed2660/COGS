@@ -8,17 +8,17 @@ import org.jsfml.graphics.*;
 //javac -d .\test\build\ -cp .\lib\jsfml.jar;.\src\java\ .\test\java\LevelTest.java
 //java -cp .\test\build\;.\lib\jsfml.jar LevelTest
 
+//The crash has something to do with mouse input
+
 public class LevelTest {
     public static void main (String[] args)
     {
         RenderWindow window = new RenderWindow(new VideoMode(1024, 640), "Test");
-        Level level3 = new Level("Level3");
+        Level level3 = new Level("Level1");
         window.setFramerateLimit(30);
         window.clear(Color.WHITE);
         View v = new View(new FloatRect(0, 0, 1024, 640));
         window.setView(v);
-
-        GameObject background = new GameObject(0, 0, "./Levels/Level3/assets/BackgroundMoon.png");
 
         drawAll(level3.objectList, window);
 
@@ -58,7 +58,6 @@ public class LevelTest {
                 if(e.type == Event.Type.CLOSED)
                 {
                     window.close();
-                    //IMPORTANT CLOSES WINDOW UPON PRESSING CLOSE DO NOT ALTER
                 }
             }
         }
