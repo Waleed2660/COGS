@@ -5,10 +5,10 @@ import org.jsfml.graphics.*;
 
 public class MenuMaker
 {
-    private int width = 1024, height = 640; //used for setting resolution of window
+    private int width = 1920, height = 1080; //used for setting resolution of window
     private int xBPos = width/2, yBPos = height/2; //used for setting button size and position
     private MMWindow window = new MMWindow(width,height,"Main menu");
-    private TextManager buttons[] = new TextManager[2];     // Hold buttons for Menu
+    private TextManager buttons[] = new TextManager[4];     // Hold buttons for Menu
 
     /**
      * Creates the main menu (for now very basic)
@@ -19,10 +19,11 @@ public class MenuMaker
     public MenuMaker(){
         // Origin parameters for text
         float originX = width * (float)(0.07), originY = height * (float)(0.05);
-        buttons[0] = new TextManager("Start",originX,originY, xBPos/(float)3, yBPos+80);
-        buttons[1] = new TextManager("Exit",originX,originY, xBPos/(float)3, yBPos+((int)2.2*80));
+        buttons[0] = new TextManager("Start",originX,originY, xBPos/(float)6, yBPos+80);
+        buttons[1] = new TextManager("Help",originX,originY, xBPos/(float)6, yBPos+(2*80));
+        buttons[2] = new TextManager("Settings",originX,originY, xBPos/(float)6, yBPos+(3*80));
+        buttons[3] = new TextManager("Exit",originX,originY, xBPos/(float)6, yBPos+(4*80));
 
-        System.out.println("Button bounds: "+buttons[0].getLocalBounds().width+" , "+buttons[0].getLocalBounds().height);
 
         while(window.isOpen()) {
             // Real-Time Location parameters for Cursor
@@ -47,11 +48,7 @@ public class MenuMaker
                     //code for what happens when the mouse leaves the window
                 }
                 if(event.type == Event.Type.RESIZED) {
-                    //need to look up how to find the exterior window size and resize menu window size
-
-                    for (TextManager button : buttons){
-                        button.updateText(window.getSize().x,window.getSize().y);
-                    }
+                   //need to look up how to find the exterior window size and resize menu window size
                 }
                 if(event.type == Event.Type.MOUSE_BUTTON_PRESSED) {
                     // Clickable Button
@@ -75,11 +72,22 @@ public class MenuMaker
             // Starts Game
             if (button.blinkButton(MouseX, MouseY, Color.RED) && button.getString().equals("Start")) {
                 // Level Selector Class can be called here
-            } else
-                // Closes Window
-                if (button.blinkButton(MouseX, MouseY, Color.RED) && button.getString().equals("Exit")) {
-                    window.close();
-                }
+            }
+            // Opens Help Menu
+            else
+            if (button.blinkButton(MouseX, MouseY, Color.RED) && button.getString().equals("Help")) {
+
+            }
+            // Opens Settings
+            else
+            if (button.blinkButton(MouseX, MouseY, Color.RED) && button.getString().equals("Settings")) {
+
+            }
+            // Closes Window
+            else
+            if (button.blinkButton(MouseX, MouseY, Color.RED) && button.getString().equals("Exit")) {
+                window.close();
+            }
         }
     }
 
