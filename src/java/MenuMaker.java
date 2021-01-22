@@ -1,11 +1,13 @@
-import org.jsfml.window.*;
-import org.jsfml.window.event.*;
-import org.jsfml.graphics.*;
-
+import org.jsfml.graphics.Color;
+import org.jsfml.window.Keyboard;
+import org.jsfml.window.Mouse;
+import org.jsfml.window.event.Event;
+import java.awt.*;
 
 public class MenuMaker
 {
-    private int width = 1920, height = 1080; //used for setting resolution of window
+    private Dimension screenRes = Toolkit.getDefaultToolkit().getScreenSize();
+    private int width = screenRes.width, height = screenRes.height; //used for setting resolution of window
     private int xBPos = width/2, yBPos = height/2; //used for setting button size and position
     private MMWindow window = new MMWindow(width,height,"Main menu");
     private TextManager buttons[] = new TextManager[4];     // Hold buttons for Menu
@@ -18,12 +20,12 @@ public class MenuMaker
      * MenuMaker makes use of MMButtons and MMWindow
      */
     public MenuMaker(){
-        // Origin parameters for text
-        float originX = width * (float)(0.07), originY = height * (float)(0.05);
-        buttons[0] = new TextManager("Start",originX,originY, xBPos/(float)6, yBPos+80);
-        buttons[1] = new TextManager("Help",originX,originY, xBPos/(float)6, yBPos+(2*80));
-        buttons[2] = new TextManager("Settings",originX,originY, xBPos/(float)6, yBPos+(3*80));
-        buttons[3] = new TextManager("Exit",originX,originY, xBPos/(float)6, yBPos+(4*80));
+
+        // Creating Button
+        buttons[0] = new TextManager("Start",xBPos/(float)6, yBPos+(yBPos*(float)0.10));
+        buttons[1] = new TextManager("Help",xBPos/(float)6, yBPos+(yBPos*(float)0.25));
+        buttons[2] = new TextManager("Settings",xBPos/(float)6, yBPos+(yBPos*(float)0.40));
+        buttons[3] = new TextManager("Exit",xBPos/(float)6, yBPos+(yBPos*(float)0.55));
 
 
         while(window.isOpen()) {
@@ -31,7 +33,6 @@ public class MenuMaker
             float MouseX = Mouse.getPosition(window).x, MouseY = Mouse.getPosition(window).y;
 
             //add code to display buttons etc here / user interaction
-            window.clear(new Color(165,158,158));
             for (TextManager button : buttons) {
                 window.draw(button);    // Draws all buttons
             }
@@ -56,6 +57,9 @@ public class MenuMaker
                 if(event.type == Event.Type.MOUSE_BUTTON_PRESSED) {
                     // Clickable Button
                     buttonPressed(MouseX,MouseY);
+                }
+                if(Keyboard.isKeyPressed(Keyboard.Key.RIGHT)){
+
                 }
                 if(event.type == Event.Type.CLOSED || Keyboard.isKeyPressed(Keyboard.Key.ESCAPE)) {
                     window.close();
