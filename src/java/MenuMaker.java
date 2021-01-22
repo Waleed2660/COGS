@@ -19,13 +19,6 @@ public class MenuMaker
      * MenuMaker makes use of MMButtons and MMWindow
      */
     public MenuMaker(){
-        // Menu background
-        Sprites background = new Sprites("resources/ultrawide.jpg");
-        Sprites player = new Sprites("resources/m.jpg");
-        player.setPos(xBPos, yBPos);
-
-        Sprites player2 = new Sprites("resources/m.jpg");
-        player2.setPos(xBPos+500, yBPos);
 
         // Creating Button
         buttons[0] = new TextManager("Start",xBPos/(float)6, yBPos+(yBPos*(float)0.10));
@@ -39,7 +32,6 @@ public class MenuMaker
             float MouseX = Mouse.getPosition(window).x, MouseY = Mouse.getPosition(window).y;
 
             //add code to display buttons etc here / user interaction
-            window.draw(background);
             for (TextManager button : buttons) {
                 window.draw(button);    // Draws all buttons
             }
