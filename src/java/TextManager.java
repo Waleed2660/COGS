@@ -15,12 +15,12 @@ public class TextManager extends Text{
      * @param xPos  Position on x-axis
      * @param yPos  Position on y-axis
     */
-        public TextManager(String str, float x, float y, float xPos, float yPos) {
+        public TextManager(String str,float xPos, float yPos) {
             super();                            // creates an empty text
             createFont();
             this.setString(str);
-            this.setColor(Color.BLACK);
-            this.setCharacterSize((int) (xPos * 0.24));
+            this.setColor(Color.WHITE);
+            this.setCharacterSize((int)(xPos * 0.24));
             this.setStyle(Text.BOLD);
             this.setFont(arial);
             this.setOrigin(0, 0);          // center of rectangle
@@ -53,7 +53,7 @@ public class TextManager extends Text{
             return true;
         }
         else
-            this.setColor(Color.BLACK);
+            this.setColor(Color.WHITE);
         return false;
     }
 }
