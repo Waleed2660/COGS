@@ -4,13 +4,20 @@ import org.jsfml.graphics.*;
 import org.jsfml.system.Vector2f;
 
 /**
- * A class for representing a constant object in game. Should be improved. Could be ommited because sprite has bounds.
+ * A class for representing an object in game.
  */
 
 public class GameObject extends Sprite
 {
     private FloatRect hitBox;
 
+    /**
+     * Constructor for a game object with a texture
+     * 
+     * @param x position
+     * @param y position
+     * @param texturePath the path to the texture to set
+     */
     public GameObject(float x, float y, String texturePath)
     {
         super();

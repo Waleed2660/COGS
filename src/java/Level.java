@@ -14,6 +14,12 @@ public class Level
     private String levelNum;
     public ArrayList<GameObject> objectList = new ArrayList<GameObject>(); //public for now should improve the way to access it and change it eventually
 
+    //Arrays for different objects. could be usseful in the future but not right now
+    private ArrayList<FloatRect> ground = new ArrayList<FloatRect>();
+    private ArrayList<Enemy> enemies = new ArrayList<Enemy>();
+    private ArrayList<Platform> platforms = new ArrayList<Platform>();
+    private Player player;
+
     /**
      * Constructor for a level.
      * 
