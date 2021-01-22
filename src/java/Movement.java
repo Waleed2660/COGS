@@ -19,4 +19,9 @@ public class Movement extends RectangleShape // THIS WILL NEED TO CHANGE LATER O
         this.setPosition(100,100);
         this.setFillColor(Color.BLUE);
     }
+
+    private mvmt()
+    {
+        
+    }
 }

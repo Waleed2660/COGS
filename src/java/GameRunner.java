@@ -20,32 +20,15 @@ public class GameRunner
     public void run(MMWindow window)
     {
           float xlocl = 10, ylocl = 10;
-          boolean alt,ctrl,shift,system;
           Movement player = new Movement(xlocl,ylocl);
-          int x = 1;
-          String keystroke = "";
-          /*Keyboard.Key d = Keyboard.Key.valueOf("D");
-          Keyboard.Key a = Keyboard.Key.valueOf("A"); //this shit is going to be the death of me
-          Keyboard.Key w = Keyboard.Key.valueOf("W");
-          Keyboard.Key s = Keyboard.Key.valueOf("S");*/
-          //event kevent = event.KeyEvent;
-          Keyboard.Key space = Keyboard.Key.valueOf("SPACE");
-          Keyboard.Key d = Keyboard.Key.D;
-          Keyboard.Key a = Keyboard.Key.A;
-          Keyboard.Key s = Keyboard.Key.S;
-          Keyboard.Key w = Keyboard.Key.W;
           
-          while(x==1)
+          while(window.isOpen())
           {
                window.clear(Color.GREEN);
                window.draw(player);
                window.display();
                for(Event event : window.pollEvents())
-               {
-                    if(event.type == Event.Type.MOUSE_BUTTON_PRESSED)
-                    {
-                        System.out.println("Working");
-                    }         
+               {   
                     if(event.type == Event.Type.CLOSED)
                     {
                          window.close();
@@ -53,10 +36,7 @@ public class GameRunner
                     }
                     if(event.type == Event.Type.KEY_PRESSED)
                     {
-                         //WORKs NEED TO FIGURE OUT HOW TF TO MAKE THIS SHITTING THING KNOW WHICH KEY WAS PRESSED
-                         //if(event.KeyEvent() == d)
-                         keyPress();
-                         
+                         keyPress(); 
                     }
                }
           }
@@ -64,10 +44,22 @@ public class GameRunner
 
     public void keyPress()
     {
-          
-          if(Keyboard.Key) 
+         
+          if(Keyboard.isKeyPressed(Keyboard.Key.W)) 
           {
                System.out.println("W");
+          }
+          if(Keyboard.isKeyPressed(Keyboard.Key.S)) 
+          {
+               System.out.println("S");
+          }
+          if(Keyboard.isKeyPressed(Keyboard.Key.A)) 
+          {
+               System.out.println("A");
+          }
+          if(Keyboard.isKeyPressed(Keyboard.Key.D)) 
+          {
+               System.out.println("D");
           }
     }
 }
