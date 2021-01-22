@@ -19,6 +19,7 @@ public class MenuMaker
         int x = 100, y = 100, xBPos = 100, yBPos = 100; //used for setting button size and position
         MMWindow window = new MMWindow(res1,res2,"Main menu");
         MMButtons button = new MMButtons(x, y,xBPos, yBPos);
+        GameRunner game = new GameRunner();
 
         while(window.isOpen())
         {
@@ -34,9 +35,11 @@ public class MenuMaker
                 {
                     //code for what happens when the mouse is moved inside the window
                 }
-                if(event.type == Event.Type.MOUSE_LEFT)
+                if(event.type == Event.Type.MOUSE_BUTTON_PRESSED)
                 {
                     //code for what happens when the mouse leaves the window
+                    //temp test file to see transition
+                    game.run(window);
                 }
                 if(event.type == Event.Type.RESIZED)
                 {
@@ -50,4 +53,5 @@ public class MenuMaker
             }
         }
     }
+
 }
