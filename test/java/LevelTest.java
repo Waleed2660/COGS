@@ -64,7 +64,7 @@ public class LevelTest {
     {
         FloatRect viewZone = new FloatRect(window.getView().getCenter().x-window.getView().getSize().x/2, window.getView().getCenter().y-window.getView().getSize().y/2, window.getView().getSize().x, window.getView().getSize().y);
         window.clear(Color.WHITE);
-        System.out.println(level.background.getTextureRect().toString());
+        
         level.setBackgroundView(viewZone);
         window.draw(level.background);
         for(GameObject a : level.objectList)
