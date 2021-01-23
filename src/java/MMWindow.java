@@ -13,7 +13,7 @@ public class MMWindow extends RenderWindow
     public MMWindow(int res1, int res2, String name)
     {
         super();
-        // creates a new window at 1000x600 with a window name "Main menu"
+        // creates a new window at User's screensize with a window name "Main menu"
         // Window.style is set to 8 (Full Screen)
         this.create(new VideoMode(res1, res2), name, 8);
         this.setMouseCursorVisible(true); //lets user see cursor

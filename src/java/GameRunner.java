@@ -36,15 +36,21 @@ public class GameRunner
                     }
                     if(event.type == Event.Type.KEY_PRESSED)
                     {
-                         keyPress(); 
+                         keyPress(window); 
                     }
                }
           }
     }
 
-    public void keyPress()
+    public void keyPress(MMWindow window)
     {
-         
+         /** 
+         * KeyPress uses a MMWindow
+         * 
+         * <p>
+         * KeyPress is used to detect which key is pressed exactly
+         * 
+    */
           if(Keyboard.isKeyPressed(Keyboard.Key.W)) 
           {
                System.out.println("W");
@@ -60,6 +66,11 @@ public class GameRunner
           if(Keyboard.isKeyPressed(Keyboard.Key.D)) 
           {
                System.out.println("D");
+          }
+          if(Keyboard.isKeyPressed(Keyboard.Key.ESCAPE)) 
+          {
+               window.close();
+               //closes window if esc is pressed
           }
     }
 }

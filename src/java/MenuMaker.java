@@ -11,7 +11,6 @@ public class MenuMaker
     private int xBPos = width/2, yBPos = height/2; //used for setting button size and position
     private MMWindow window = new MMWindow(width,height,"Main menu");
     private TextManager buttons[] = new TextManager[4];     // Hold buttons for Menu
-    private GameRunner game = new GameRunner();
 
     /**
      * Creates the main menu (for now very basic)
@@ -49,14 +48,14 @@ public class MenuMaker
                 if(event.type == Event.Type.MOUSE_BUTTON_PRESSED) {
                     //code for what happens when the mouse leaves the window
                     //temp test file to see transition
-                    game.run(window);
+                    //game.run(window);
                 }
                 if(event.type == Event.Type.RESIZED) {
                    //need to look up how to find the exterior window size and resize menu window size
                 }
                 if(event.type == Event.Type.MOUSE_BUTTON_PRESSED) {
                     // Clickable Button
-                    buttonPressed(MouseX,MouseY);
+                    buttonPressed(MouseX,MouseY,window);
                 }
                 if(Keyboard.isKeyPressed(Keyboard.Key.RIGHT)){
 
@@ -74,11 +73,13 @@ public class MenuMaker
      * @param MouseX    x-coordinate of the mouse
      * @param MouseY    y-coordinate of the mouse
      */
-    public void buttonPressed(float MouseX, float MouseY){
+    public void buttonPressed(float MouseX, float MouseY, MMWindow window){
+        GameRunner game = new GameRunner();
         for (TextManager button : buttons) {
             // Starts Game
             if (button.blinkButton(MouseX, MouseY, Color.RED) && button.getString().equals("Start")) {
                 // Level Selector Class can be called here
+                game.run(window);
             }
             // Opens Help Menu
             else
