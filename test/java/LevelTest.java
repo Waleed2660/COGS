@@ -18,7 +18,6 @@ public class LevelTest {
         window.setFramerateLimit(30);
         window.clear(Color.WHITE);
         View v = new View(new FloatRect(0, 0, 1024, 640));
-        v.setViewport(new FloatRect((float)0.5, (float)0.5, (float)0.5, (float)0.5));
         window.setView(v);
 
         drawAll(level, window);
@@ -50,7 +49,6 @@ public class LevelTest {
                 window.setView(v);
                 drawAll(level, window);
             }
-        }
             for(Event e : window.pollEvents())
             {
                 if(e.type == Event.Type.CLOSED)
@@ -59,6 +57,8 @@ public class LevelTest {
                 }
             }
         }
+
+    }
 
     public static void drawAll(Level level, RenderWindow window)
     {
