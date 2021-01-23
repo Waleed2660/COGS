@@ -24,8 +24,6 @@ public class GameRunner
           while(window.isOpen())
           {
                window.clear(Color.GREEN);
-               window.draw(player);
-               window.draw(plat);
                window.display();
                for(Event event : window.pollEvents())
                {   
@@ -36,7 +34,7 @@ public class GameRunner
                     }
                     if(event.type == Event.Type.KEY_PRESSED)
                     {
-                         keyPress(window,player); 
+                         keyPress(window); 
                     }
                }
           }
@@ -45,10 +43,11 @@ public class GameRunner
     public void keyPress(MMWindow window,Player player)
     {
          /** 
-         * KeyPress uses a MMWindow
+         * KeyPress uses a MMWindow and Player
          * 
          * <p>
          * KeyPress is used to detect which key is pressed exactly
+         * It will be used to move the player's sprite around the window
          * 
     */
           /*if(Keyboard.isKeyPressed(Keyboard.Key.W)) 
@@ -66,7 +65,13 @@ public class GameRunner
           if(Keyboard.isKeyPressed(Keyboard.Key.D)) 
           {
                player.moveRight();
-          }*/
+          }
+          if(Keyboard.isKeyPressed(Keyboard.Key.SPACE))
+          {
+               player.shoot();
+          }
+          
+          */
           if(Keyboard.isKeyPressed(Keyboard.Key.ESCAPE)) 
           {
                window.close();
