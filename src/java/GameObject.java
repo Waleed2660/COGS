@@ -49,12 +49,9 @@ public class GameObject extends Sprite
     {
         return hitBox;
     }
-
-    public boolean checkForCollision(Vector2f objectPosition){
-        float xLoc = objectPosition.x, yLoc = objectPosition.y;
-
-        // Checks if given sprite is  is within the bounds of rectangle
-        return this.getPosition().x <= xLoc && xLoc <= (this.getPosition().x + this.getLocalBounds().width) &&
-                this.getPosition().y <= yLoc && yLoc <= (this.getPosition().y + +this.getLocalBounds().height);
-    }
+    
+    public void gravity(Vector2f fallSpeed)
+    {
+        
+    } 
 }

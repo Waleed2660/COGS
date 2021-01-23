@@ -8,4 +8,5 @@ public class Player extends GameObject
     {
         super(x, y, texPath);
     }
+
 }

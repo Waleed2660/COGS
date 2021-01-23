@@ -20,12 +20,12 @@ public class GameRunner
     public void run(MMWindow window)
     {
           float xlocl = 10, ylocl = 10;
-          Movement player = new Movement(xlocl,ylocl);
           
           while(window.isOpen())
           {
                window.clear(Color.GREEN);
                window.draw(player);
+               window.draw(plat);
                window.display();
                for(Event event : window.pollEvents())
                {   
@@ -36,13 +36,13 @@ public class GameRunner
                     }
                     if(event.type == Event.Type.KEY_PRESSED)
                     {
-                         keyPress(window); 
+                         keyPress(window,player); 
                     }
                }
           }
     }
 
-    public void keyPress(MMWindow window)
+    public void keyPress(MMWindow window,Player player)
     {
          /** 
          * KeyPress uses a MMWindow
@@ -51,22 +51,22 @@ public class GameRunner
          * KeyPress is used to detect which key is pressed exactly
          * 
     */
-          if(Keyboard.isKeyPressed(Keyboard.Key.W)) 
+          /*if(Keyboard.isKeyPressed(Keyboard.Key.W)) 
           {
-               System.out.println("W");
+               player.jump();
           }
           if(Keyboard.isKeyPressed(Keyboard.Key.S)) 
           {
-               System.out.println("S");
+               player.drop();
           }
           if(Keyboard.isKeyPressed(Keyboard.Key.A)) 
           {
-               System.out.println("A");
+               player.moveLeft();
           }
           if(Keyboard.isKeyPressed(Keyboard.Key.D)) 
           {
-               System.out.println("D");
-          }
+               player.moveRight();
+          }*/
           if(Keyboard.isKeyPressed(Keyboard.Key.ESCAPE)) 
           {
                window.close();
