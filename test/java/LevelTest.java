@@ -13,14 +13,15 @@ import org.jsfml.graphics.*;
 public class LevelTest {
     public static void main (String[] args)
     {
-        RenderWindow window = new RenderWindow(new VideoMode(1024, 640), "Test");
-        Level level3 = new Level("Level1");
+        RenderWindow window = new RenderWindow(new VideoMode(1024, 600), "Test");
+        Level level = new Level("Level1");
         window.setFramerateLimit(30);
         window.clear(Color.WHITE);
         View v = new View(new FloatRect(0, 0, 1024, 640));
+        v.setViewport(new FloatRect((float)0.5, (float)0.5, (float)0.5, (float)0.5));
         window.setView(v);
 
-        drawAll(level3.objectList, window);
+        drawAll(level, window);
 
         while(window.isOpen())
         {
@@ -45,14 +46,11 @@ public class LevelTest {
                     y += 1;
                 }
 
-                v.move(10*x, 0);
+                v.move(20*x, 0);
                 window.setView(v);
-                }
-
-                drawAll(level3.objectList, window);
+                drawAll(level, window);
             }
-            
-
+        }
             for(Event e : window.pollEvents())
             {
                 if(e.type == Event.Type.CLOSED)
@@ -62,12 +60,19 @@ public class LevelTest {
             }
         }
 
-    public static void drawAll(ArrayList<GameObject> objects, RenderWindow window)
+    public static void drawAll(Level level, RenderWindow window)
     {
+        FloatRect viewZone = new FloatRect(window.getView().getCenter().x-window.getView().getSize().x/2, window.getView().getCenter().y-window.getView().getSize().y/2, window.getView().getSize().x, window.getView().getSize().y);
         window.clear(Color.WHITE);
-        for(GameObject a : objects)
+        System.out.println(level.background.getTextureRect().toString());
+        level.setBackgroundView(viewZone);
+        window.draw(level.background);
+        for(GameObject a : level.objectList)
         {
-            window.draw(a);
+            if(viewZone.intersection(a.getHitBox()) != null)
+            {
+                window.draw(a);
+            }
         }
         window.display();
     }

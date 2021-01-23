@@ -13,7 +13,7 @@ public class Level
 {
     private String levelNum;
     public ArrayList<GameObject> objectList = new ArrayList<GameObject>(); //public for now should improve the way to access it and change it eventually
-
+    public GameObject background;
     //Arrays for different objects. could be usseful in the future but not right now
     private ArrayList<FloatRect> ground = new ArrayList<FloatRect>();
     private ArrayList<Enemy> enemies = new ArrayList<Enemy>();
@@ -49,6 +49,11 @@ public class Level
               {
                 //different cases for ground and player objects
               }
+              else if(spl[0].contains("Background"))
+              {
+                background = new GameObject(Integer.parseInt(spl[1]), Integer.parseInt(spl[2]), filePath.concat("assets/").concat(spl[0]).concat(".png/"));
+                background.setTextureRect(new IntRect(100, 0, 1024, 640));
+              }
               else
               {
                 objectList.add(new GameObject(Integer.parseInt(spl[1]), Integer.parseInt(spl[2]), filePath.concat("assets/").concat(spl[0]).concat(".png/")));
@@ -59,5 +64,11 @@ public class Level
             System.out.println("An error occurred.");
             e.printStackTrace();
           }
+    }
+
+    public void setBackgroundView(FloatRect v)
+    {
+      background.setPosition(v.left, v.top);
+      background.setTextureRect(new IntRect(v));
     }
 }
