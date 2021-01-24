@@ -46,9 +46,7 @@ public class MenuMaker
                     }
                 }
                 if(event.type == Event.Type.MOUSE_BUTTON_PRESSED) {
-                    //code for what happens when the mouse leaves the window
-                    //temp test file to see transition
-                    //game.run(window);
+                    
                 }
                 if(event.type == Event.Type.RESIZED) {
                    //need to look up how to find the exterior window size and resize menu window size

@@ -19,7 +19,6 @@ public class GameRunner
     }
     public void run(MMWindow window)
     {
-          float xlocl = 10, ylocl = 10;
           
           while(window.isOpen())
           {
@@ -40,7 +39,7 @@ public class GameRunner
           }
     }
 
-    public void keyPress(MMWindow window,Player player)
+    public void keyPress(MMWindow window/*,Player player*/)
     {
          /** 
          * KeyPress uses a MMWindow and Player
