@@ -6,6 +6,7 @@ import org.jsfml.graphics.FloatRect;
 public class Bullet extends GameObject{
     private MMWindow window;
     private float XSpeed = 15;
+    private float direction = 0;
 
     /**
      * Creates a bullet object with given texture and coordinates
@@ -16,14 +17,13 @@ public class Bullet extends GameObject{
      */
     public Bullet(float direction, float x, float y, String texturePath) {
         super(x, y, texturePath);
-        moveBullet(direction);
+        this.direction = direction;
     }
 
     /**
      * Moves the bullet object given direction
-     * @param direction use 1 to fire bullet to right & -1 for left
     */
-    public void moveBullet(float direction){
+    public void moveBullet(){
         this.setPosition(this.getPosition().x + XSpeed * direction, this.getPosition().y);
     }
 
@@ -34,7 +34,6 @@ public class Bullet extends GameObject{
      */
     public boolean bulletInSight(MMWindow window){
         return this.getPosition().x >= 0 && this.getPosition().x <= window.getSize().x;
-
     }
 
     /**

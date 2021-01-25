@@ -22,7 +22,7 @@ public class GameRunner
          float winSizeX = window.getSize().x, winSizeY = window.getSize().y;
          TextManager backToMenu = new TextManager("Back",100,200);
 
-         GameObject enemy = new GameObject(winSizeX/2 + 400, winSizeY/2,"resources/enemy.gif");
+         GameObject enemy = new GameObject(winSizeX/2 + 700, winSizeY/2,"resources/enemy.gif");
          enemy.setScale((float) 0.2,(float)0.2);
 
          while(window.isOpen()) {
@@ -34,7 +34,7 @@ public class GameRunner
              if(shotFired){
                  for (int  x = 0; x < bullets.size(); x++) {
                      window.draw(bullets.get(x));
-                     bullets.get(x).moveBullet(direction);
+                     bullets.get(x).moveBullet();
                      // De-spawns the bullet when it goes out of frame/ hits object
                      if (!bullets.get(x).bulletInSight(window) || bullets.get(x).bulletCollision(enemy.getHitBox())) {
                          bullets.remove(x);
