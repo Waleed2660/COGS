@@ -17,6 +17,7 @@ public class GameRunner
     private int direction = 1;
     private MMWindow window;
     private Level level;
+    private int health = 100; //5 hits to ko 20 hp per hit  // enemies dog - 1 hit ko robot 2 - hit ko
 
     public GameRunner(MMWindow window, String levelNum)
     {
@@ -50,37 +51,19 @@ public class GameRunner
                      }
                  }
              }
+             for(Event event : window.pollEvents())
+             {
+                if(event.type == Event.Type.KEY_PRESSED)
+                {
+                    keyPress(window,bullets);
+                }
+             }
              window.display();
 
-
-             for(Event event : window.pollEvents()) {
-
-                 if(event.type == Event.Type.CLOSED) {
-                     window.close();
-                     //IMPORTANT CLOSES WINDOW UPON PRESSING CLOSE DO NOT ALTER
-                 }
-                 if(event.type == Event.Type.MOUSE_BUTTON_PRESSED) {
-                     // Clickable Button
-                 }
-                 if(Keyboard.isKeyPressed(Keyboard.Key.LEFT)) {
-                     direction = -1;    // Updates Bullet travel direction
-                 }
-                 if(Keyboard.isKeyPressed(Keyboard.Key.RIGHT)) {
-                     direction = 1;     // Updates Bullet travel direction
-                 }
-                 if(Keyboard.isKeyPressed(Keyboard.Key.SPACE)) {
-                     bullets.add(new Bullet(direction,winSizeX/2,winSizeY/2,"resources/bullet.png"));
-                     shotFired = true;
-                 }
-                 if(Keyboard.isKeyPressed(Keyboard.Key.ESCAPE)) {
-                     window.clear();
-                     //menu.runMenu(window);
-                 }
-             }
          }
     }
 
-    public void keyPress(MMWindow window,Player player) {
+    public void keyPress(MMWindow window,ArrayList<Bullet> bullets) {
 
          /** 
          * KeyPress uses a MMWindow and Player
@@ -90,33 +73,32 @@ public class GameRunner
          * It will be used to move the player's sprite around the window
          * 
           */
-          /*if(Keyboard.isKeyPressed(Keyboard.Key.W))
-          {
-               player.jump();
-          }
-          if(Keyboard.isKeyPressed(Keyboard.Key.S))
-          {
-               player.drop();
-          }
-          if(Keyboard.isKeyPressed(Keyboard.Key.A))
-          {
-               player.moveLeft();
-          }
-          if(Keyboard.isKeyPressed(Keyboard.Key.D))
-          {
-               player.moveRight();
-          }
-          if(Keyboard.isKeyPressed(Keyboard.Key.SPACE))
-          {
-               player.shoot();
-          }
-          
-          */
-          if(Keyboard.isKeyPressed(Keyboard.Key.ESCAPE)) 
-          {
-               window.close();
-               //closes window if esc is pressed
-          }
+        float winSizeX = window.getSize().x, winSizeY = window.getSize().y;
+        for(Event event : window.pollEvents()) {
+
+            if(event.type == Event.Type.CLOSED) {
+                window.close();
+                //IMPORTANT CLOSES WINDOW UPON PRESSING CLOSE DO NOT ALTER
+            }
+            if(event.type == Event.Type.MOUSE_BUTTON_PRESSED) {
+                // Clickable Button
+            }
+            if(Keyboard.isKeyPressed(Keyboard.Key.LEFT)) {
+                direction = -1;    // Updates Bullet travel direction
+            }
+            if(Keyboard.isKeyPressed(Keyboard.Key.RIGHT)) {
+                direction = 1;     // Updates Bullet travel direction
+            }
+            if(Keyboard.isKeyPressed(Keyboard.Key.SPACE)) {
+                bullets.add(new Bullet(direction,winSizeX/2,winSizeY/2,"resources/bullet.png"));
+                shotFired = true;
+            }
+            if(Keyboard.isKeyPressed(Keyboard.Key.ESCAPE)) {
+                window.clear();
+                window.close(); // only a temp fix
+                //menu.runMenu(window);
+            }
+        }
     }
 
     /**
