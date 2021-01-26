@@ -16,6 +16,11 @@ public class Player extends GameObject
 
     public void movement(int xDir, int yDir)
     {
+
+    }
+
+    public void shoot(int xDir, int yDir)
+    {
         
     }
 }

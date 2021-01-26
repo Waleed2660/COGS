@@ -48,9 +48,13 @@ public class Level
             String data = myReader.nextLine();
             String[] spl = data.split(" ");
 
-            if(spl[0].equals("Ground") || spl[0].equals("player"))
+            if(spl[0].equals("Ground"))
             {
-              //different cases for ground and player objects
+              ground.add(new FloatRect(Float.parseFloat(spl[1]), Float.parseFloat(spl[2]), Float.parseFloat(spl[3]), Float.parseFloat(spl[4])));
+            }
+            else if(spl[0].equals("player"))
+            {
+              player = new Player(Float.parseFloat(spl[1]), Float.parseFloat(spl[2]), 10, 1, filePath.concat("assets/").concat(spl[0]).concat(".png/"));
             }
             else if(spl[0].contains("Background"))
             {
