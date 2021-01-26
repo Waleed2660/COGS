@@ -44,8 +44,7 @@ public class GameRunner
          {
                //window.clear(Color.BLACK); //for some reason works without clearing
                //window.draw(backToMenu);
-               ArrayList<GameObject> blocks = drawAll(level, window);
-               this.controller(blocks);
+               this.controller(drawAll(level, window));
 
                Event e = window.pollEvent();
                if(e != null)
@@ -90,7 +89,7 @@ public class GameRunner
     }
 
      /**
-     * Checks if a key is pressed and does stuff accordingly. Moved to GameRunner for now.
+     * Checks if a key is pressed and moves the player. More functionality could be added.
      * 
      * @param blocks the GameObject to check for collision with
      */
