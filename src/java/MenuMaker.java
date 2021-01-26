@@ -29,7 +29,6 @@ public class MenuMaker
 
 
         while(window.isOpen()) {
-
             window.clear(Color.BLACK); //someone forgot to clear before drawing
             // Real-Time Location parameters for Cursor
             float MouseX = Mouse.getPosition(window).x, MouseY = Mouse.getPosition(window).y;
@@ -38,7 +37,6 @@ public class MenuMaker
             for (TextManager button : buttons) {
                 window.draw(button);    // Draws all buttons
             }
-            window.display();
 
             for(Event event : window.pollEvents()) {
 
@@ -67,6 +65,7 @@ public class MenuMaker
                     //IMPORTANT CLOSES WINDOW UPON PRESSING CLOSE DO NOT ALTER
                 }
             }
+            window.display();
         }
     }
 

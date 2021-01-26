@@ -49,4 +49,15 @@ public class GameObject extends Sprite
     {
         return hitBox;
     }
+
+    public void moveObject(float x, float y)
+    {
+        this.move(x, y);
+        hitBox = new FloatRect(hitBox.left+x, hitBox.top+y, hitBox.width, hitBox.height);
+    }
+
+    public FloatRect getFutureHitBox(float xOff, float yOff)
+    {
+        return new FloatRect(hitBox.left+xOff, hitBox.top+yOff, hitBox.width, hitBox.height);
+    }
 }

@@ -9,11 +9,11 @@ import java.util.ArrayList;
 public class GameRunner
 {
     private ArrayList<Bullet> bullets = new ArrayList<>();
-    private int direction = 1;
     private MMWindow window;
     private Level level;
     private int health = 100; //5 hits to ko 20 hp per hit  // enemies dog - 1 hit ko robot 2 - hit ko
     private boolean levelOpen = true;
+    private Player player;
 
     /**
      * Creates the gamerunner for a specific level and gives the window to use
@@ -24,7 +24,9 @@ public class GameRunner
     public GameRunner(MMWindow window, String levelNum)
     {
           this.window = window;
+          window.setKeyRepeatEnabled(false);
           this.level = new Level(levelNum, 2);
+          this.player = level.getPlayer();
     }
 
     /**
@@ -34,80 +36,78 @@ public class GameRunner
     {
          float xlocl = 10, ylocl = 10;
          float winSizeX = window.getSize().x, winSizeY = window.getSize().y;
-         TextManager backToMenu = new TextManager("Back",100,200);
+         //TextManager backToMenu = new TextManager("Back",100,200);
 
          //GameObject enemy = new GameObject(winSizeX/2 + 700, winSizeY/2,"resources/enemy.gif");
          //enemy.setScale((float) 0.2,(float)0.2);
-         while(levelOpen)
+         while(levelOpen && window.isOpen())
          {
-               window.clear(Color.BLACK);
-               window.draw(backToMenu);
+               //window.clear(Color.BLACK); //for some reason works without clearing
+               //window.draw(backToMenu);
+               ArrayList<GameObject> blocks = drawAll(level, window);
+               this.controller(blocks);
 
-               // Animates bullet once fired #changed to animate if there are any bullets
-               if(!bullets.isEmpty()){
-                    for (int  x = 0; x < bullets.size(); x++) {
-                         window.draw(bullets.get(x));
-                         bullets.get(x).moveBullet();
-
-                         // De-spawns the bullet when it goes out of frame/ hits object
-                         if (!bullets.get(x).bulletInSight(window)) {
-                              bullets.remove(x);
-                         }
-                    }
-               }
-
-               for(Event event : window.pollEvents())
+               Event e = window.pollEvent();
+               if(e != null)
                {
-                    if(event.type == Event.Type.KEY_PRESSED)
+                    if(e.type == Event.Type.KEY_PRESSED)
                     {
-                         keyPress(event, bullets);
+                         keyPress(e);
                     }
-                    if(event.type == Event.Type.CLOSED)
+                    if(e.type == Event.Type.CLOSED)
                     {
                          window.close();
                          //IMPORTANT CLOSES WINDOW UPON PRESSING CLOSE DO NOT ALTER
                     }
-                    if(event.type == Event.Type.MOUSE_BUTTON_PRESSED)
+                    if(e.type == Event.Type.MOUSE_BUTTON_PRESSED)
                     {
                          // Clickable Button
                     }
                }
+
                window.display();
          }
     }
 
      /** 
-      * KeyPress uses a MMWindow and Player
+      * KeyPress uses a MMWindow and Player. A bit redundant. Could be removed or merged with controller?
      * 
      * <p>
      * KeyPress is used to detect which key is pressed exactly
      * It will be used to move the player's sprite around the window
      * 
      */
-    public void keyPress(Event event, ArrayList<Bullet> bullets)
+    public void keyPress(Event event)
     {
-          float winSizeX = window.getSize().x, winSizeY = window.getSize().y;
-        
-          if(Keyboard.isKeyPressed(Keyboard.Key.LEFT))
+          if(event.asKeyEvent().key == Keyboard.Key.SPACE)
           {
-               direction = -1;    // Updates Bullet travel direction
+               player.shoot(bullets);
           }
-          if(Keyboard.isKeyPressed(Keyboard.Key.RIGHT))
-          {
-               direction = 1;     // Updates Bullet travel direction
-          }
-          if(Keyboard.isKeyPressed(Keyboard.Key.SPACE))
-          {
-               bullets.add(new Bullet(direction,winSizeX/2,winSizeY/2,"resources/bullet.png"));
-          }
-          if(Keyboard.isKeyPressed(Keyboard.Key.ESCAPE))
+          if(event.asKeyEvent().key == Keyboard.Key.ESCAPE)
           {
                levelOpen = false;
           }
     }
 
+     /**
+     * Checks if a key is pressed and does stuff accordingly. Moved to GameRunner for now.
+     * 
+     * @param blocks the GameObject to check for collision with
+     */
+    public void controller(ArrayList<GameObject> blocks)
+    {
+        if(Keyboard.isKeyPressed(Keyboard.Key.LEFT))
+        {
+          player.movement(-1, 0, blocks);
+        }
+        if(Keyboard.isKeyPressed(Keyboard.Key.RIGHT))
+        {
+          player.movement(1, 0, blocks);
+        }
+    }
+
     /**
-     * Draws all objects in a level dynamically
+     * Draws all objects in a level dynamically.
      * 
      * @param level
      * @param window
@@ -115,21 +115,35 @@ public class GameRunner
      */
     public ArrayList<GameObject> drawAll(Level level, MMWindow window)
     {
-         ArrayList<GameObject> result = new ArrayList<GameObject>();
-        FloatRect viewZone = window.getViewZone();
-        window.clear(Color.WHITE);
-        
-        level.setBackgroundView(viewZone);
-        window.draw(level.background);
-        for(GameObject a : level.objectList)
-        {
-          if(viewZone.intersection(a.getHitBox()) != null)
+          ArrayList<GameObject> result = new ArrayList<GameObject>();
+          FloatRect viewZone = window.getViewZone();
+          //window.clear(Color.BLACK); 
+
+          level.setBackgroundView(viewZone);
+          window.draw(level.background);
+          for(GameObject a : level.objectList)
           {
-               result.add(a);
-               window.draw(a);
+               if(viewZone.intersection(a.getHitBox()) != null)
+               {
+                    result.add(a);
+                    window.draw(a);
+               }
           }
-        }
-        window.display();
+          // Animates bullet once fired #changed to animate if there are any bullets
+          if(!bullets.isEmpty()){
+               
+               for (int  x = 0; x < bullets.size(); x++) {
+                    System.out.println("b move");
+                    window.draw(bullets.get(x));
+                    bullets.get(x).moveBullet();
+
+                    // De-spawns the bullet when it goes out of frame/ hits object
+                    if (!bullets.get(x).bulletInSight(window)) {
+                         bullets.remove(x);
+                    }
+               }
+          }
+        //window.display();
         return result;
     }
 }

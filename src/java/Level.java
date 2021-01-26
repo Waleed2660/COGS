@@ -55,6 +55,7 @@ public class Level
             else if(spl[0].equals("player"))
             {
               player = new Player(Float.parseFloat(spl[1]), Float.parseFloat(spl[2]), 10, 1, filePath.concat("assets/").concat(spl[0]).concat(".png/"));
+              objectList.add(player);
             }
             else if(spl[0].contains("Background"))
             {
@@ -81,5 +82,10 @@ public class Level
   {
     background.setPosition(v.left, v.top);
     background.setTextureRect(new IntRect(v));
+  }
+
+  public Player getPlayer()
+  {
+    return player;
   }
 }

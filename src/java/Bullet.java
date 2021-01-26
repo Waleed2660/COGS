@@ -24,7 +24,7 @@ public class Bullet extends GameObject{
      * Moves the bullet object given direction
     */
     public void moveBullet(){
-        this.setPosition(this.getPosition().x + XSpeed * direction, this.getPosition().y);
+        this.moveObject(XSpeed*direction, 0);
     }
 
     /**
