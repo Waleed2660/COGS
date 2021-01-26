@@ -5,6 +5,7 @@ import org.jsfml.system.*;
 
 public class MMWindow extends RenderWindow
 {
+    private View view;
     /** 
          * Used by MenuMaker
          * <p>
@@ -18,6 +19,6 @@ public class MMWindow extends RenderWindow
         this.create(new VideoMode(res1, res2), name, 8);
         this.setMouseCursorVisible(true); //lets user see cursor
         this.setFramerateLimit(30); //limits the frame rate
-
+        view 
     }
 }

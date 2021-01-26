@@ -8,4 +8,6 @@ public class Enemy extends GameObject
     {
         super(x, y, texPath);
     }
+
+    
 }

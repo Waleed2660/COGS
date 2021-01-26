@@ -1,4 +1,4 @@
-import org.jsfml.graphics.Color;
+import org.jsfml.graphics.*;
 import org.jsfml.window.Keyboard;
 import org.jsfml.window.event.Event;
 import java.util.ArrayList;
@@ -15,20 +15,29 @@ public class GameRunner
     private boolean shotFired = false;
     private ArrayList<Bullet> bullets = new ArrayList<>();
     private int direction = 1;
+    private MMWindow window;
+    private Level level;
 
-    public void run(MMWindow window)
+    public GameRunner(MMWindow window, String levelNum)
     {
+          this.window = window;
+          this.level = new Level(levelNum, 2);
+    }
+
+    public void run()
+    {
+         boolean levelOpen = true;
          float xlocl = 10, ylocl = 10;
          float winSizeX = window.getSize().x, winSizeY = window.getSize().y;
          TextManager backToMenu = new TextManager("Back",100,200);
 
-         GameObject enemy = new GameObject(winSizeX/2 + 700, winSizeY/2,"resources/enemy.gif");
-         enemy.setScale((float) 0.2,(float)0.2);
+         //GameObject enemy = new GameObject(winSizeX/2 + 700, winSizeY/2,"resources/enemy.gif");
+         //enemy.setScale((float) 0.2,(float)0.2);
 
-         while(window.isOpen()) {
+         while(levelOpen) {
              window.clear(Color.BLACK);
              window.draw(backToMenu);
-             window.draw(enemy);
+             //window.draw(enemy);
 
              // Animates bullet once fired
              if(shotFired){
@@ -80,20 +89,20 @@ public class GameRunner
          * KeyPress is used to detect which key is pressed exactly
          * It will be used to move the player's sprite around the window
          * 
-    */
-          /*if(Keyboard.isKeyPressed(Keyboard.Key.W)) 
+          */
+          /*if(Keyboard.isKeyPressed(Keyboard.Key.W))
           {
                player.jump();
           }
-          if(Keyboard.isKeyPressed(Keyboard.Key.S)) 
+          if(Keyboard.isKeyPressed(Keyboard.Key.S))
           {
                player.drop();
           }
-          if(Keyboard.isKeyPressed(Keyboard.Key.A)) 
+          if(Keyboard.isKeyPressed(Keyboard.Key.A))
           {
                player.moveLeft();
           }
-          if(Keyboard.isKeyPressed(Keyboard.Key.D)) 
+          if(Keyboard.isKeyPressed(Keyboard.Key.D))
           {
                player.moveRight();
           }
@@ -108,5 +117,28 @@ public class GameRunner
                window.close();
                //closes window if esc is pressed
           }
+    }
+
+    /**
+     * Draws all objects in a level dynamically
+     * 
+     * @param level
+     * @param window
+     */
+    public void drawAll(Level level, MMWindow window)
+    {
+        FloatRect viewZone = new FloatRect(window.getView().getCenter().x-window.getView().getSize().x/2, window.getView().getCenter().y-window.getView().getSize().y/2, window.getView().getSize().x, window.getView().getSize().y);
+        window.clear(Color.WHITE);
+        
+        level.setBackgroundView(viewZone);
+        window.draw(level.background);
+        for(GameObject a : level.objectList)
+        {
+          if(viewZone.intersection(a.getHitBox()) != null)
+          {
+               window.draw(a);
+          }
+        }
+        window.display();
     }
 }

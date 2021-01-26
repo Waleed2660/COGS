@@ -58,7 +58,7 @@ public class MenuMaker
                     buttonPressed(MouseX,MouseY,window);
                 }
                 if(Keyboard.isKeyPressed(Keyboard.Key.RIGHT)){
-
+                    
                 }
                 if(event.type == Event.Type.CLOSED || Keyboard.isKeyPressed(Keyboard.Key.ESCAPE)) {
                     window.close();
@@ -74,12 +74,12 @@ public class MenuMaker
      * @param MouseY    y-coordinate of the mouse
      */
     public void buttonPressed(float MouseX, float MouseY, MMWindow window){
-        GameRunner game = new GameRunner();
+        GameRunner game = new GameRunner(window, "Level1");
         for (TextManager button : buttons) {
             // Starts Game
             if (button.blinkButton(MouseX, MouseY, Color.RED) && button.getString().equals("Start")) {
                 // Level Selector Class can be called here
-                game.run(window);
+                game.run();
             }
             // Opens Help Menu
             else

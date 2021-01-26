@@ -49,9 +49,4 @@ public class GameObject extends Sprite
     {
         return hitBox;
     }
-    
-    public void gravity(Vector2f fallSpeed)
-    {
-        
-    } 
 }

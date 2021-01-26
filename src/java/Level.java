@@ -20,15 +20,18 @@ public class Level
   private ArrayList<Platform> platforms = new ArrayList<Platform>();
   private Player player;
 
+  private float gravity = 0;
+
   /**
    * Constructor for a level.
    * 
    * @param levNum - the level to construct. Currently can be Level1, Level2 or Level3. Should make the choices into enums
    */
-  public Level(String levNum)
+  public Level(String levNum, float gravity)
   {
       levelNum = levNum;
       addFromFile("./levels/".concat(levelNum).concat("/"));
+      this.gravity = gravity;
   }
 
   /**

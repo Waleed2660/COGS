@@ -44,9 +44,4 @@ public class Bullet extends GameObject{
     public boolean bulletCollision(FloatRect victimObject){
         return victimObject.contains(this.getPosition());
     }
-
-
-
-
-
 }
