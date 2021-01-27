@@ -15,7 +15,7 @@ public class GameRunner
     private boolean shotFired = false;
     private ArrayList<Bullet> bullets = new ArrayList<>();
     private int direction = 1;
-    private int health = 100; //5 hits to ko 20 hp per hit  // enemies dog - 1 hit ko robot 2 - hit ko
+    //private int health = 100; //5 hits to ko 20 hp per hit  // enemies dog - 1 hit ko robot 2 - hit ko
 
     public void run(MMWindow window)
     {
@@ -23,7 +23,7 @@ public class GameRunner
          float winSizeX = window.getSize().x, winSizeY = window.getSize().y;
          TextManager backToMenu = new TextManager("Back",100,200);
 
-         GameObject enemy = new GameObject(winSizeX/2 + 700, winSizeY/2,"resources/enemy.gif");
+         GameObject enemy = new GameObject(winSizeX/2 + 700, winSizeY/2,"resources/enemy.gif",2);
          enemy.setScale((float) 0.2,(float)0.2);
 
          while(window.isOpen()) {
@@ -46,7 +46,11 @@ public class GameRunner
              {
                 if(event.type == Event.Type.KEY_PRESSED)
                 {
-                    keyPress(window,bullets);
+                    keyPress(window);
+                }
+                if(Keyboard.isKeyPressed(Keyboard.Key.SPACE)) {
+                    bullets.add(new Bullet(direction,winSizeX/2,winSizeY/2,"resources/bullet.png"));
+                    shotFired = true;
                 }
              }
              window.display();
@@ -54,7 +58,7 @@ public class GameRunner
          }
     }
 
-    public void keyPress(MMWindow window,ArrayList<Bullet> bullets) {
+    public void keyPress(MMWindow window) {
 
          /** 
          * KeyPress uses a MMWindow and Player
@@ -64,7 +68,6 @@ public class GameRunner
          * It will be used to move the player's sprite around the window
          * 
     */
-        float winSizeX = window.getSize().x, winSizeY = window.getSize().y;
         for(Event event : window.pollEvents()) {
 
             if(event.type == Event.Type.CLOSED) {
@@ -79,10 +82,6 @@ public class GameRunner
             }
             if(Keyboard.isKeyPressed(Keyboard.Key.RIGHT)) {
                 direction = 1;     // Updates Bullet travel direction
-            }
-            if(Keyboard.isKeyPressed(Keyboard.Key.SPACE)) {
-                bullets.add(new Bullet(direction,winSizeX/2,winSizeY/2,"resources/bullet.png"));
-                shotFired = true;
             }
             if(Keyboard.isKeyPressed(Keyboard.Key.ESCAPE)) {
                 window.clear();

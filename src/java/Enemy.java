@@ -4,8 +4,9 @@
 
 public class Enemy extends GameObject
 {
-    public Enemy(float x, float y, String texPath)
+    public Enemy(float x, float y, String texPath,int hp)
     {
         super(x, y, texPath);
+        
     }
 }

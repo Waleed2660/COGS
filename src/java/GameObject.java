@@ -32,6 +32,7 @@ public class GameObject extends Sprite
         }
         this.setPosition(x, y);
         setHitBoxToTexture();
+
     }
 
     public void setHitBoxToTexture()
