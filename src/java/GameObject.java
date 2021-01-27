@@ -1,5 +1,7 @@
 import java.io.IOException;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+
 import org.jsfml.graphics.*;
 import org.jsfml.system.Vector2f;
 
@@ -103,5 +105,27 @@ public class GameObject extends Sprite
     public FloatRect getFutureHitBox(float xOff, float yOff)
     {
         return new FloatRect(hitBox.left+xOff, hitBox.top+yOff, hitBox.width, hitBox.height);
+    }
+
+    /**
+     * A collision detection method that checks if the current object collides with any in the given list and returns the one it collides with.
+     * 
+     * @param listToDetect GameObjects to check for collision with
+     * @return null - doesnt collide with anything, GameObject - the object it collides with
+     */
+    public GameObject collides(ArrayList<GameObject> listToDetect)
+    {
+        for(GameObject a : listToDetect)
+        {
+            if(!a.equals(this))
+            {
+                if(this.getHitBox().intersection(a.getHitBox()) != null)
+                {
+                    return a;
+                }
+            }
+
+        }
+        return null;
     }
 }
