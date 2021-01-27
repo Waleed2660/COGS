@@ -42,7 +42,6 @@ public class GameRunner
          //enemy.setScale((float) 0.2,(float)0.2);
          while(levelOpen && window.isOpen())
          {
-               //window.clear(Color.BLACK); //for some reason works without clearing
                //window.draw(backToMenu);
                this.controller(drawAll(level, window));
 
@@ -63,8 +62,6 @@ public class GameRunner
                          // Clickable Button
                     }
                }
-
-               window.display();
          }
     }
 
@@ -75,6 +72,7 @@ public class GameRunner
      * KeyPress is used to detect which key is pressed exactly
      * It will be used to move the player's sprite around the window
      * 
+     * @param event the key event
      */
     public void keyPress(Event event)
     {
@@ -85,6 +83,10 @@ public class GameRunner
           if(event.asKeyEvent().key == Keyboard.Key.ESCAPE)
           {
                levelOpen = false;
+          }
+          if(event.asKeyEvent().key == Keyboard.Key.UP)
+          {
+               player.jump(80);
           }
     }
 
@@ -97,12 +99,13 @@ public class GameRunner
     {
         if(Keyboard.isKeyPressed(Keyboard.Key.LEFT))
         {
-          player.movement(-1, 0, blocks);
+          player.walk(-1, 10/3);
         }
         if(Keyboard.isKeyPressed(Keyboard.Key.RIGHT))
         {
-          player.movement(1, 0, blocks);
+          player.walk(1, 10/3);
         }
+        player.movement(blocks, window);
     }
 
     /**
@@ -116,7 +119,7 @@ public class GameRunner
     {
           ArrayList<GameObject> result = new ArrayList<GameObject>();
           FloatRect viewZone = window.getViewZone();
-          //window.clear(Color.BLACK); 
+          window.clear(Color.BLACK); 
 
           level.setBackgroundView(viewZone);
           window.draw(level.background);
@@ -132,7 +135,6 @@ public class GameRunner
           if(!bullets.isEmpty()){
                
                for (int  x = 0; x < bullets.size(); x++) {
-                    System.out.println("b move");
                     window.draw(bullets.get(x));
                     bullets.get(x).moveBullet();
 
@@ -142,7 +144,7 @@ public class GameRunner
                     }
                }
           }
-        //window.display();
+        window.display();
         return result;
     }
 }

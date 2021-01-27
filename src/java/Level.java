@@ -15,7 +15,7 @@ public class Level
   public ArrayList<GameObject> objectList = new ArrayList<GameObject>(); //public for now should improve the way to access it and change it eventually
   public GameObject background;
   //Arrays for different objects. could be usseful in the future but not right now
-  private ArrayList<FloatRect> ground = new ArrayList<FloatRect>();
+  private ArrayList<GameObject> ground = new ArrayList<GameObject>();
   private ArrayList<Enemy> enemies = new ArrayList<Enemy>();
   private ArrayList<Platform> platforms = new ArrayList<Platform>();
   private Player player;
@@ -50,16 +50,24 @@ public class Level
 
             if(spl[0].equals("Ground"))
             {
-              ground.add(new FloatRect(Float.parseFloat(spl[1]), Float.parseFloat(spl[2]), Float.parseFloat(spl[3]), Float.parseFloat(spl[4])));
+              GameObject temp = new GameObject(Float.parseFloat(spl[1]), Float.parseFloat(spl[2]), Float.parseFloat(spl[3]), Float.parseFloat(spl[4]));
+              ground.add(temp);
+              objectList.add(temp);
             }
             else if(spl[0].equals("player"))
             {
-              player = new Player(Float.parseFloat(spl[1]), Float.parseFloat(spl[2]), 10, 1, filePath.concat("assets/").concat(spl[0]).concat(".png/"));
+              player = new Player(Float.parseFloat(spl[1]), Float.parseFloat(spl[2]), 10, 10, 1, filePath.concat("assets/").concat(spl[0]).concat(".png/"));
               objectList.add(player);
             }
             else if(spl[0].contains("Background"))
             {
               background = new GameObject(Integer.parseInt(spl[1]), Integer.parseInt(spl[2]), filePath.concat("assets/").concat(spl[0]).concat(".png/"));
+            }
+            else if(spl[0].contains("dog"))
+            {
+              Enemy temp = new Enemy(Integer.parseInt(spl[1]), Integer.parseInt(spl[2]), filePath.concat("assets/").concat(spl[0]).concat(".png/"));
+              enemies.add(temp);
+              objectList.add(temp);
             }
             else
             {
@@ -84,6 +92,10 @@ public class Level
     background.setTextureRect(new IntRect(v));
   }
 
+  /**
+   * Returns the player object
+   * @return
+   */
   public Player getPlayer()
   {
     return player;

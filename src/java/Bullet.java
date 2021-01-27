@@ -33,7 +33,7 @@ public class Bullet extends GameObject{
      * @return          returns boolean
      */
     public boolean bulletInSight(MMWindow window){
-        return this.getPosition().x >= 0 && this.getPosition().x <= window.getSize().x;
+        return this.getHitBox().intersection(window.getViewZone()) != null;
     }
 
     /**

@@ -9,14 +9,27 @@ import org.jsfml.window.Keyboard.Key;
 
 public class Player extends GameObject
 {
-    private float speed;
+    private float speedY = 0, speedX = 0;
+    private float maxSpeedX, maxSpeedY;
     private float friction;
     private int direction = 1;
+    private float g = 10/6;
 
-    public Player(float x, float y, float speed, float friction, String texPath)
+    /**
+     * Constructor for player.
+     * 
+     * @param x position
+     * @param y position
+     * @param maxSpeedX max speed on the x axis
+     * @param maxSpeedY max speed when falling
+     * @param friction friction increment which stops the players movements
+     * @param texPath texture path
+     */
+    public Player(float x, float y, float maxSpeedX, float maxSpeedY, float friction, String texPath)
     {
         super(x, y, texPath);
-        this.speed = speed;
+        this.maxSpeedX = maxSpeedX;
+        this.maxSpeedY = maxSpeedY;
         this.friction = friction;
     }
 
@@ -51,31 +64,84 @@ public class Player extends GameObject
     }*/
 
     /**
-     * Checks for collision and if it doesnt hit anything moves the player.
+     * Increases the speed of the player causing him to move in the next movement call.
      * 
-     * @param xDir x direction to move to
-     * @param yDir y direction to move to
-     * @param blocks blocks to check for collision with
+     * @param direction x direction to move to
+     * @param a the acceleration increment
      */
-    public void movement(int xDir, int yDir, ArrayList<GameObject> blocks)
+    public void walk(int direction, float a)
     {
-        direction = xDir;
-        boolean collides = false;
-        for(GameObject a : blocks)
+        this.direction = direction;
+        if(speedX < maxSpeedX)
+        {
+            speedX += a;
+        }
+        if(speedX > maxSpeedX)
+        {
+            speedX = maxSpeedX;
+        }
+    }
+
+    /**
+     * Performs a jump of the given height
+     * 
+     * @param height the height of the jump
+     */
+    public void jump(float height)
+    {
+        if(speedY <= 0)
+        {
+            speedY = height/5;
+        }
+    }
+
+    /**
+     * Executes any movement for the player.
+     * 
+     * !!!BUG: for some reason sometimes collision isnt detected and it merges in a corner!!!
+     * 
+     * @param blocks
+     * @param window
+     */
+    public void movement(ArrayList<GameObject> objectsInView, MMWindow window)
+    {
+        for(GameObject a : objectsInView)
         {
             if(a.getClass() != Player.class)
             {
-                if(this.getFutureHitBox(xDir*speed, 0).intersection(a.getHitBox()) != null)
+                if(this.getFutureHitBox(0, speedY*-1).intersection(a.getHitBox()) != null)
                 {
-                    collides = true;
+                    speedY = 0;
+                }
+                else if(this.getFutureHitBox(speedX*direction, 0).intersection(a.getHitBox()) != null)
+                {
+                    speedX = 0;
                 }
             }
 
         }
-        if(!collides)
+        //if(!collidesX && !collidesY)
+        //{
+            this.moveObject(speedX*direction, speedY*-1);
+            speedY -= g;
+            if(speedX > 0)
+            {
+                speedX -= friction;
+            }
+            else{
+                speedX = 0;
+            }
+            window.moveView(speedX*direction);
+        /**}
+        else if(!collidesY)
         {
-            this.moveObject(xDir*speed, 0);
+            this.moveObject(0, speedY*-1);
+            speedY -= g;
         }
+        else{
+            speedY = 0;
+        }*/
+
     }
 
     /**
