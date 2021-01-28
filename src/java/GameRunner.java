@@ -25,7 +25,7 @@ public class GameRunner
     {
           this.window = window;
           window.setKeyRepeatEnabled(false);
-          this.level = new Level(levelNum, 2);
+          this.level = new Level(levelNum, (float)2.5, 2);
           this.player = level.getPlayer();
     }
 

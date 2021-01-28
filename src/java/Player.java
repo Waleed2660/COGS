@@ -11,6 +11,7 @@ import org.jsfml.window.Keyboard.Key;
  * TODO:
  *  1. properly calculate Y speed in relation to jump height
  *  2. properly calculate the max Y speed in relation to jump height
+ *  3. passable but standable platforms
  */
 
 public class Player extends GameObject
@@ -20,7 +21,8 @@ public class Player extends GameObject
     private float friction;
     private int direction = 1;
     private boolean isJump = false;
-    private float g = (float)2.5;
+    private float g;
+    private float[] xEdges;
 
     /**
      * Constructor for player.
@@ -29,15 +31,17 @@ public class Player extends GameObject
      * @param y position
      * @param maxSpeedX max speed on the x axis
      * @param jumpHeight the player jump height
-     * @param friction friction increment which stops the players movements
+     * @param level the level the player is in
      * @param texPath texture path
      */
-    public Player(float x, float y, float maxSpeedX, float jumpHeight, float friction, String texPath)
+    public Player(float x, float y, float maxSpeedX, float jumpHeight, Level level, String texPath)
     {
         super(x, y, texPath);
         this.maxSpeedX = maxSpeedX;
         this.jumpHeight = jumpHeight;
-        this.friction = friction;
+        this.friction = level.getFriction();
+        this.g = level.getGravity();
+        xEdges = level.getEdgeCoords();
     }
 
     /**
@@ -97,7 +101,7 @@ public class Player extends GameObject
     /**
      * Executes any movement for the player.
      * 
-     * !!!BUG: for some reason sometimes collision isnt detected and it merges in a corner!!!
+     * !!!BUG: when hitting a corner the detection does not detect any collision. Need to decide on whether in that case y or x speed is turned off!!!
      * 
      * @param objectsInView an array of the object that are in view and should be checked for collision
      * @param window the game window
@@ -110,6 +114,11 @@ public class Player extends GameObject
         {
             if(!a.equals(this))
             {
+                if(this.getPosition().x+speedX*direction < xEdges[0] || (this.getPosition().x+this.getLocalBounds().width)+speedX*direction > xEdges[1])
+                {
+                    speedX = 0;
+                }
+
                 //  Checks if the player collides with anything on the y axis and if it does checks if its above or bellow and changes the speed
                 //  so it ends up right next to it. Same for the x axis.
                 FloatRect yCollision = this.getFutureHitBox(0, speedY*-1).intersection(a.getHitBox());
@@ -141,7 +150,16 @@ public class Player extends GameObject
 
         }
 
+        if(window.getViewZone().left+speedX*direction > xEdges[0]
+            && (window.getViewZone().left+window.getViewZone().width)+speedX*direction < xEdges[1]
+            && this.getPosition().x >= window.getViewZone().left+window.getViewZone().width/3
+            && this.getPosition().x <= (window.getViewZone().left+(window.getViewZone().width/3)*2))
+        {
+            window.moveView(speedX*direction);
+        }
         this.moveObject(speedX*direction, speedY*-1);
+        
+        
         if(yCollides != null)
         {
             speedY = 0;
@@ -171,7 +189,6 @@ public class Player extends GameObject
         else{
             speedX = 0;
         }
-        window.moveView(speedX*direction);
     }
 
     /**
