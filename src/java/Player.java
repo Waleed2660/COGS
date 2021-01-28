@@ -1,19 +1,26 @@
 import java.util.ArrayList;
 import org.jsfml.window.event.Event;
+import org.jsfml.graphics.FloatRect;
 import org.jsfml.window.Keyboard;
 import org.jsfml.window.Keyboard.Key;
 
 /**
  * A class that represents the player entity. Extends GameObject.
  */
+/**
+ * TODO:
+ *  1. properly calculate Y speed in relation to jump height
+ *  2. properly calculate the max Y speed in relation to jump height
+ */
 
 public class Player extends GameObject
 {
     private float speedY = 0, speedX = 0;
-    private float maxSpeedX, maxSpeedY;
+    private float maxSpeedX, jumpHeight;
     private float friction;
     private int direction = 1;
-    private float g = 10/6;
+    private boolean isJump = false;
+    private float g = (float)2.5;
 
     /**
      * Constructor for player.
@@ -21,15 +28,15 @@ public class Player extends GameObject
      * @param x position
      * @param y position
      * @param maxSpeedX max speed on the x axis
-     * @param maxSpeedY max speed when falling
+     * @param jumpHeight the player jump height
      * @param friction friction increment which stops the players movements
      * @param texPath texture path
      */
-    public Player(float x, float y, float maxSpeedX, float maxSpeedY, float friction, String texPath)
+    public Player(float x, float y, float maxSpeedX, float jumpHeight, float friction, String texPath)
     {
         super(x, y, texPath);
         this.maxSpeedX = maxSpeedX;
-        this.maxSpeedY = maxSpeedY;
+        this.jumpHeight = jumpHeight;
         this.friction = friction;
     }
 
@@ -67,31 +74,23 @@ public class Player extends GameObject
      * Increases the speed of the player causing him to move in the next movement call.
      * 
      * @param direction x direction to move to
-     * @param a the acceleration increment
      */
-    public void walk(int direction, float a)
+    public void walk(int direction)
     {
         this.direction = direction;
-        if(speedX < maxSpeedX)
-        {
-            speedX += a;
-        }
-        if(speedX > maxSpeedX)
-        {
-            speedX = maxSpeedX;
-        }
+        speedX = maxSpeedX;
     }
 
     /**
-     * Performs a jump of the given height
-     * 
-     * @param height the height of the jump
+     * Performs a jump of the set height
      */
-    public void jump(float height)
+    public void jump()
     {
-        if(speedY <= 0)
+        if(!isJump)
         {
-            speedY = height/5;
+            //needs adjusting
+            speedY = jumpHeight/3;
+            isJump = true;
         }
     }
 
@@ -100,48 +99,79 @@ public class Player extends GameObject
      * 
      * !!!BUG: for some reason sometimes collision isnt detected and it merges in a corner!!!
      * 
-     * @param blocks
-     * @param window
+     * @param objectsInView an array of the object that are in view and should be checked for collision
+     * @param window the game window
      */
     public void movement(ArrayList<GameObject> objectsInView, MMWindow window)
     {
+        FloatRect yCollides = null;
+    
         for(GameObject a : objectsInView)
         {
-            if(a.getClass() != Player.class)
+            if(!a.equals(this))
             {
-                if(this.getFutureHitBox(0, speedY*-1).intersection(a.getHitBox()) != null)
+                //  Checks if the player collides with anything on the y axis and if it does checks if its above or bellow and changes the speed
+                //  so it ends up right next to it. Same for the x axis.
+                FloatRect yCollision = this.getFutureHitBox(0, speedY*-1).intersection(a.getHitBox());
+                if(yCollision != null)
                 {
-                    speedY = 0;
+                    yCollides = yCollision;
+                    if(yCollision.top > this.getPosition().y)
+                    {
+                        speedY = (yCollision.top-(this.getPosition().y+this.getLocalBounds().height))*-1;
+                    }
+                    else if(yCollision.top < this.getPosition().y)
+                    {
+                        speedY = this.getPosition().y-(yCollision.top+yCollision.height);
+                    }
                 }
-                else if(this.getFutureHitBox(speedX*direction, 0).intersection(a.getHitBox()) != null)
+                FloatRect xCollision = this.getFutureHitBox(speedX*direction, 0).intersection(a.getHitBox());
+                if(xCollision != null)
                 {
-                    speedX = 0;
+                    if(xCollision.left > this.getPosition().x)
+                    {
+                        speedX = xCollision.left-(this.getPosition().x+this.getLocalBounds().width);
+                    }
+                    else if(xCollision.left < this.getPosition().x)
+                    {
+                        speedX = this.getPosition().x-(xCollision.left+xCollision.width);
+                    }
                 }
             }
 
         }
-        //if(!collidesX && !collidesY)
-        //{
-            this.moveObject(speedX*direction, speedY*-1);
-            speedY -= g;
-            if(speedX > 0)
-            {
-                speedX -= friction;
-            }
-            else{
-                speedX = 0;
-            }
-            window.moveView(speedX*direction);
-        /**}
-        else if(!collidesY)
+
+        this.moveObject(speedX*direction, speedY*-1);
+        if(yCollides != null)
         {
-            this.moveObject(0, speedY*-1);
-            speedY -= g;
+            speedY = 0;
+            if(yCollides.top > this.getPosition().y)
+            {
+                isJump = false;
+            }
+        }
+        
+        speedY -= g;
+
+        //needs adjusting
+        if(speedY*-1 > jumpHeight/2)
+        {
+            speedY = (jumpHeight/2)*-1;
+        }
+
+        // reduces the speed gradually
+        if(isJump && speedX > 0)
+        {
+            speedX -= friction/2;
+        }
+        else if(speedX > 0)
+        {
+            speedX -= friction;
         }
         else{
-            speedY = 0;
-        }*/
-
+            speedX = 0;
+        }
+        window.moveView(speedX*direction);
     }
 
     /**
@@ -151,6 +181,6 @@ public class Player extends GameObject
      */
     public void shoot(ArrayList<Bullet> bullets)
     {
-        bullets.add(new Bullet(direction, this.getPosition().x, this.getPosition().y+this.getLocalBounds().height/2, "resources/laser.png"));
+        bullets.add(new Bullet(direction, this.getPosition().x+this.getLocalBounds().width*direction, this.getPosition().y+this.getLocalBounds().height/2, "resources/laser.png"));
     }
 }

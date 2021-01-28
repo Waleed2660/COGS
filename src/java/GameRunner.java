@@ -84,10 +84,6 @@ public class GameRunner
           {
                levelOpen = false;
           }
-          if(event.asKeyEvent().key == Keyboard.Key.UP)
-          {
-               player.jump(80);
-          }
     }
 
      /**
@@ -95,18 +91,22 @@ public class GameRunner
      * 
      * @param blocks the GameObject to check for collision with
      */
-    public void controller(ArrayList<GameObject> blocks)
-    {
-        if(Keyboard.isKeyPressed(Keyboard.Key.LEFT))
-        {
-          player.walk(-1, 10/3);
-        }
-        if(Keyboard.isKeyPressed(Keyboard.Key.RIGHT))
-        {
-          player.walk(1, 10/3);
-        }
-        player.movement(blocks, window);
-    }
+     public void controller(ArrayList<GameObject> blocks)
+     {
+          if(Keyboard.isKeyPressed(Keyboard.Key.LEFT))
+          {
+               player.walk(-1);
+          }
+          if(Keyboard.isKeyPressed(Keyboard.Key.RIGHT))
+          {
+               player.walk(1);
+          }
+          if(Keyboard.isKeyPressed(Keyboard.Key.UP))
+          {
+               player.jump();
+          }
+          player.movement(blocks, window);
+     }
 
     /**
      * Draws all objects in a level dynamically.
@@ -139,7 +139,7 @@ public class GameRunner
                     bullets.get(x).moveBullet();
 
                     // De-spawns the bullet when it goes out of frame/ hits object
-                    if (!bullets.get(x).bulletInSight(window)) {
+                    if (!bullets.get(x).bulletInSight(window) || bullets.get(x).collides(result) != null) {
                          bullets.remove(x);
                     }
                }
