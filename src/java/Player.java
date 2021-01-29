@@ -100,9 +100,7 @@ public class Player extends GameObject
 
     /**
      * Executes any movement for the player.
-     * 
-     * !!!BUG: when hitting a corner the detection does not detect any collision. Need to decide on whether in that case y or x speed is turned off!!!
-     * 
+     *  
      * @param objectsInView an array of the object that are in view and should be checked for collision
      * @param window the game window
      */
@@ -110,15 +108,16 @@ public class Player extends GameObject
     {
         FloatRect yCollides = null;
     
+        //Checks that it doesnt go off the screen
+        if(this.getPosition().x+speedX*direction < xEdges[0] || (this.getPosition().x+this.getLocalBounds().width)+speedX*direction > xEdges[1])
+        {
+            speedX = 0;
+        }
+
         for(GameObject a : objectsInView)
         {
             if(!a.equals(this))
             {
-                if(this.getPosition().x+speedX*direction < xEdges[0] || (this.getPosition().x+this.getLocalBounds().width)+speedX*direction > xEdges[1])
-                {
-                    speedX = 0;
-                }
-
                 //  Checks if the player collides with anything on the y axis and if it does checks if its above or bellow and changes the speed
                 //  so it ends up right next to it. Same for the x axis.
                 FloatRect yCollision = this.getFutureHitBox(0, speedY*-1).intersection(a.getHitBox());
@@ -144,6 +143,14 @@ public class Player extends GameObject
                     else if(xCollision.left < this.getPosition().x)
                     {
                         speedX = this.getPosition().x-(xCollision.left+xCollision.width);
+                    }
+                }
+                //If no collision on x or y checks for collision diaganolly. Temporary fix to bug
+                if(yCollision == null && xCollision == null)
+                {
+                    if(this.getFutureHitBox(speedX*direction, speedY*-1).intersection(a.getHitBox()) != null)
+                    {
+                        speedX = 0;
                     }
                 }
             }
