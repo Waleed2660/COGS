@@ -29,7 +29,7 @@ public class GameRunner
     {
           this.window = window;
           window.setKeyRepeatEnabled(false);
-          this.level = new Level(levelNum, 2);
+          this.level = new Level(levelNum, (float)2.5, 2);
           this.player = level.getPlayer();
     }
 
@@ -101,10 +101,6 @@ public class GameRunner
           {
                levelOpen = false;
           }
-          if(event.asKeyEvent().key == Keyboard.Key.UP)
-          {
-               player.jump(80);
-          }
     }
 
      /**
@@ -112,18 +108,22 @@ public class GameRunner
      * 
      * @param blocks the GameObject to check for collision with
      */
-    public void controller(ArrayList<GameObject> blocks)
-    {
-        if(Keyboard.isKeyPressed(Keyboard.Key.LEFT))
-        {
-          player.walk(-1, 10/3);
-        }
-        if(Keyboard.isKeyPressed(Keyboard.Key.RIGHT))
-        {
-          player.walk(1, 10/3);
-        }
-        player.movement(blocks, window);
-    }
+     public void controller(ArrayList<GameObject> blocks)
+     {
+          if(Keyboard.isKeyPressed(Keyboard.Key.LEFT))
+          {
+               player.walk(-1);
+          }
+          if(Keyboard.isKeyPressed(Keyboard.Key.RIGHT))
+          {
+               player.walk(1);
+          }
+          if(Keyboard.isKeyPressed(Keyboard.Key.UP))
+          {
+               player.jump();
+          }
+          player.movement(blocks, window);
+     }
 
     /**
      * Draws all objects in a level dynamically.
@@ -156,6 +156,7 @@ public class GameRunner
 
                     // De-spawns the bullet when it goes out of frame/ hits object
                     if (!bullets.get(x).bulletInSight(window) || bullets.get(x).collides(result) != null) {
+<<<<<<< HEAD
                          if(bullets.get(x).eCollides(level.enemies) != null)
                          {
                               for(int f = 0; f < level.enemies.size();f++)
@@ -170,6 +171,8 @@ public class GameRunner
                          
                               }  
                          }   
+=======
+>>>>>>> f9fade8e097aadb0d6fa4fabba099b9ce2bb0357
                          bullets.remove(x);
                     }
                }
