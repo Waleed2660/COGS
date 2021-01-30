@@ -1,4 +1,5 @@
 import org.jsfml.graphics.FloatRect;
+import java.util.ArrayList;
 
 /**
  * This class provides basic bullet functionality
@@ -41,7 +42,7 @@ public class Bullet extends GameObject{
      * @param victimObject  FloatRect for Object
      * @return  returns true if collision detected
      */
-    public boolean bulletCollision(FloatRect victimObject){
+    public boolean bulletCollision(ArrayList<Enemy> victimObject){
         return victimObject.contains(this.getPosition());
     }
 }

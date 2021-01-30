@@ -16,7 +16,7 @@ public class Level
   public GameObject background;
   //Arrays for different objects. could be usseful in the future but not right now
   private ArrayList<GameObject> ground = new ArrayList<GameObject>();
-  private ArrayList<Enemy> enemies = new ArrayList<Enemy>();
+  public ArrayList<Enemy> enemies = new ArrayList<Enemy>(); //had to change to public so i could access in GameRunner  for collsion damage detection
   private ArrayList<Platform> platforms = new ArrayList<Platform>();
   private Player player;
 
@@ -32,10 +32,16 @@ public class Level
    */
   public Level(String levNum, float gravity, float friction)
   {
+<<<<<<< HEAD
+      levelNum = levNum;
+      addFromFile("./Levels/".concat(levelNum).concat("/"));
+      this.gravity = gravity;
+=======
     levelNum = levNum;
     this.gravity = gravity;
     this.friction = friction;
     addFromFile("./levels/".concat(levelNum).concat("/"));
+>>>>>>> f9fade8e097aadb0d6fa4fabba099b9ce2bb0357
   }
 
   /**
@@ -67,11 +73,17 @@ public class Level
           {
             background = new GameObject(Integer.parseInt(spl[1]), Integer.parseInt(spl[2]), filePath.concat("assets/").concat(spl[0]).concat(".png/"));
           }
-          else if(spl[0].contains("dog") || spl[0].contains("robot"))
+          else if(spl[0].contains("dog"))
           {
-            Enemy temp = new Enemy(Integer.parseInt(spl[1]), Integer.parseInt(spl[2]), filePath.concat("assets/").concat(spl[0]).concat(".png/"));
-            enemies.add(temp);
-            objectList.add(temp);
+              Enemy temp = new Enemy(Integer.parseInt(spl[1]), Integer.parseInt(spl[2]), filePath.concat("assets/").concat(spl[0]).concat(".png/"), 1);
+              enemies.add(temp);
+              objectList.add(temp);
+          }
+          else if(spl[0].contains("robot"))
+          {
+              Enemy temp = new Enemy(Integer.parseInt(spl[1]), Integer.parseInt(spl[2]), filePath.concat("assets/").concat(spl[0]).concat(".png/"), 2);
+              enemies.add(temp);
+              objectList.add(temp);
           }
           else if(spl[0].contains("platform"))
           {

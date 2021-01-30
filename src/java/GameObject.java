@@ -34,6 +34,7 @@ public class GameObject extends Sprite
         }
         this.setPosition(x, y);
         setHitBoxToTexture();
+
     }
 
     /**
@@ -114,6 +115,43 @@ public class GameObject extends Sprite
      * @return null - doesnt collide with anything, GameObject - the object it collides with
      */
     public GameObject collides(ArrayList<GameObject> listToDetect)
+    {
+        for(GameObject a : listToDetect)
+        {
+            if(!a.equals(this))
+            {
+                if(this.getHitBox().intersection(a.getHitBox()) != null)
+                {
+                    return a;
+                }
+            }
+
+        }
+        return null;
+    }
+    
+    /**
+     * Same as collides but for enemies
+     * 
+     * @param listToDetect Enemy list to check for collision with
+     * @return null - doesnt collide with anything, GameObject - the object it collides with
+     */
+    public GameObject eCollides(ArrayList<Enemy> listToDetect)
+    {
+        for(GameObject a : listToDetect)
+        {
+            if(!a.equals(this))
+            {
+                if(this.getFutureHitBox(10,10).intersection(a.getHitBox()) != null)
+                {
+                    return a;
+                }
+            }
+
+        }
+        return null;
+    }
+    public GameObject bCollides(ArrayList<Bullet> listToDetect)
     {
         for(GameObject a : listToDetect)
         {

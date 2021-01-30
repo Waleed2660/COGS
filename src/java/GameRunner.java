@@ -2,18 +2,22 @@ import org.jsfml.graphics.*;
 import org.jsfml.window.Keyboard;
 import org.jsfml.window.event.Event;
 import java.util.ArrayList;
+import java.util.Timer;
 
 /**
  * Used to run the game
  */
 public class GameRunner
 {
+    private ArrayList<GameObject> result = new ArrayList<GameObject>();
     private ArrayList<Bullet> bullets = new ArrayList<>();
     private MMWindow window;
     private Level level;
-    private int health = 100; //5 hits to ko 20 hp per hit  // enemies dog - 1 hit ko robot 2 - hit ko
     private boolean levelOpen = true;
     private Player player;
+    private GameOver over;
+    private boolean ticker;
+    private int tocker = 0;
 
     /**
      * Creates the gamerunner for a specific level and gives the window to use
@@ -37,8 +41,7 @@ public class GameRunner
     {
          float xlocl = 10, ylocl = 10;
          float winSizeX = window.getSize().x, winSizeY = window.getSize().y;
-         //TextManager backToMenu = new TextManager("Back",100,200);
-
+         int check = player.hp;
          //GameObject enemy = new GameObject(winSizeX/2 + 700, winSizeY/2,"resources/enemy.gif");
          //enemy.setScale((float) 0.2,(float)0.2);
          while(levelOpen && window.isOpen())
@@ -63,8 +66,22 @@ public class GameRunner
                          // Clickable Button
                     }
                }
-         }
-    }
+               
+               if(player.eCollides(level.enemies) != null)
+               {  
+                    System.out.println("hit" + check);
+                    check = player.dmghp();
+                    if(check == 0 || check == -1)
+                    {
+                         System.out.println("dead");
+                         player.setHP(100);
+                         window.close(); // temp thing until we figure out what we want to do when player ko
+                    }
+               }      
+               
+          }
+               
+    } 
 
      /** 
       * KeyPress uses a MMWindow and Player. A bit redundant. Could be removed or merged with controller?
@@ -119,7 +136,6 @@ public class GameRunner
      */
     public ArrayList<GameObject> drawAll(Level level, MMWindow window)
     {
-          ArrayList<GameObject> result = new ArrayList<GameObject>();
           FloatRect viewZone = window.getViewZone();
           window.clear(Color.BLACK); 
 
@@ -142,6 +158,23 @@ public class GameRunner
 
                     // De-spawns the bullet when it goes out of frame/ hits object
                     if (!bullets.get(x).bulletInSight(window) || bullets.get(x).collides(result) != null) {
+<<<<<<< HEAD
+                         if(bullets.get(x).eCollides(level.enemies) != null)
+                         {
+                              for(int f = 0; f < level.enemies.size();f++)
+                              {
+                                   if(level.enemies.get(f).bCollides(bullets) != null)
+                                   {
+                                        if(level.enemies.get(f).dmghp() == 0)
+                                        {
+                                             System.out.println("Enem dead");
+                                        }
+                                   }
+                         
+                              }  
+                         }   
+=======
+>>>>>>> f9fade8e097aadb0d6fa4fabba099b9ce2bb0357
                          bullets.remove(x);
                     }
                }

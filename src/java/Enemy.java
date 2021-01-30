@@ -4,10 +4,21 @@
 
 public class Enemy extends GameObject
 {
-    public Enemy(float x, float y, String texPath)
+    int hp;
+    public Enemy(float x, float y, String texPath,int hp)
     {
         super(x, y, texPath);
+        this.hp = hp;
+
     }
 
-    
+    public int dmghp()
+    {
+        hp -= 1;
+        if(hp == 0)
+        {
+            return 0;
+        }
+        return hp;
+    }
 }
