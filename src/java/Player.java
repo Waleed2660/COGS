@@ -11,7 +11,6 @@ import org.jsfml.window.Keyboard.Key;
  * TODO:
  *  1. properly calculate Y speed in relation to jump height
  *  2. properly calculate the max Y speed in relation to jump height
- *  3. passable but standable platforms
  */
 
 public class Player extends GameObject
@@ -99,7 +98,7 @@ public class Player extends GameObject
     }
 
     /**
-     * Executes any movement for the player.
+     * Executes any movement for the player(With checking for collision).
      *  
      * @param objectsInView an array of the object that are in view and should be checked for collision
      * @param window the game window
@@ -108,6 +107,8 @@ public class Player extends GameObject
     {
         //falling flag
         boolean landed = false;
+        boolean diagCheck = true;
+        float tempX = speedX;
     
         //Checks that it doesnt go off the screen
         if(this.getPosition().x+speedX*direction < xEdges[0] || (this.getPosition().x+this.getLocalBounds().width)+speedX*direction > xEdges[1])
@@ -124,6 +125,7 @@ public class Player extends GameObject
                 FloatRect yCollision = this.getFutureHitBox(0, speedY*-1).intersection(a.getHitBox());
                 if(yCollision != null)
                 {
+                    diagCheck = false;
                     //if collides bellow
                     if(yCollision.top >= this.getPosition().y+this.getLocalBounds().height)
                     {
@@ -139,6 +141,7 @@ public class Player extends GameObject
                 FloatRect xCollision = this.getFutureHitBox(speedX*direction, 0).intersection(a.getHitBox());
                 if(xCollision != null)
                 {
+                    diagCheck = false;
                     //if collides on the right
                     if(xCollision.left >= this.getPosition().x+this.getLocalBounds().width && a.getClass() != Platform.class)
                     {
@@ -151,18 +154,21 @@ public class Player extends GameObject
                     }
                 }
                 //If in air for collision diaganolly. Temporary fix to bug
-                if(inAir)
+                if(diagCheck)
                 {
                     FloatRect diagCollision = this.getFutureHitBox(speedX*direction, speedY*-1).intersection(a.getHitBox());
                     if(diagCollision != null && a.getClass() != Platform.class)
                     {
-                        speedX = 0;
+                        tempX = 0;
                     }
                 }
             }
 
         }
-
+        if(diagCheck)
+        {
+            speedX = tempX;
+        }
         if(window.getViewZone().left+speedX*direction > xEdges[0]
             && (window.getViewZone().left+window.getViewZone().width)+speedX*direction < xEdges[1]
             && this.getPosition().x >= window.getViewZone().left+window.getViewZone().width/3
@@ -178,10 +184,11 @@ public class Player extends GameObject
             inAir = false;
             speedY = 0;
         }
-        else{
+        else
+        {
             inAir = true;
-            speedY -= g;
         }
+        speedY -= g;
         
         //needs adjusting
         if(speedY*-1 > jumpHeight/2)

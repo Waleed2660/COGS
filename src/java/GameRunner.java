@@ -24,6 +24,7 @@ public class GameRunner
     public GameRunner(MMWindow window, String levelNum)
     {
           this.window = window;
+          window.resetView();
           window.setKeyRepeatEnabled(false);
           this.level = new Level(levelNum, (float)2.5, 2);
           this.player = level.getPlayer();
@@ -83,6 +84,7 @@ public class GameRunner
           if(event.asKeyEvent().key == Keyboard.Key.ESCAPE)
           {
                levelOpen = false;
+               window.resetView();
           }
     }
 
