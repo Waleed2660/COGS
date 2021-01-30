@@ -15,7 +15,7 @@ public class GameRunner
     private Level level;
     private boolean levelOpen = true;
     private Player player;
-    private GameOver over;
+    //private GameOver over;
     private boolean ticker;
     private int tocker = 0;
 
@@ -158,7 +158,6 @@ public class GameRunner
 
                     // De-spawns the bullet when it goes out of frame/ hits object
                     if (!bullets.get(x).bulletInSight(window) || bullets.get(x).collides(result) != null) {
-<<<<<<< HEAD
                          if(bullets.get(x).eCollides(level.enemies) != null)
                          {
                               for(int f = 0; f < level.enemies.size();f++)
@@ -173,8 +172,6 @@ public class GameRunner
                          
                               }  
                          }   
-=======
->>>>>>> f9fade8e097aadb0d6fa4fabba099b9ce2bb0357
                          bullets.remove(x);
                     }
                }

@@ -32,16 +32,10 @@ public class Level
    */
   public Level(String levNum, float gravity, float friction)
   {
-<<<<<<< HEAD
-      levelNum = levNum;
-      addFromFile("./Levels/".concat(levelNum).concat("/"));
-      this.gravity = gravity;
-=======
     levelNum = levNum;
     this.gravity = gravity;
     this.friction = friction;
     addFromFile("./levels/".concat(levelNum).concat("/"));
->>>>>>> f9fade8e097aadb0d6fa4fabba099b9ce2bb0357
   }
 
   /**
