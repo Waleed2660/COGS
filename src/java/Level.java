@@ -60,17 +60,23 @@ public class Level
           }
           else if(spl[0].equals("player"))
           {
-            player = new Player(Float.parseFloat(spl[1]), Float.parseFloat(spl[2]), 10, 80, this, filePath.concat("assets/").concat(spl[0]).concat(".png/"));
+            player = new Player(Float.parseFloat(spl[1]), Float.parseFloat(spl[2]), 10, 100, this, filePath.concat("assets/").concat(spl[0]).concat(".png/"));
             objectList.add(player);
           }
           else if(spl[0].contains("Background"))
           {
             background = new GameObject(Integer.parseInt(spl[1]), Integer.parseInt(spl[2]), filePath.concat("assets/").concat(spl[0]).concat(".png/"));
           }
-          else if(spl[0].contains("dog"))
+          else if(spl[0].contains("dog") || spl[0].contains("robot"))
           {
             Enemy temp = new Enemy(Integer.parseInt(spl[1]), Integer.parseInt(spl[2]), filePath.concat("assets/").concat(spl[0]).concat(".png/"));
             enemies.add(temp);
+            objectList.add(temp);
+          }
+          else if(spl[0].contains("platform"))
+          {
+            Platform temp = new Platform(Integer.parseInt(spl[1]), Integer.parseInt(spl[2]), filePath.concat("assets/").concat(spl[0]).concat(".png/"));
+            platforms.add(temp);
             objectList.add(temp);
           }
           else

@@ -20,7 +20,7 @@ public class Player extends GameObject
     private float maxSpeedX, jumpHeight;
     private float friction;
     private int direction = 1;
-    private boolean isJump = false;
+    private boolean inAir = false;
     private float g;
     private float[] xEdges;
 
@@ -90,11 +90,11 @@ public class Player extends GameObject
      */
     public void jump()
     {
-        if(!isJump)
+        if(!inAir)
         {
             //needs adjusting
             speedY = jumpHeight/3;
-            isJump = true;
+            inAir = true;
         }
     }
 
@@ -106,7 +106,8 @@ public class Player extends GameObject
      */
     public void movement(ArrayList<GameObject> objectsInView, MMWindow window)
     {
-        FloatRect yCollides = null;
+        //falling flag
+        boolean landed = false;
     
         //Checks that it doesnt go off the screen
         if(this.getPosition().x+speedX*direction < xEdges[0] || (this.getPosition().x+this.getLocalBounds().width)+speedX*direction > xEdges[1])
@@ -116,19 +117,21 @@ public class Player extends GameObject
 
         for(GameObject a : objectsInView)
         {
-            if(!a.equals(this))
+            if(!a.equals(this) && a.getClass() != Enemy.class)
             {
                 //  Checks if the player collides with anything on the y axis and if it does checks if its above or bellow and changes the speed
                 //  so it ends up right next to it. Same for the x axis.
                 FloatRect yCollision = this.getFutureHitBox(0, speedY*-1).intersection(a.getHitBox());
                 if(yCollision != null)
                 {
-                    yCollides = yCollision;
-                    if(yCollision.top > this.getPosition().y)
+                    //if collides bellow
+                    if(yCollision.top >= this.getPosition().y+this.getLocalBounds().height)
                     {
+                        landed = true;
                         speedY = (yCollision.top-(this.getPosition().y+this.getLocalBounds().height))*-1;
                     }
-                    else if(yCollision.top < this.getPosition().y)
+                    //if collides above
+                    else if(yCollision.top+yCollision.height <= this.getPosition().y && a.getClass() != Platform.class)
                     {
                         speedY = this.getPosition().y-(yCollision.top+yCollision.height);
                     }
@@ -136,19 +139,22 @@ public class Player extends GameObject
                 FloatRect xCollision = this.getFutureHitBox(speedX*direction, 0).intersection(a.getHitBox());
                 if(xCollision != null)
                 {
-                    if(xCollision.left > this.getPosition().x)
+                    //if collides on the right
+                    if(xCollision.left >= this.getPosition().x+this.getLocalBounds().width && a.getClass() != Platform.class)
                     {
                         speedX = xCollision.left-(this.getPosition().x+this.getLocalBounds().width);
                     }
-                    else if(xCollision.left < this.getPosition().x)
+                    //if collides on the left
+                    else if(xCollision.left+xCollision.width <= this.getPosition().x && a.getClass() != Platform.class)
                     {
                         speedX = this.getPosition().x-(xCollision.left+xCollision.width);
                     }
                 }
-                //If no collision on x or y checks for collision diaganolly. Temporary fix to bug
-                if(yCollision == null && xCollision == null)
+                //If in air for collision diaganolly. Temporary fix to bug
+                if(inAir)
                 {
-                    if(this.getFutureHitBox(speedX*direction, speedY*-1).intersection(a.getHitBox()) != null)
+                    FloatRect diagCollision = this.getFutureHitBox(speedX*direction, speedY*-1).intersection(a.getHitBox());
+                    if(diagCollision != null && a.getClass() != Platform.class)
                     {
                         speedX = 0;
                     }
@@ -167,17 +173,16 @@ public class Player extends GameObject
         this.moveObject(speedX*direction, speedY*-1);
         
         
-        if(yCollides != null)
+        if(landed)
         {
+            inAir = false;
             speedY = 0;
-            if(yCollides.top > this.getPosition().y)
-            {
-                isJump = false;
-            }
+        }
+        else{
+            inAir = true;
+            speedY -= g;
         }
         
-        speedY -= g;
-
         //needs adjusting
         if(speedY*-1 > jumpHeight/2)
         {
@@ -185,7 +190,7 @@ public class Player extends GameObject
         }
 
         // reduces the speed gradually
-        if(isJump && speedX > 0)
+        if(!landed && speedX > 0)
         {
             speedX -= friction/2;
         }
