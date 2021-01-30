@@ -1,4 +1,5 @@
 import org.jsfml.graphics.FloatRect;
+import java.util.ArrayList;
 
 /**
  * This class provides basic bullet functionality
@@ -24,7 +25,7 @@ public class Bullet extends GameObject{
      * Moves the bullet object given direction
     */
     public void moveBullet(){
-        this.setPosition(this.getPosition().x + XSpeed * direction, this.getPosition().y);
+        this.moveObject(XSpeed*direction, 0);
     }
 
     /**
@@ -33,7 +34,7 @@ public class Bullet extends GameObject{
      * @return          returns boolean
      */
     public boolean bulletInSight(MMWindow window){
-        return this.getPosition().x >= 0 && this.getPosition().x <= window.getSize().x;
+        return this.getHitBox().intersection(window.getViewZone()) != null;
     }
 
     /**
@@ -41,12 +42,7 @@ public class Bullet extends GameObject{
      * @param victimObject  FloatRect for Object
      * @return  returns true if collision detected
      */
-    public boolean bulletCollision(FloatRect victimObject){
+    public boolean bulletCollision(ArrayList<Enemy> victimObject){
         return victimObject.contains(this.getPosition());
     }
-
-
-
-
-
 }

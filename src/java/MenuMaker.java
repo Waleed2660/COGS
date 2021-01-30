@@ -7,9 +7,10 @@ import java.awt.*;
 public class MenuMaker
 {
     private Dimension screenRes = Toolkit.getDefaultToolkit().getScreenSize();
-    private int width = screenRes.width, height = screenRes.height; //used for setting resolution of window
+    //private int width = screenRes.width, height = screenRes.height; //used for setting resolution of window
+    private int width = 1024, height = 640; //used for setting resolution of window
     private int xBPos = width/2, yBPos = height/2; //used for setting button size and position
-    private MMWindow window = new MMWindow(width,height,"Main menu");
+    public MMWindow window = new MMWindow(width,height,"Main menu", false); // changed temp to public for GameOver access
     private TextManager buttons[] = new TextManager[4];     // Hold buttons for Menu
 
     /**
@@ -18,8 +19,13 @@ public class MenuMaker
      * <p>
      * MenuMaker makes use of MMButtons and MMWindow
      */
-    public MenuMaker(){
-
+    public MenuMaker()
+    {
+        makerMenu();
+    }
+    
+    public void makerMenu()
+    {
         // Creating Button
         buttons[0] = new TextManager("Start",xBPos/(float)6, yBPos+(yBPos*(float)0.10));
         buttons[1] = new TextManager("Help",xBPos/(float)6, yBPos+(yBPos*(float)0.25));
@@ -28,6 +34,7 @@ public class MenuMaker
 
 
         while(window.isOpen()) {
+            window.clear(Color.BLACK); //someone forgot to clear before drawing
             // Real-Time Location parameters for Cursor
             float MouseX = Mouse.getPosition(window).x, MouseY = Mouse.getPosition(window).y;
 
@@ -35,7 +42,6 @@ public class MenuMaker
             for (TextManager button : buttons) {
                 window.draw(button);    // Draws all buttons
             }
-            window.display();
 
             for(Event event : window.pollEvents()) {
 
@@ -45,24 +51,23 @@ public class MenuMaker
                         button.blinkButton(MouseX, MouseY, Color.RED);   //Blinks button
                     }
                 }
-                if(event.type == Event.Type.MOUSE_BUTTON_PRESSED) {
-                    
-                }
                 if(event.type == Event.Type.RESIZED) {
                    //need to look up how to find the exterior window size and resize menu window size
                 }
                 if(event.type == Event.Type.MOUSE_BUTTON_PRESSED) {
                     // Clickable Button
                     buttonPressed(MouseX,MouseY,window);
-                }
-                if(Keyboard.isKeyPressed(Keyboard.Key.RIGHT)){
 
                 }
-                if(event.type == Event.Type.CLOSED || Keyboard.isKeyPressed(Keyboard.Key.ESCAPE)) {
+                if(Keyboard.isKeyPressed(Keyboard.Key.RIGHT)){
+                    
+                }
+                if(event.type == Event.Type.CLOSED) {
                     window.close();
                     //IMPORTANT CLOSES WINDOW UPON PRESSING CLOSE DO NOT ALTER
                 }
             }
+            window.display();
         }
     }
 
@@ -72,12 +77,13 @@ public class MenuMaker
      * @param MouseY    y-coordinate of the mouse
      */
     public void buttonPressed(float MouseX, float MouseY, MMWindow window){
-        GameRunner game = new GameRunner();
+        GameRunner game = new GameRunner(window, "Level1");
         for (TextManager button : buttons) {
             // Starts Game
             if (button.blinkButton(MouseX, MouseY, Color.RED) && button.getString().equals("Start")) {
                 // Level Selector Class can be called here
-                game.run(window);
+                game.run();
+                break;
             }
             // Opens Help Menu
             else
@@ -94,6 +100,7 @@ public class MenuMaker
             if (button.blinkButton(MouseX, MouseY, Color.RED) && button.getString().equals("Exit")) {
                 window.close();
             }
+            
         }
     }
 

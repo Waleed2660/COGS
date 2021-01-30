@@ -15,20 +15,23 @@ public class Level
   public ArrayList<GameObject> objectList = new ArrayList<GameObject>(); //public for now should improve the way to access it and change it eventually
   public GameObject background;
   //Arrays for different objects. could be usseful in the future but not right now
-  private ArrayList<FloatRect> ground = new ArrayList<FloatRect>();
-  private ArrayList<Enemy> enemies = new ArrayList<Enemy>();
+  private ArrayList<GameObject> ground = new ArrayList<GameObject>();
+  public ArrayList<Enemy> enemies = new ArrayList<Enemy>(); //had to change to public so i could access in GameRunner  for collsion damage detection
   private ArrayList<Platform> platforms = new ArrayList<Platform>();
   private Player player;
+
+  private float gravity = 0;
 
   /**
    * Constructor for a level.
    * 
    * @param levNum - the level to construct. Currently can be Level1, Level2 or Level3. Should make the choices into enums
    */
-  public Level(String levNum)
+  public Level(String levNum, float gravity)
   {
       levelNum = levNum;
-      addFromFile("./levels/".concat(levelNum).concat("/"));
+      addFromFile("./Levels/".concat(levelNum).concat("/"));
+      this.gravity = gravity;
   }
 
   /**
@@ -45,13 +48,32 @@ public class Level
             String data = myReader.nextLine();
             String[] spl = data.split(" ");
 
-            if(spl[0].equals("Ground") || spl[0].equals("player"))
+            if(spl[0].equals("Ground"))
             {
-              //different cases for ground and player objects
+              GameObject temp = new GameObject(Float.parseFloat(spl[1]), Float.parseFloat(spl[2]), Float.parseFloat(spl[3]), Float.parseFloat(spl[4]));
+              ground.add(temp);
+              objectList.add(temp);
+            }
+            else if(spl[0].equals("player"))
+            {
+              player = new Player(Float.parseFloat(spl[1]), Float.parseFloat(spl[2]), 10, 10, 1, filePath.concat("assets/").concat(spl[0]).concat(".png/"));
+              objectList.add(player);
             }
             else if(spl[0].contains("Background"))
             {
               background = new GameObject(Integer.parseInt(spl[1]), Integer.parseInt(spl[2]), filePath.concat("assets/").concat(spl[0]).concat(".png/"));
+            }
+            else if(spl[0].contains("dog"))
+            {
+              Enemy temp0 = new Enemy(Integer.parseInt(spl[1]), Integer.parseInt(spl[2]), filePath.concat("assets/").concat(spl[0]).concat(".png/"), 1);
+              enemies.add(temp0);
+              objectList.add(temp0);
+            }
+            else if(spl[0].contains("robot"))
+            {
+              Enemy temp1 = new Enemy(Integer.parseInt(spl[1]), Integer.parseInt(spl[2]), filePath.concat("assets/").concat(spl[0]).concat(".png/"), 2);
+              enemies.add(temp1);
+              objectList.add(temp1);
             }
             else
             {
@@ -74,5 +96,14 @@ public class Level
   {
     background.setPosition(v.left, v.top);
     background.setTextureRect(new IntRect(v));
+  }
+
+  /**
+   * Returns the player object
+   * @return
+   */
+  public Player getPlayer()
+  {
+    return player;
   }
 }
