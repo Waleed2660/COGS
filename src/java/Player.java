@@ -20,15 +20,11 @@ public class Player extends GameObject
     private float maxSpeedX, jumpHeight;
     private float friction;
     private int direction = 1;
-<<<<<<< HEAD
-    private float g = 10/6;
-    public int hp = 100; //5 hits to ko 20 hp per hit  // enemies dog - 1 hit ko robot 2 - hit ko
-    int health = 0; // used to store health for iframes
-=======
     private boolean inAir = false;
     private float g;
     private float[] xEdges;
->>>>>>> f9fade8e097aadb0d6fa4fabba099b9ce2bb0357
+    public int hp = 100; //5 hits to ko 20 hp per hit  // enemies dog - 1 hit ko robot 2 - hit ko
+    private int health = 0; // used to store health for iframes
 
     /**
      * Constructor for player.
@@ -216,7 +212,6 @@ public class Player extends GameObject
      */
     public void shoot(ArrayList<Bullet> bullets)
     {
-<<<<<<< HEAD
         if(direction == 1) // Extended code so that bullet detect doesnt hit player and despawn player
             bullets.add(new Bullet(direction, this.getPosition().x+40, this.getPosition().y+this.getLocalBounds().height/2, "resources/laser.png"));
         else
@@ -246,8 +241,5 @@ public class Player extends GameObject
     public void setHP(int hp)
     {
         this.hp = hp;
-=======
-        bullets.add(new Bullet(direction, this.getPosition().x+this.getLocalBounds().width*direction, this.getPosition().y+this.getLocalBounds().height/2, "resources/laser.png"));
->>>>>>> f9fade8e097aadb0d6fa4fabba099b9ce2bb0357
     }
 }

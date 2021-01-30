@@ -74,7 +74,7 @@ public class GameRunner
                     {
                          System.out.println("dead");
                          player.setHP(100);
-                         window.close(); // temp thing until we figure out what we want to do when player ko
+                         levelOpen = false; // temp thing until we figure out what we want to do when player ko
                     }
                }      
                
@@ -156,7 +156,6 @@ public class GameRunner
 
                     // De-spawns the bullet when it goes out of frame/ hits object
                     if (!bullets.get(x).bulletInSight(window) || bullets.get(x).collides(result) != null) {
-<<<<<<< HEAD
                          if(bullets.get(x).eCollides(level.enemies) != null)
                          {
                               for(int f = 0; f < level.enemies.size();f++)
@@ -165,14 +164,14 @@ public class GameRunner
                                    {
                                         if(level.enemies.get(f).dmghp() == 0)
                                         {
-                                             System.out.println("Enem dead");
+                                             level.enemies.remove(f);
+                                             level.objectList.remove(f);
                                         }
                                    }
                          
                               }  
                          }   
-=======
->>>>>>> f9fade8e097aadb0d6fa4fabba099b9ce2bb0357
+
                          bullets.remove(x);
                     }
                }
