@@ -74,7 +74,7 @@ public class GameRunner
                     {
                          System.out.println("dead");
                          player.setHP(100);
-                         levelOpen = false; // temp thing until we figure out what we want to do when player ko
+                         window.close(); // temp thing until we figure out what we want to do when player ko
                     }
                }      
                
@@ -171,7 +171,6 @@ public class GameRunner
                          
                               }  
                          }   
-
                          bullets.remove(x);
                     }
                }

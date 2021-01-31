@@ -235,7 +235,6 @@ public class Player extends GameObject
     public void invicible()
     {
         health = hp;
-        //System.out.println(health);
         hp = -100;
     }
 
