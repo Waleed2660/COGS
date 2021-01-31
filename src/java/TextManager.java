@@ -56,5 +56,14 @@ public class TextManager extends Text{
             this.setColor(Color.WHITE);
         return false;
     }
+
+    /**
+     * This method checks if any button is pressed and returns boolean value
+     * @param MouseX    x-coordinate of the mouse
+     * @param MouseY    y-coordinate of the mouse
+     */
+    public boolean buttonPressed(float MouseX, float MouseY, String buttonName){
+        return this.blinkButton(MouseX, MouseY, Color.RED) && this.getString().equals(buttonName);
+    }
 }
 
