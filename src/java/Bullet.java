@@ -1,13 +1,10 @@
-import org.jsfml.graphics.FloatRect;
-import java.util.ArrayList;
 
 /**
  * This class provides basic bullet functionality
  */
 public class Bullet extends GameObject{
-    private MMWindow window;
     private float XSpeed = 15;
-    private float direction = 0;
+    private float direction;
 
     /**
      * Creates a bullet object with given texture and coordinates
@@ -35,14 +32,5 @@ public class Bullet extends GameObject{
      */
     public boolean bulletInSight(MMWindow window){
         return this.getHitBox().intersection(window.getViewZone()) != null;
-    }
-
-    /**
-     * Checks Collisions between bullet and given (Object) FloatRect
-     * @param victimObject  FloatRect for Object
-     * @return  returns true if collision detected
-     */
-    public boolean bulletCollision(ArrayList<Enemy> victimObject){
-        return victimObject.contains(this.getPosition());
     }
 }

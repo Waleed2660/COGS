@@ -12,6 +12,7 @@ public class MenuMaker
     private int xBPos = width/2, yBPos = height/2; //used for setting button size and position
     public MMWindow window = new MMWindow(width,height,"Main menu", false); // changed temp to public for GameOver access
     private TextManager buttons[] = new TextManager[4];     // Hold buttons for Menu
+    private GameRunner game = new GameRunner(window, "Level1");
 
     /**
      * Creates the main menu (for now very basic)
@@ -51,16 +52,8 @@ public class MenuMaker
                         button.blinkButton(MouseX, MouseY, Color.RED);   //Blinks button
                     }
                 }
-                if(event.type == Event.Type.RESIZED) {
-                   //need to look up how to find the exterior window size and resize menu window size
-                }
                 if(event.type == Event.Type.MOUSE_BUTTON_PRESSED) {
-                    // Clickable Button
-                    buttonPressed(MouseX,MouseY,window);
-
-                }
-                if(Keyboard.isKeyPressed(Keyboard.Key.RIGHT)){
-                    
+                    checkButtons(MouseX,MouseY);
                 }
                 if(event.type == Event.Type.CLOSED) {
                     window.close();
@@ -71,39 +64,15 @@ public class MenuMaker
         }
     }
 
-    /**
-     * This method checks if any button is pressed and does the corresponding action
-     * @param MouseX    x-coordinate of the mouse
-     * @param MouseY    y-coordinate of the mouse
-     */
-    public void buttonPressed(float MouseX, float MouseY, MMWindow window){
-        GameRunner game = new GameRunner(window, "Level3");
+    private void checkButtons(float MouseX,float MouseY){
+        // Clickable Button
         for (TextManager button : buttons) {
-            // Starts Game
-            if (button.blinkButton(MouseX, MouseY, Color.RED) && button.getString().equals("Start")) {
-                // Level Selector Class can be called here
-                game.run();
-                break;
-            }
-            // Opens Help Menu
-            else
-            if (button.blinkButton(MouseX, MouseY, Color.RED) && button.getString().equals("Help")) {
-
-            }
-            // Opens Settings
-            else
-            if (button.blinkButton(MouseX, MouseY, Color.RED) && button.getString().equals("Settings")) {
-
-            }
-            // Closes Window
-            else
-            if (button.blinkButton(MouseX, MouseY, Color.RED) && button.getString().equals("Exit")) {
-                window.close();
-            }
-            
+            if (button.buttonPressed(MouseX, MouseY, "Start"))  game.run();
+            if (button.buttonPressed(MouseX, MouseY, "Help"))  {}
+            if (button.buttonPressed(MouseX, MouseY, "Settings"))  {}
+            if (button.buttonPressed(MouseX, MouseY, "Exit"))  window.close();
         }
     }
-
     public static void main(String[] args) {
        new MenuMaker();
     }

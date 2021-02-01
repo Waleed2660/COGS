@@ -17,10 +17,9 @@ import org.jsfml.window.Keyboard.Key;
 public class Player extends GameObject
 {
     private float speedY = 0, speedX = 0;
-    private float maxSpeedX, jumpHeight;
-    private float friction;
+    private float maxSpeedX, jumpHeight, friction, g = 10/6;
     private int direction = 1;
-    private float g = 10/6;
+    private double lastBulletTime = System.currentTimeMillis();
     public int hp = 100; //5 hits to ko 20 hp per hit  // enemies dog - 1 hit ko robot 2 - hit ko
     int health = 0; // used to store health for iframes
 
@@ -219,13 +218,14 @@ public class Player extends GameObject
      * 
      * @param bullets list to add bullets to
      */
-    public void shoot(ArrayList<Bullet> bullets)
+    public Bullet shoot()
     {
-        if(direction == 1) // Extended code so that bullet detect doesnt hit player and despawn player
-            bullets.add(new Bullet(direction, this.getPosition().x+40, this.getPosition().y+this.getLocalBounds().height/2, "resources/laser.png"));
+        if (direction == 1) // Extended code so that bullet detect doesnt hit player and despawn player
+            return new Bullet(direction, this.getPosition().x + 40, this.getPosition().y + this.getLocalBounds().height / 2, "resources/laser.png");
         else
-            bullets.add(new Bullet(direction, this.getPosition().x-20, this.getPosition().y+this.getLocalBounds().height/2, "resources/laser.png"));
+            return new Bullet(direction, this.getPosition().x - 20, this.getPosition().y + this.getLocalBounds().height / 2, "resources/laser.png");
     }
+
     /**
      * Reduces player's health leading eventually to ko
      * 
