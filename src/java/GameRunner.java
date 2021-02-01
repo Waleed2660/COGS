@@ -41,6 +41,7 @@ public class GameRunner
      */
     public void run()
     {
+         levelOpen = true;
          float xlocl = 10, ylocl = 10;
          float winSizeX = window.getSize().x, winSizeY = window.getSize().y;
          int check = player.hp;
@@ -71,7 +72,8 @@ public class GameRunner
                     {
                          System.out.println("dead");
                          player.setHP(100);
-                         window.close(); // temp thing until we figure out what we want to do when player ko
+                         levelOpen = false; // temp thing until we figure out what we want to do when player ko
+                         window.resetView();
                     }
                }
                
@@ -102,6 +104,8 @@ public class GameRunner
           }
           if(Keyboard.isKeyPressed(Keyboard.Key.ESCAPE)) {
                levelOpen = false;
+               window.resetView();
+               return;
           }
           player.movement(blocks, window);
      }
@@ -163,6 +167,7 @@ public class GameRunner
 
                                              System.out.println("Enemy dead");
                                              level.enemies.remove(f);
+                                             level.objectList.remove(level.enemies.get(f)); // removes the wrong guy meaning that the whole method of determining what is hit is flawed
                                         }
                                    }
                               }

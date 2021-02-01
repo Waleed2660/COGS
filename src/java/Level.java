@@ -38,7 +38,6 @@ public class Level
     this.gravity = gravity;
     this.friction = friction;
     addFromFile("./levels/".concat(levelNum).concat("/"), view);
-    System.out.println(playArea.toString());
   }
 
   /**
