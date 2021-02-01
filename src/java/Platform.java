@@ -6,6 +6,6 @@ public class Platform extends GameObject
 {
     public Platform(float x, float y, String texPath)
     {
-        super(x, y, texPath);
+        super(x, y, texPath, null);
     }
 }

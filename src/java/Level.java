@@ -13,12 +13,13 @@ public class Level
 {
   private String levelNum;
   public ArrayList<GameObject> objectList = new ArrayList<GameObject>(); //public for now should improve the way to access it and change it eventually
-  public GameObject background;
   //Arrays for different objects. could be usseful in the future but not right now
   private ArrayList<GameObject> ground = new ArrayList<GameObject>();
+  public ArrayList<GameObject> background = new ArrayList<GameObject>();
   public ArrayList<Enemy> enemies = new ArrayList<Enemy>(); //had to change to public so i could access in GameRunner  for collsion damage detection
   private ArrayList<Platform> platforms = new ArrayList<Platform>();
   private Player player;
+  private FloatRect playArea;
 
   private final float gravity;
   private final float friction;
@@ -29,13 +30,15 @@ public class Level
    * @param levNum - the level to construct. Currently can be Level1, Level2 or Level3. Should make the choices into enums
    * @param gravity gravity force to be applied in the level
    * @param friction friction force to be applied in the level
+   * @param view the view to load
    */
-  public Level(String levNum, float gravity, float friction)
+  public Level(String levNum, float gravity, float friction, FloatRect view)
   {
     levelNum = levNum;
     this.gravity = gravity;
     this.friction = friction;
-    addFromFile("./levels/".concat(levelNum).concat("/"));
+    addFromFile("./levels/".concat(levelNum).concat("/"), view);
+    System.out.println(playArea.toString());
   }
 
   /**
@@ -43,7 +46,7 @@ public class Level
    * 
    * @param filePath the file path of the folder where assets and level information are stored
    */
-  private void addFromFile(String filePath)
+  private void addFromFile(String filePath, FloatRect view)
   {
     try {
         File myObj = new File(filePath.concat(levelNum).concat(".txt"));
@@ -65,19 +68,23 @@ public class Level
           }
           else if(spl[0].contains("Background"))
           {
-            background = new GameObject(Integer.parseInt(spl[1]), Integer.parseInt(spl[2]), filePath.concat("assets/").concat(spl[0]).concat(".png/"));
+            playArea = new FloatRect(Integer.parseInt(spl[1]), Integer.parseInt(spl[2]), Integer.parseInt(spl[3]), Integer.parseInt(spl[4]));
+            for(int i = 0; i < Integer.parseInt(spl[3])/view.width; i++)
+            {
+              background.add(new GameObject(view.width*i, 0, filePath.concat("assets/").concat(spl[0]).concat(".png/"), new FloatRect(view.width*i, 0, view.width, view.height)));
+            }
           }
           else if(spl[0].contains("dog"))
           {
-              Enemy temp = new Enemy(Integer.parseInt(spl[1]), Integer.parseInt(spl[2]), filePath.concat("assets/").concat(spl[0]).concat(".png/"), 1);
-              enemies.add(temp);
-              objectList.add(temp);
+            Enemy temp = new Enemy(Integer.parseInt(spl[1]), Integer.parseInt(spl[2]), filePath.concat("assets/").concat(spl[0]).concat(".png/"), 1);
+            enemies.add(temp);
+            objectList.add(temp);
           }
           else if(spl[0].contains("robot"))
           {
-              Enemy temp = new Enemy(Integer.parseInt(spl[1]), Integer.parseInt(spl[2]), filePath.concat("assets/").concat(spl[0]).concat(".png/"), 2);
-              enemies.add(temp);
-              objectList.add(temp);
+            Enemy temp = new Enemy(Integer.parseInt(spl[1]), Integer.parseInt(spl[2]), filePath.concat("assets/").concat(spl[0]).concat(".png/"), 2);
+            enemies.add(temp);
+            objectList.add(temp);
           }
           else if(spl[0].contains("platform"))
           {
@@ -87,7 +94,7 @@ public class Level
           }
           else
           {
-            objectList.add(new GameObject(Integer.parseInt(spl[1]), Integer.parseInt(spl[2]), filePath.concat("assets/").concat(spl[0]).concat(".png/")));
+            objectList.add(new GameObject(Integer.parseInt(spl[1]), Integer.parseInt(spl[2]), filePath.concat("assets/").concat(spl[0]).concat(".png/"), null));
           }
         }
         myReader.close();
@@ -98,18 +105,7 @@ public class Level
   }
 
   /**
-   * Sets how much of the background should be drawn. Used for dynamic loading.
-   * 
-   * @param v the rectangle representing the users view
-   */
-  public void setBackgroundView(FloatRect v)
-  {
-    background.setPosition(v.left, v.top);
-    background.setTextureRect(new IntRect(v));
-  }
-
-  /**
-   * Returns the player object
+   * Returns the player object.
    * @return
    */
   public Player getPlayer()
@@ -118,7 +114,7 @@ public class Level
   }
 
   /**
-   * Returns level gravity
+   * Returns level gravity.
    * @return
    */
   public float getGravity()
@@ -127,7 +123,7 @@ public class Level
   }
 
   /**
-   * Returns level friction
+   * Returns level friction.
    * @return
    */
   public float getFriction()
@@ -136,11 +132,11 @@ public class Level
   }
 
   /**
-   * Return an array that has the levels x edge coordinates
-   * @return an array of size 2
+   * Returns a FloatRect representing the play area.
+   * @return
    */
-  public float[] getEdgeCoords()
+  public FloatRect getPlayArea()
   {
-    return new float[]{background.getPosition().x, background.getPosition().x+background.getLocalBounds().width};
+    return playArea;
   }
 }

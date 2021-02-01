@@ -77,7 +77,7 @@ public class MenuMaker
      * @param MouseY    y-coordinate of the mouse
      */
     public void buttonPressed(float MouseX, float MouseY, MMWindow window){
-        GameRunner game = new GameRunner(window, "Level1");
+        GameRunner game = new GameRunner(window, "Level3");
         for (TextManager button : buttons) {
             // Starts Game
             if (button.blinkButton(MouseX, MouseY, Color.RED) && button.getString().equals("Start")) {

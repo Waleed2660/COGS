@@ -1,4 +1,4 @@
-BackgroundMoon 0 0
+BackgroundMoon 0 0 15360 640
 robot 2048 320
 robot 3040 320
 robot 1664 256
