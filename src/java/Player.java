@@ -11,16 +11,14 @@ import org.jsfml.window.Keyboard.Key;
  * TODO:
  *  1. properly calculate Y speed in relation to jump height
  *  2. properly calculate the max Y speed in relation to jump height
- *  3. passable but standable platforms
  */
 
 public class Player extends GameObject
 {
     private float speedY = 0, speedX = 0;
-    private float maxSpeedX, jumpHeight;
-    private float friction;
+    private float maxSpeedX, jumpHeight, friction, g = 10/6;
     private int direction = 1;
-    private float g = 10/6;
+    private double lastBulletTime = System.currentTimeMillis();
     public int hp = 100; //5 hits to ko 20 hp per hit  // enemies dog - 1 hit ko robot 2 - hit ko
     int health = 0; // used to store health for iframes
 
@@ -102,7 +100,7 @@ public class Player extends GameObject
     }
 
     /**
-     * Executes any movement for the player.
+     * Executes any movement for the player(With checking for collision).
      *  
      * @param objectsInView an array of the object that are in view and should be checked for collision
      * @param window the game window
@@ -111,12 +109,14 @@ public class Player extends GameObject
     {
         //falling flag
         boolean landed = false;
+        boolean diagCheck = true;
+        float tempX = speedX;
     
         //Checks that it doesnt go off the screen
-        if(this.getPosition().x+speedX*direction < xEdges[0] || (this.getPosition().x+this.getLocalBounds().width)+speedX*direction > xEdges[1])
+        /*if(this.getPosition().x+speedX*direction < xEdges[0] || (this.getPosition().x+this.getLocalBounds().width)+speedX*direction > xEdges[1])
         {
             speedX = 0;
-        }
+        }*/
 
         for(GameObject a : objectsInView)
         {
@@ -127,6 +127,7 @@ public class Player extends GameObject
                 FloatRect yCollision = this.getFutureHitBox(0, speedY*-1).intersection(a.getHitBox());
                 if(yCollision != null)
                 {
+                    diagCheck = false;
                     //if collides bellow
                     if(yCollision.top >= this.getPosition().y+this.getLocalBounds().height)
                     {
@@ -142,6 +143,7 @@ public class Player extends GameObject
                 FloatRect xCollision = this.getFutureHitBox(speedX*direction, 0).intersection(a.getHitBox());
                 if(xCollision != null)
                 {
+                    diagCheck = false;
                     //if collides on the right
                     if(xCollision.left >= this.getPosition().x+this.getLocalBounds().width && a.getClass() != Platform.class)
                     {
@@ -154,18 +156,22 @@ public class Player extends GameObject
                     }
                 }
                 //If in air for collision diaganolly. Temporary fix to bug
-                if(inAir)
+                if(diagCheck)
                 {
                     FloatRect diagCollision = this.getFutureHitBox(speedX*direction, speedY*-1).intersection(a.getHitBox());
                     if(diagCollision != null && a.getClass() != Platform.class)
                     {
-                        speedX = 0;
+                        tempX = 0;
                     }
                 }
             }
 
         }
 
+        if(diagCheck)
+        {
+            speedX = tempX;
+        }
         if(window.getViewZone().left+speedX*direction > xEdges[0]
             && (window.getViewZone().left+window.getViewZone().width)+speedX*direction < xEdges[1]
             && this.getPosition().x >= window.getViewZone().left+window.getViewZone().width/3
@@ -181,10 +187,11 @@ public class Player extends GameObject
             inAir = false;
             speedY = 0;
         }
-        else{
+        else
+        {
             inAir = true;
-            speedY -= g;
         }
+        speedY -= g;
         
         //needs adjusting
         if(speedY*-1 > jumpHeight/2)
@@ -211,13 +218,14 @@ public class Player extends GameObject
      * 
      * @param bullets list to add bullets to
      */
-    public void shoot(ArrayList<Bullet> bullets)
+    public Bullet shoot()
     {
-        if(direction == 1) // Extended code so that bullet detect doesnt hit player and despawn player
-            bullets.add(new Bullet(direction, this.getPosition().x+40, this.getPosition().y+this.getLocalBounds().height/2, "resources/laser.png"));
+        if (direction == 1) // Extended code so that bullet detect doesnt hit player and despawn player
+            return new Bullet(direction, this.getPosition().x + 40, this.getPosition().y + this.getLocalBounds().height / 2, "resources/laser.png");
         else
-            bullets.add(new Bullet(direction, this.getPosition().x-20, this.getPosition().y+this.getLocalBounds().height/2, "resources/laser.png"));
+            return new Bullet(direction, this.getPosition().x - 20, this.getPosition().y + this.getLocalBounds().height / 2, "resources/laser.png");
     }
+
     /**
      * Reduces player's health leading eventually to ko
      * 

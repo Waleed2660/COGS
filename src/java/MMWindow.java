@@ -45,6 +45,16 @@ public class MMWindow extends RenderWindow
     }
 
     /**
+     * Resets the view to position 0, 0.
+     */
+    public void resetView()
+    {
+        view = new View(new FloatRect(0, 0, this.getSize().x, this.getSize().y));
+        viewZone = new FloatRect(this.getView().getCenter().x-this.getView().getSize().x/2, this.getView().getCenter().y-this.getView().getSize().y/2, this.getView().getSize().x, this.getView().getSize().y);
+        this.setView(view);
+    }
+
+    /**
      * Accessor for the view zone.
      * 
      * @return a rectangle representing the user view
