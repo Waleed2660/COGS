@@ -11,6 +11,7 @@ import org.jsfml.window.Keyboard.Key;
  * TODO:
  *  1. properly calculate Y speed in relation to jump height
  *  2. properly calculate the max Y speed in relation to jump height
+ *  3. adjust the camera follow for Level 2
  */
 
 public class Player extends GameObject
@@ -23,7 +24,7 @@ public class Player extends GameObject
     int health = 0; // used to store health for iframes
 
     private boolean inAir = false;
-    private float[] xEdges;
+    private FloatRect playArea;
 
     /**
      * Constructor for player.
@@ -37,12 +38,12 @@ public class Player extends GameObject
      */
     public Player(float x, float y, float maxSpeedX, float jumpHeight, Level level, String texPath)
     {
-        super(x, y, texPath);
+        super(x, y, texPath, null);
         this.maxSpeedX = maxSpeedX;
         this.jumpHeight = jumpHeight;
         this.friction = level.getFriction();
         this.g = level.getGravity();
-        xEdges = level.getEdgeCoords();
+        this.playArea = level.getPlayArea();
     }
 
     /**
@@ -102,8 +103,8 @@ public class Player extends GameObject
     /**
      * Executes any movement for the player(With checking for collision).
      *  
-     * @param objectsInView an array of the object that are in view and should be checked for collision
-     * @param window the game window
+     * @param objectsInView an array of the object that are in view and should be checked for collision.
+     * @param window the game window.
      */
     public void movement(ArrayList<GameObject> objectsInView, MMWindow window)
     {
@@ -111,12 +112,6 @@ public class Player extends GameObject
         boolean landed = false;
         boolean diagCheck = true;
         float tempX = speedX;
-    
-        //Checks that it doesnt go off the screen
-        /*if(this.getPosition().x+speedX*direction < xEdges[0] || (this.getPosition().x+this.getLocalBounds().width)+speedX*direction > xEdges[1])
-        {
-            speedX = 0;
-        }*/
 
         for(GameObject a : objectsInView)
         {
@@ -172,15 +167,21 @@ public class Player extends GameObject
         {
             speedX = tempX;
         }
-        if(window.getViewZone().left+speedX*direction > xEdges[0]
-            && (window.getViewZone().left+window.getViewZone().width)+speedX*direction < xEdges[1]
-            && this.getPosition().x >= window.getViewZone().left+window.getViewZone().width/3
-            && this.getPosition().x <= (window.getViewZone().left+(window.getViewZone().width/3)*2))
+
+        //Checks that it doesnt go off the screen
+        if(this.getFutureHitBox(speedX*direction, speedY*-1).intersection(playArea) == null || this.getFutureHitBox(speedX*direction, speedY*-1).intersection(playArea).width != this.getLocalBounds().width)
+        {
+            speedX = 0;
+        }
+
+        if(window.getFutureViewZone(speedX*direction, 0).intersection(playArea).width == window.getViewZone().width &&
+            this.getPosition().x >= window.getViewZone().width/3 &&
+            this.getPosition().x <= window.getViewZone().left+(window.getViewZone().width/3)*2)
         {
             window.moveView(speedX*direction);
         }
+
         this.moveObject(speedX*direction, speedY*-1);
-        
         
         if(landed)
         {

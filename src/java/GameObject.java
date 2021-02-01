@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
@@ -12,29 +13,47 @@ import org.jsfml.system.Vector2f;
 public class GameObject extends Sprite
 {
     private FloatRect hitBox;
-
+    private Path textPath; 
     /**
-     * Constructor for a game object with a texture
+     * Constructor for a game object with a texture also sets the texture.
      * 
      * @param x position
      * @param y position
      * @param texturePath the path to the texture to set
+     * @param size if given sets the texture to a part specified from the given file, if null sets the texture to the whole given file
      */
-    public GameObject(float x, float y, String texturePath)
+    public GameObject(float x, float y, String texturePath, FloatRect size)
     {
         super();
-        try{
-            Texture temp = new Texture();
-            temp.loadFromFile(Paths.get(texturePath));
-            this.setTexture(temp);
-        }
-        catch(IOException e)
+        textPath = Paths.get(texturePath);
+        if(size == null)
         {
-            e.printStackTrace();
+            try{
+                Texture temp = new Texture();
+                temp.loadFromFile(textPath);
+                this.setTexture(temp);
+            }
+            catch(IOException e)
+            {
+                e.printStackTrace();
+            }
+            this.setPosition(x, y);
         }
-        this.setPosition(x, y);
+        else
+        {
+            try{
+                Texture temp = new Texture();
+                temp.loadFromFile(textPath, new IntRect(size));
+                this.setTexture(temp);
+            }
+            catch(IOException e)
+            {
+                e.printStackTrace();
+            }
+            //this.setPosition(size.left, size.top);
+            this.setPosition(x, y);
+        }
         setHitBoxToTexture();
-
     }
 
     /**

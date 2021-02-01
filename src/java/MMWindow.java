@@ -63,4 +63,16 @@ public class MMWindow extends RenderWindow
     {
         return viewZone;
     }
+
+    /**
+     * Returns a FloatRect of view with an offset
+     * 
+     * @param xOff x offset
+     * @param yOff y offset
+     * @return
+     */
+    public FloatRect getFutureViewZone(float xOff, float yOff)
+    {
+        return new FloatRect(this.getView().getCenter().x-this.getView().getSize().x/2+xOff, this.getView().getCenter().y-this.getView().getSize().y/2+yOff, this.getView().getSize().x, this.getView().getSize().y);
+    }
 }

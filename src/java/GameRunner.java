@@ -32,7 +32,7 @@ public class GameRunner
           this.window = window;
           window.resetView();
           window.setKeyRepeatEnabled(false);
-          this.level = new Level(levelNum, (float)2.5, 2);
+          this.level = new Level(levelNum, (float)2.5, 2, window.getViewZone());
           this.player = level.getPlayer();
     }
 
@@ -126,13 +126,20 @@ public class GameRunner
      */
     public ArrayList<GameObject> drawAll(Level level, MMWindow window) {
           FloatRect viewZone = window.getViewZone();
-          window.clear(Color.BLACK); 
+          window.clear(Color.BLACK);
 
-          level.setBackgroundView(viewZone);
-          window.draw(level.background);
-
-          for(GameObject a : level.objectList) {
-               if(viewZone.intersection(a.getHitBox()) != null) {
+          //window.draw(level.background);
+          for(GameObject b : level.background)
+          {
+               if(viewZone.intersection(b.getHitBox()) != null)
+               {
+                    window.draw(b);
+               }
+          }
+          for(GameObject a : level.objectList)
+          {
+               if(viewZone.intersection(a.getHitBox()) != null)
+               {
                     result.add(a);
                     window.draw(a);
                }

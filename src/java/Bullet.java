@@ -14,7 +14,7 @@ public class Bullet extends GameObject{
      * @param texturePath the path to the texture to set
      */
     public Bullet(float direction, float x, float y, String texturePath) {
-        super(x, y, texturePath);
+        super(x, y, texturePath, null);
         this.direction = direction;
     }
 

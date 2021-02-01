@@ -7,7 +7,7 @@ public class Enemy extends GameObject
     int hp;
     public Enemy(float x, float y, String texPath,int hp)
     {
-        super(x, y, texPath);
+        super(x, y, texPath, null);
         this.hp = hp;
 
     }
