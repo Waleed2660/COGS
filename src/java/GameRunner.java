@@ -147,6 +147,14 @@ public class GameRunner
                     window.draw(a);
                }
           }
+        for(GameObject a : level.enemies)
+        {
+            if(viewZone.intersection(a.getHitBox()) != null)
+            {
+                result.add(a);
+                window.draw(a);
+            }
+        }
           // Animates bullet once fired #changed to animate if there are any bullets
           if(!bullets.isEmpty()){
 
@@ -167,7 +175,6 @@ public class GameRunner
 
                                              System.out.println("Enemy dead");
                                              level.enemies.remove(f);
-                                             level.objectList.remove(level.enemies.get(f)); // removes the wrong guy meaning that the whole method of determining what is hit is flawed
                                         }
                                    }
                               }
