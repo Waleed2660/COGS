@@ -27,6 +27,7 @@ public class MMWindow extends RenderWindow
         }
         this.setMouseCursorVisible(true); //lets user see cursor
         this.setFramerateLimit(30); //limits the frame rate
+
         view = new View(new FloatRect(0, 0, res1, res2));
         this.setView(view);
         viewZone = new FloatRect(this.getView().getCenter().x-this.getView().getSize().x/2, this.getView().getCenter().y-this.getView().getSize().y/2, this.getView().getSize().x, this.getView().getSize().y);

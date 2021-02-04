@@ -7,10 +7,10 @@ import java.awt.*;
 public class MenuMaker
 {
     private Dimension screenRes = Toolkit.getDefaultToolkit().getScreenSize();
-    //private int width = screenRes.width, height = screenRes.height; //used for setting resolution of window
-    private int width = 1024, height = 640; //used for setting resolution of window
+    private int width = screenRes.width, height = screenRes.height; //used for setting resolution of window
+    //private int width = 1024, height = 640; //used for setting resolution of window
     private int xBPos = width/2, yBPos = height/2; //used for setting button size and position
-    public MMWindow window = new MMWindow(width,height,"Main menu", false); // changed temp to public for GameOver access
+    public MMWindow window = new MMWindow(width,height,"Main menu", true); // changed temp to public for GameOver access
     private TextManager buttons[] = new TextManager[4];     // Hold buttons for Menu
     //private GameRunner game = new GameRunner(window, "Level1");
 

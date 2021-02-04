@@ -166,8 +166,8 @@ public class GameRunner
                                         if(level.enemies.get(f).dmghp() <= 0) {
 
                                              System.out.println("Enemy dead");
-                                             level.enemies.remove(f);
-                                             level.objectList.remove(level.enemies.get(f)); // removes the wrong guy meaning that the whole method of determining what is hit is flawed
+                                             level.enemies.remove(level.enemies.get(f));
+                                             level.objectList.remove(level.enemies.get(f));
                                         }
                                    }
                               }
