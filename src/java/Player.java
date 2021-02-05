@@ -20,7 +20,7 @@ public class Player extends GameObject
     private float maxSpeedX, jumpHeight, friction, g = 10/6;
     private int direction = 1;
     private double lastBulletTime = System.currentTimeMillis();
-    public int hp = 100; //5 hits to ko 20 hp per hit  // enemies dog - 1 hit ko robot 2 - hit ko
+    public int hp = 10000000; //5 hits to ko 20 hp per hit  // enemies dog - 1 hit ko robot 2 - hit ko
     int health = 0; // used to store health for iframes
 
     private boolean inAir = false;

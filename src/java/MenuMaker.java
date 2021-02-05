@@ -12,7 +12,7 @@ public class MenuMaker
     private int xBPos = width/2, yBPos = height/2; //used for setting button size and position
     public MMWindow window = new MMWindow(width,height,"Main menu", false); // changed temp to public for GameOver access
     private TextManager buttons[] = new TextManager[4];     // Hold buttons for Menu
-    private GameRunner game = new GameRunner(window, "Level1");
+    //private GameRunner game = new GameRunner(window, "Level1");
 
     /**
      * Creates the main menu (for now very basic)
@@ -67,7 +67,7 @@ public class MenuMaker
     private void checkButtons(float MouseX,float MouseY){
         // Clickable Button
         for (TextManager button : buttons) {
-            if (button.buttonPressed(MouseX, MouseY, "Start"))  game.run();
+            if (button.buttonPressed(MouseX, MouseY, "Start")) new GameRunner(window, "Level1").run();
             if (button.buttonPressed(MouseX, MouseY, "Help"))  {}
             if (button.buttonPressed(MouseX, MouseY, "Settings"))  {}
             if (button.buttonPressed(MouseX, MouseY, "Exit"))  window.close();
