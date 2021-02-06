@@ -147,6 +147,14 @@ public class GameRunner
                     window.draw(a);
                }
           }
+        for(GameObject a : level.enemies)
+        {
+            if(viewZone.intersection(a.getHitBox()) != null)
+            {
+                result.add(a);
+                window.draw(a);
+            }
+        }
           // Animates bullet once fired #changed to animate if there are any bullets
           if(!bullets.isEmpty()){
 
@@ -166,8 +174,7 @@ public class GameRunner
                                         if(level.enemies.get(f).dmghp() <= 0) {
 
                                              System.out.println("Enemy dead");
-                                             level.enemies.remove(level.enemies.get(f));
-                                             level.objectList.remove(level.enemies.get(f));
+                                             level.enemies.remove(f);
                                         }
                                    }
                               }
