@@ -19,6 +19,7 @@ public class Level
   public ArrayList<Enemy> enemies = new ArrayList<Enemy>(); //had to change to public so i could access in GameRunner  for collsion damage detection
   private ArrayList<Platform> platforms = new ArrayList<Platform>();
   private Player player;
+  private GameObject portal;
   private FloatRect playArea;
 
   private final float gravity;
@@ -70,7 +71,7 @@ public class Level
           playArea = new FloatRect(Integer.parseInt(spl[1]), Integer.parseInt(spl[2]), Integer.parseInt(spl[3]), Integer.parseInt(spl[4]));
           for(int i = 0; i < Integer.parseInt(spl[3])/view.width; i++)
           {
-            background.add(new GameObject(view.width*i, 0, filePath.concat("assets/").concat(spl[0]).concat(".png/"), new FloatRect(view.width*i, 0, view.width, view.height)));
+            background.add(new GameObject(view.width*i, 0, filePath.concat("assets/").concat(spl[0]).concat(".png/"), new FloatRect(view.width*i, 0, view.width, Integer.parseInt(spl[4]))));
           }
         }
         else if(spl[0].contains("dog"))
@@ -88,6 +89,11 @@ public class Level
           Platform temp = new Platform(Integer.parseInt(spl[1]), Integer.parseInt(spl[2]), filePath.concat("assets/").concat(spl[0]).concat(".png/"));
           platforms.add(temp);
           objectList.add(temp);
+        }
+        else if(spl[0].contains("portal"))
+        {
+          portal = new GameObject(Integer.parseInt(spl[1]), Integer.parseInt(spl[2]), filePath.concat("assets/").concat(spl[0]).concat(".png/"), "portal", null);
+          objectList.add(portal);
         }
         else
         {

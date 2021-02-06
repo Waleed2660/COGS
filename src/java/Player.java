@@ -115,39 +115,38 @@ public class Player extends GameObject
 
         for(GameObject a : objectsInView)
         {
-            if(!a.equals(this) && a.getClass() != Enemy.class)
+            if(!a.equals(this) && a.getClass() != Enemy.class && !a.getType().equals("portal"))
             {
                 //  Checks if the player collides with anything on the y axis and if it does checks if its above or bellow and changes the speed
                 //  so it ends up right next to it. Same for the x axis.
-                FloatRect yCollision = this.getFutureHitBox(0, speedY*-1).intersection(a.getHitBox());
-                if(yCollision != null)
+                if(this.getFutureHitBox(0, speedY*-1).intersection(a.getHitBox()) != null)
                 {
                     diagCheck = false;
                     //if collides bellow
-                    if(yCollision.top >= this.getPosition().y+this.getLocalBounds().height)
+                    if(a.getHitBox().top >= this.getPosition().y+this.getLocalBounds().height)
                     {
                         landed = true;
-                        speedY = (yCollision.top-(this.getPosition().y+this.getLocalBounds().height))*-1;
+                        speedY = (a.getHitBox().top-(this.getPosition().y+this.getLocalBounds().height))*-1;
                     }
                     //if collides above
-                    else if(yCollision.top+yCollision.height <= this.getPosition().y && a.getClass() != Platform.class)
+                    else if(a.getHitBox().top+a.getHitBox().height <= this.getPosition().y && a.getClass() != Platform.class)
                     {
-                        speedY = this.getPosition().y-(yCollision.top+yCollision.height);
+                        speedY = this.getPosition().y-(a.getHitBox().top+a.getHitBox().height);
                     }
                 }
-                FloatRect xCollision = this.getFutureHitBox(speedX*direction, 0).intersection(a.getHitBox());
-                if(xCollision != null)
+                
+                if(this.getFutureHitBox(speedX*direction, 0).intersection(a.getHitBox()) != null)
                 {
                     diagCheck = false;
                     //if collides on the right
-                    if(xCollision.left >= this.getPosition().x+this.getLocalBounds().width && a.getClass() != Platform.class)
+                    if(a.getHitBox().left >= this.getPosition().x+this.getLocalBounds().width && a.getClass() != Platform.class)
                     {
-                        speedX = xCollision.left-(this.getPosition().x+this.getLocalBounds().width);
+                        speedX = a.getHitBox().left-(this.getPosition().x+this.getLocalBounds().width);
                     }
                     //if collides on the left
-                    else if(xCollision.left+xCollision.width <= this.getPosition().x && a.getClass() != Platform.class)
+                    else if(a.getHitBox().left+a.getHitBox().width <= this.getPosition().x && a.getClass() != Platform.class)
                     {
-                        speedX = this.getPosition().x-(xCollision.left+xCollision.width);
+                        speedX = this.getPosition().x-(a.getHitBox().left+a.getHitBox().width);
                     }
                 }
                 //If in air for collision diaganolly. Temporary fix to bug

@@ -9,12 +9,10 @@ import java.util.Timer;
  */
 public class GameRunner
 {
-    private ArrayList<GameObject> result = new ArrayList<GameObject>();
     private ArrayList<Bullet> bullets = new ArrayList<>();
     private double lastBulletTime = System.currentTimeMillis();
     private MMWindow window;
     private Level level;
-    private boolean levelOpen = true;
     private Player player;
 
     //private GameOver over;
@@ -38,17 +36,22 @@ public class GameRunner
 
     /**
      * Runs the level and controls game flow.
+     * 
+     * @return return 0 if return to menu, 1 if load next level
      */
-    public void run()
+    public int run()
     {
-         levelOpen = true;
          float xlocl = 10, ylocl = 10;
          float winSizeX = window.getSize().x, winSizeY = window.getSize().y;
          int check = player.hp;
 
-        while(levelOpen && window.isOpen()) {
+        while(window.isOpen()) {
 
-               this.controller(drawAll(level, window));
+               ArrayList<GameObject> objectsInView = drawAll(level, window);
+               if(this.controller(objectsInView) == 1)
+               {
+                    return 0;
+               }
 
                Event e = window.pollEvent();
                if(e != null) {
@@ -64,7 +67,7 @@ public class GameRunner
                     }
                }
 
-               if(player.eCollides(level.enemies) != null)
+               /*if(player.eCollides(level.enemies) != null)
                {
                     System.out.println("Collision with Alive Enemy" + check);
                     check = player.dmghp();
@@ -72,13 +75,16 @@ public class GameRunner
                     {
                          System.out.println("dead");
                          player.setHP(100);
-                         levelOpen = false; // temp thing until we figure out what we want to do when player ko
-                         window.resetView();
+                         return 0;
                     }
+               }*/
+               GameObject playerCollides = player.collides(objectsInView);
+               if(playerCollides != null && playerCollides.getType().equals("portal"))
+               {
+                    return 1;
                }
-               
           }
-               
+          return 0;
     }
 
      /**
@@ -87,8 +93,9 @@ public class GameRunner
       * It will be used to move the player's sprite around the window
       *
       * @param blocks the GameObject to check for collision with
+      * @return return 1 if return to menu
      */
-     public void controller(ArrayList<GameObject> blocks)
+     public int controller(ArrayList<GameObject> blocks)
      {
           if(Keyboard.isKeyPressed(Keyboard.Key.SPACE)) {
                renderBullets();
@@ -103,11 +110,10 @@ public class GameRunner
                player.jump();
           }
           if(Keyboard.isKeyPressed(Keyboard.Key.ESCAPE)) {
-               levelOpen = false;
-               window.resetView();
-               return;
+               return 1;
           }
           player.movement(blocks, window);
+          return 0;
      }
 
     /**
@@ -127,7 +133,9 @@ public class GameRunner
      * @param window
      * @return returns a list of all objects currently in view
      */
-    public ArrayList<GameObject> drawAll(Level level, MMWindow window) {
+    public ArrayList<GameObject> drawAll(Level level, MMWindow window)
+    {
+          ArrayList<GameObject> result = new ArrayList<GameObject>();
           FloatRect viewZone = window.getViewZone();
           window.clear(Color.BLACK);
 
