@@ -67,7 +67,18 @@ public class MenuMaker
     private void checkButtons(float MouseX,float MouseY){
         // Clickable Button
         for (TextManager button : buttons) {
-            if (button.buttonPressed(MouseX, MouseY, "Start")) new GameRunner(window, "Level1").run();
+            if (button.buttonPressed(MouseX, MouseY, "Start"))
+            {
+                if(new GameRunner(window, "Level1").run() == 1)
+                {
+                    window.resetView();
+                    if(new GameRunner(window, "Level3").run() == 1)
+                    {
+                        window.resetView();
+                    }
+                }
+                window.resetView();
+            }
             if (button.buttonPressed(MouseX, MouseY, "Help"))  {}
             if (button.buttonPressed(MouseX, MouseY, "Settings"))  {}
             if (button.buttonPressed(MouseX, MouseY, "Exit"))  window.close();

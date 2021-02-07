@@ -12,6 +12,7 @@ import org.jsfml.system.Vector2f;
 
 public class GameObject extends Sprite
 {
+    private String type = "";
     private FloatRect hitBox;
     private Path textPath; 
     /**
@@ -25,6 +26,50 @@ public class GameObject extends Sprite
     public GameObject(float x, float y, String texturePath, FloatRect size)
     {
         super();
+        textPath = Paths.get(texturePath);
+        if(size == null)
+        {
+            try{
+                Texture temp = new Texture();
+                temp.loadFromFile(textPath);
+                this.setTexture(temp);
+            }
+            catch(IOException e)
+            {
+                e.printStackTrace();
+            }
+            this.setPosition(x, y);
+        }
+        else
+        {
+            try{
+                Texture temp = new Texture();
+                temp.loadFromFile(textPath, new IntRect(size));
+                this.setTexture(temp);
+            }
+            catch(IOException e)
+            {
+                e.printStackTrace();
+            }
+            //this.setPosition(size.left, size.top);
+            this.setPosition(x, y);
+        }
+        setHitBoxToTexture();
+    }
+
+        /**
+     * Constructor for a game object with a texture also sets the texture.
+     * 
+     * @param x position
+     * @param y position
+     * @param texturePath the path to the texture to set
+     * @param type the name of the object
+     * @param size if given sets the texture to a part specified from the given file, if null sets the texture to the whole given file
+     */
+    public GameObject(float x, float y, String texturePath, String type, FloatRect size)
+    {
+        super();
+        this.type = type;
         textPath = Paths.get(texturePath);
         if(size == null)
         {
@@ -92,6 +137,15 @@ public class GameObject extends Sprite
     public void setCustomHitBox(float x, float y, float width, float height)
     {
         hitBox = new FloatRect(x, y, width, height);
+    }
+
+    /**
+     * Returns the name of the type of object.
+     * @return
+     */
+    public String getType()
+    {
+        return type;
     }
 
     /**

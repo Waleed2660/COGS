@@ -1,93 +1,94 @@
+portal 13248 448
 BackgroundMoon 0 0 15360 640
-robot 2048 320
-robot 3040 320
-robot 1664 256
-robot 3200 320
 robot 2464 224
+robot 1664 256
+robot 3040 320
+robot 3200 320
+robot 2048 320
 robot 4768 304
 robot 5024 448
-robot 3904 192
-robot 5536 304
+robot 5088 176
+robot 3680 320
 robot 6240 352
 robot 6432 352
 robot 6784 448
-robot 6880 288
 robot 6976 448
-robot 7232 384
-robot 5088 176
-robot 7488 384
-robot 3680 320
-robot 8000 448
-robot 8288 448
-robot 9568 384
+robot 6880 288
 robot 7360 240
+robot 7232 384
+robot 8000 448
+robot 7488 384
+robot 3904 192
+robot 9568 384
+robot 8288 448
 robot 10240 176
-robot 10176 416
-robot 10272 416
 robot 10048 416
+robot 8864 384
+robot 10176 416
+robot 10368 416
 robot 10464 416
+robot 5536 304
+robot 10272 416
 robot 10560 416
 robot 10752 416
-robot 10656 416
-robot 10848 416
 robot 10912 416
+robot 10848 416
+robot 10656 416
 robot 10976 416
+dog 11104 448
 robot 10528 208
 robot 10816 176
-robot 10368 416
 dog 8544 448
-dog 11104 448
-robot 8864 384
+dog 5632 480
 dog 5376 480
 dog 7584 416
 dog 4864 480
-dog 3872 416
 dog 2336 480
-dog 2016 480
-dog 5632 480
-dog 832 384
-dog 1728 480
-dog 592 384
-player 96 448
 dog 8096 480
-Ground 288 512 1216 32
-Ground 0 544 15360 96
+dog 1728 480
+dog 3872 416
+dog 592 384
+dog 2016 480
+player 96 448
+dog 832 384
 Ground 416 480 864 32
+Ground 288 512 1216 32
 Ground 544 448 544 32
 Ground 2592 512 1952 32
-Ground 2944 416 448 32
-Ground 2816 448 640 32
+Ground 0 544 15360 96
 Ground 2688 480 896 32
+Ground 2816 448 640 32
 Ground 3840 480 512 32
+Ground 2944 416 448 32
 Ground 4032 448 224 32
-Ground 6016 512 736 32
 Ground 6080 480 608 32
 Ground 6176 448 416 32
 Ground 7136 480 608 32
 Ground 7040 512 800 32
 Ground 8512 512 2976 32
+Ground 6016 512 736 32
 Ground 8736 480 960 32
+platform 2016 416
 platform 1632 352
 platform 2432 320
-platform 2016 416
-platform 3872 288
 platform 4736 400
-platform 5504 400
 platform 5056 272
-platform 7744 208
-platform 8160 208
-platform 8704 208
+platform 3872 288
 platform 6848 384
 platform 7328 336
-platform 9280 272
-platform 9920 336
-platform 10208 272
+platform 5504 400
+platform 7744 208
+platform 8704 208
 platform 9728 208
+platform 8160 208
+platform 9280 272
+platform 10208 272
 platform 10496 304
+platform 9920 336
+platform 10784 272
 box3x3 9024 384
 box3x3 9120 384
 box3x3 5864 448
 box3x3 3648 416
-platform 10784 272
-box3x3 5864 352
 box3x3 5768 448
+box3x3 5864 352
