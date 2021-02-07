@@ -12,10 +12,12 @@ public class GameRunner
     private ArrayList<GameObject> result = new ArrayList<GameObject>();
     private ArrayList<Bullet> bullets = new ArrayList<>();
     private double lastBulletTime = System.currentTimeMillis();
+    private double lastHitTime = 0;
     private MMWindow window;
     private Level level;
     private boolean levelOpen = true;
     private Player player;
+    private int check;
 
     //private GameOver over;
 
@@ -42,7 +44,7 @@ public class GameRunner
          levelOpen = true;
          float xlocl = 10, ylocl = 10;
          float winSizeX = window.getSize().x, winSizeY = window.getSize().y;
-         int check = player.hp;
+         
 
         while(levelOpen && window.isOpen()) {
 
@@ -64,15 +66,21 @@ public class GameRunner
 
                if(player.eCollides(level.enemies) != null)
                {
-                    System.out.println("Collision with Alive Enemy" + check);
-                    check = player.dmghp();
-                    if(check == 0 || check == -1)
+                    if(System.currentTimeMillis() - lastHitTime > 500)
                     {
-                         System.out.println("dead");
-                         player.setHP(100);
-                         levelOpen = false; // temp thing until we figure out what we want to do when player ko
-                         window.resetView();
+                         check = player.dmghp();
+                         System.out.println("Collision with Alive Enemy" + check);
+                         lastHitTime = System.currentTimeMillis();
+                         player.hitAway();
+                         if(check == 0 || check == -1)
+                         {
+                              System.out.println("dead");
+                              player.setHP(100);
+                              levelOpen = false; // temp thing until we figure out what we want to do when player ko
+                              window.resetView();
+                         }
                     }
+                    
                }
                
           }
@@ -170,7 +178,8 @@ public class GameRunner
                                    if(level.enemies.get(f).bCollides(bullets) != null) {
 
                                         if(level.enemies.get(f).dmghp() <= 0) {
-
+                                             
+                                             level.enemies.get(f).setCustomHitBox(0, 0, 0, 0);
                                              System.out.println("Enemy dead");
                                              level.enemies.remove(f);
                                         }

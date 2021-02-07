@@ -161,7 +161,11 @@ public class GameObject extends Sprite
         {
             if(!a.equals(this))
             {
-                if(this.getFutureHitBox(10,10).intersection(a.getHitBox()) != null)
+                if(this.getFutureHitBox(10,0).intersection(a.getHitBox()) != null)
+                {
+                    return a;
+                }
+                else if(this.getFutureHitBox(-10,0).intersection(a.getHitBox()) != null)
                 {
                     return a;
                 }

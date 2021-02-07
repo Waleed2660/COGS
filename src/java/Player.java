@@ -20,7 +20,7 @@ public class Player extends GameObject
     private float maxSpeedX, jumpHeight, friction, g = 10/6;
     private int direction = 1;
     private double lastBulletTime = System.currentTimeMillis();
-    public int hp = 10000000; //5 hits to ko 20 hp per hit  // enemies dog - 1 hit ko robot 2 - hit ko
+    public int hp = 100; //5 hits to ko 20 hp per hit  // enemies dog - 1 hit ko robot 2 - hit ko
     int health = 0; // used to store health for iframes
 
     private boolean inAir = false;
@@ -98,6 +98,14 @@ public class Player extends GameObject
             speedY = jumpHeight/3;
             inAir = true;
         }
+    }
+
+    /*
+    *Here for when the enenmy hits the player to get them away wasn't sure what else to do tbh
+    **/
+    public void hitAway()
+    {
+        speedY = jumpHeight/3;
     }
 
     /**
@@ -240,11 +248,6 @@ public class Player extends GameObject
             return -1;
         }
         return hp;
-    }
-    public void invicible()
-    {
-        health = hp;
-        hp = -100;
     }
 
     public void setHP(int hp)
