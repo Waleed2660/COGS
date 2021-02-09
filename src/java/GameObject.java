@@ -14,6 +14,7 @@ public class GameObject extends Sprite
 {
     private String type = "";
     private FloatRect hitBox;
+    private double lastBulletTime = System.currentTimeMillis();
     private Path textPath; 
     /**
      * Constructor for a game object with a texture also sets the texture.
@@ -238,5 +239,18 @@ public class GameObject extends Sprite
 
         }
         return null;
+    }
+
+    /**
+     * Returns true if given amount of time has been passed
+     * @param delay Delay you want in milliseconds
+     * @return  boolean value
+     */
+    public boolean insertDelay(double delay){
+        if (System.currentTimeMillis() - lastBulletTime > delay) {
+            lastBulletTime = System.currentTimeMillis();
+            return true;
+        }
+        return false;
     }
 }

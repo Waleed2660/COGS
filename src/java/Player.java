@@ -19,7 +19,7 @@ public class Player extends GameObject
     private float speedY = 0, speedX = 0;
     private float maxSpeedX, jumpHeight, friction, g = 10/6;
     private int direction = 1;
-    private double lastBulletTime = System.currentTimeMillis();
+
     public int hp = 100; //5 hits to ko 20 hp per hit  // enemies dog - 1 hit ko robot 2 - hit ko
     int health = 0; // used to store health for iframes
 
@@ -28,7 +28,7 @@ public class Player extends GameObject
 
     /**
      * Constructor for player.
-     * 
+     *
      * @param x position
      * @param y position
      * @param maxSpeedX max speed on the x axis
@@ -48,7 +48,7 @@ public class Player extends GameObject
 
     /**
      * Checks if a key is pressed and does stuff accordingly. Moved to GameRunner for now.
-     * 
+     *
      * @param bullets the bullets array for storing shot bullets
      * @param window the window in which the player is
      * @param blocks the GameObject to check for collision with
@@ -78,7 +78,7 @@ public class Player extends GameObject
 
     /**
      * Increases the speed of the player causing him to move in the next movement call.
-     * 
+     *
      * @param direction x direction to move to
      */
     public void walk(int direction)
@@ -100,9 +100,17 @@ public class Player extends GameObject
         }
     }
 
+    /*
+     *Here for when the enenmy hits the player to get them away wasn't sure what else to do tbh
+     **/
+    public void hitAway()
+    {
+        speedY = jumpHeight/3;
+    }
+
     /**
      * Executes any movement for the player(With checking for collision).
-     *  
+     *
      * @param objectsInView an array of the object that are in view and should be checked for collision.
      * @param window the game window.
      */
@@ -134,7 +142,7 @@ public class Player extends GameObject
                         speedY = this.getPosition().y-(a.getHitBox().top+a.getHitBox().height);
                     }
                 }
-                
+
                 if(this.getFutureHitBox(speedX*direction, 0).intersection(a.getHitBox()) != null)
                 {
                     diagCheck = false;
@@ -161,6 +169,7 @@ public class Player extends GameObject
             }
 
         }
+
         if(diagCheck)
         {
             speedX = tempX;
@@ -173,14 +182,14 @@ public class Player extends GameObject
         }
 
         if(window.getFutureViewZone(speedX*direction, 0).intersection(playArea).width == window.getViewZone().width &&
-            this.getPosition().x >= window.getViewZone().width/3 &&
-            this.getPosition().x <= window.getViewZone().left+(window.getViewZone().width/3)*2)
+                this.getPosition().x >= window.getViewZone().width/3 &&
+                this.getPosition().x <= window.getViewZone().left+(window.getViewZone().width/3)*2)
         {
             window.moveView(speedX*direction);
         }
 
         this.moveObject(speedX*direction, speedY*-1);
-        
+
         if(landed)
         {
             inAir = false;
@@ -191,7 +200,7 @@ public class Player extends GameObject
             inAir = true;
         }
         speedY -= g;
-        
+
         //needs adjusting
         if(speedY*-1 > jumpHeight/2)
         {
@@ -214,11 +223,9 @@ public class Player extends GameObject
 
     /**
      * Adds a bullet to the list given.
-     * 
-     * @param bullets list to add bullets to
      */
-    public Bullet shoot()
-    {
+    public Bullet shoot() {
+
         if (direction == 1) // Extended code so that bullet detect doesnt hit player and despawn player
             return new Bullet(direction, this.getPosition().x + 40, this.getPosition().y + this.getLocalBounds().height / 2, "resources/laser.png");
         else
@@ -227,23 +234,15 @@ public class Player extends GameObject
 
     /**
      * Reduces player's health leading eventually to ko
-     * 
-     * @param hp tracks the players health
      */
     public int dmghp()
     {
-        hp -= 20;
+        hp -= 5;
         if(hp == 0)
         {
             return -1;
         }
         return hp;
-    }
-    public void invicible()
-    {
-        health = hp;
-        //System.out.println(health);
-        hp = -100;
     }
 
     public void setHP(int hp)

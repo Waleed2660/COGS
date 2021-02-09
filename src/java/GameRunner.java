@@ -10,7 +10,7 @@ import java.util.Timer;
 public class GameRunner
 {
     private ArrayList<Bullet> bullets = new ArrayList<>();
-    private double lastBulletTime = System.currentTimeMillis();
+    private ArrayList<Bullet> hostileBullets = new ArrayList<>();
     private MMWindow window;
     private Level level;
     private Player player;
@@ -41,9 +41,7 @@ public class GameRunner
      */
     public int run()
     {
-         float xlocl = 10, ylocl = 10;
-         float winSizeX = window.getSize().x, winSizeY = window.getSize().y;
-         int check = player.hp;
+        int check = player.hp;
 
         while(window.isOpen()) {
 
@@ -67,7 +65,7 @@ public class GameRunner
                     }
                }
 
-               /*if(player.eCollides(level.enemies) != null)
+               if(player.eCollides(level.enemies) != null)
                {
                     System.out.println("Collision with Alive Enemy" + check);
                     check = player.dmghp();
@@ -77,7 +75,7 @@ public class GameRunner
                          player.setHP(100);
                          return 0;
                     }
-               }*/
+               }
                GameObject playerCollides = player.collides(objectsInView);
                if(playerCollides != null && playerCollides.getType().equals("portal"))
                {
@@ -98,7 +96,10 @@ public class GameRunner
      public int controller(ArrayList<GameObject> blocks)
      {
           if(Keyboard.isKeyPressed(Keyboard.Key.SPACE)) {
-               renderBullets();
+               //Creates a Bullet Object inside Player.java & returns it, also Checks delay between each bullet
+              if (player.insertDelay(1000)) {
+                   bullets.add(player.shoot());
+               }
           }
           if(Keyboard.isKeyPressed(Keyboard.Key.LEFT)) {
                player.walk(-1);
@@ -115,16 +116,6 @@ public class GameRunner
           player.movement(blocks, window);
           return 0;
      }
-
-    /**
-     * Renders Bullets upon calling, also ensures delay in each shot
-     */
-    public void renderBullets(){
-        if (System.currentTimeMillis() - lastBulletTime > 500) {
-            bullets.add(player.shoot());
-            lastBulletTime = System.currentTimeMillis();
-        }
-    }
 
     /**
      * Draws all objects in a level dynamically.
@@ -155,10 +146,22 @@ public class GameRunner
                     window.draw(a);
                }
           }
-        for(GameObject a : level.enemies)
-        {
-            if(viewZone.intersection(a.getHitBox()) != null)
-            {
+        for(Enemy a : level.enemies) {  //Changed object type to Enemy in order to access methods
+
+            if(viewZone.intersection(a.getHitBox()) != null) {
+
+                a.movement(level.objectList, window);       //Initiates movement for each enemy
+
+                if (a.lookForPlayer(player) && a.shoot() != null) {   // Enemy only shoots if player is in range
+                    hostileBullets.add(a.shoot());
+                }
+
+                //  Render Bullets fired by Enemies
+                for (Bullet b: hostileBullets)  {
+                    b.moveBullet();
+                    window.draw(b);
+                }
+                // Renders Enemies
                 result.add(a);
                 window.draw(a);
             }
@@ -167,6 +170,7 @@ public class GameRunner
           if(!bullets.isEmpty()){
 
                for (int  x = 0; x < bullets.size(); x++) {
+
                     window.draw(bullets.get(x));
                     bullets.get(x).moveBullet();
 
@@ -178,7 +182,7 @@ public class GameRunner
                               for(int f = 0; f < level.enemies.size(); f++) {
 
                                    if(level.enemies.get(f).bCollides(bullets) != null) {
-
+                                       System.out.println("Enemy health: "+level.enemies.get(f).dmghp());
                                         if(level.enemies.get(f).dmghp() <= 0) {
 
                                              System.out.println("Enemy dead");
