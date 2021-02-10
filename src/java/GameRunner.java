@@ -28,7 +28,7 @@ public class GameRunner
     public GameRunner(MMWindow window, String levelNum)
     {
           this.window = window;
-          window.resetView();
+          //window.resetView();
           window.setKeyRepeatEnabled(false);
           this.level = new Level(levelNum, (float)2.5, 2, window.getViewZone());
           this.player = level.getPlayer();
@@ -67,7 +67,7 @@ public class GameRunner
                     }
                }
 
-               if(player.eCollides(level.enemies) != null)
+               /*if(player.eCollides(level.enemies) != null)
                {
                     if(System.currentTimeMillis() - lastHitTime > 500)
                     {
@@ -83,14 +83,13 @@ public class GameRunner
                               return 0;
                          }
                     }
-                         
-                    }
+               }*/
+               GameObject playerCollides = player.collides(objectsInView);
+               if(playerCollides != null && playerCollides.getType().equals("portal"))
+               {
+                    return 1;
                }
-          /*GameObject playerCollides = player.collides(objectsInView);
-          if(playerCollides != null && playerCollides.getType().equals("portal"))
-          {
-               return 1;
-          }*/
+          }
           return 0;
      }
           

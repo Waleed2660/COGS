@@ -63,7 +63,7 @@ public class Level
         }
         else if(spl[0].equals("player"))
         {
-          player = new Player(Float.parseFloat(spl[1]), Float.parseFloat(spl[2]), 10, 100, this, filePath.concat("assets/").concat(spl[0]).concat(".png/"));
+          player = new Player(Float.parseFloat(spl[1]), Float.parseFloat(spl[2]), 30, 100, this, filePath.concat("assets/").concat(spl[0]).concat(".png/"));
           objectList.add(player);
         }
         else if(spl[0].contains("Background"))
@@ -71,7 +71,10 @@ public class Level
           playArea = new FloatRect(Integer.parseInt(spl[1]), Integer.parseInt(spl[2]), Integer.parseInt(spl[3]), Integer.parseInt(spl[4]));
           for(int i = 0; i < Integer.parseInt(spl[3])/view.width; i++)
           {
-            background.add(new GameObject(view.width*i, 0, filePath.concat("assets/").concat(spl[0]).concat(".png/"), new FloatRect(view.width*i, 0, view.width, Integer.parseInt(spl[4]))));
+            for(int j = 0; j < Integer.parseInt(spl[4])/view.height; j++)
+            {
+              background.add(new GameObject(view.width*i, view.height*j, filePath.concat("assets/").concat(spl[0]).concat(".png/"), new FloatRect(view.width*i, view.height*j, view.width, view.height)));
+            }
           }
         }
         else if(spl[0].contains("dog"))

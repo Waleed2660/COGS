@@ -185,7 +185,13 @@ public class Player extends GameObject
             this.getPosition().x >= window.getViewZone().width/3 &&
             this.getPosition().x <= window.getViewZone().left+(window.getViewZone().width/3)*2)
         {
-            window.moveView(speedX*direction);
+            window.moveView(speedX*direction, 0);
+        }
+        if(window.getFutureViewZone(0, speedY*-1).intersection(playArea).height == window.getViewZone().height &&
+            this.getPosition().y >= window.getViewZone().height/2 &&
+            this.getPosition().y <= window.getViewZone().top+window.getViewZone().height/2)
+        {
+            window.moveView(0, speedY*-1);
         }
 
         this.moveObject(speedX*direction, speedY*-1);
