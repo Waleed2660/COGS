@@ -3,7 +3,7 @@
  * This class provides basic bullet functionality
  */
 public class Bullet extends GameObject{
-    private float XSpeed = 15;
+    private float XSpeed = 30;
     private float direction;
 
     /**

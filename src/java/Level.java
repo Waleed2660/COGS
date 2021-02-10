@@ -63,7 +63,7 @@ public class Level
         }
         else if(spl[0].equals("player"))
         {
-          player = new Player(Float.parseFloat(spl[1]), Float.parseFloat(spl[2]), 30, 100, this, filePath.concat("assets/").concat(spl[0]).concat(".png/"));
+          player = new Player(Float.parseFloat(spl[1]), Float.parseFloat(spl[2]), 15, 150, this, filePath.concat("assets/").concat(spl[0]).concat(".png/"));
           objectList.add(player);
         }
         else if(spl[0].contains("Background"))

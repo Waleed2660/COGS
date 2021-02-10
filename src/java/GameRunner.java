@@ -30,7 +30,7 @@ public class GameRunner
           this.window = window;
           //window.resetView();
           window.setKeyRepeatEnabled(false);
-          this.level = new Level(levelNum, (float)2.5, 2, window.getViewZone());
+          this.level = new Level(levelNum, (float)2.5, 3, window.getViewZone());
           this.player = level.getPlayer();
     }
 
@@ -67,7 +67,7 @@ public class GameRunner
                     }
                }
 
-               /*if(player.eCollides(level.enemies) != null)
+               if(player.collides(level.enemies) != null)
                {
                     if(System.currentTimeMillis() - lastHitTime > 500)
                     {
@@ -83,7 +83,7 @@ public class GameRunner
                               return 0;
                          }
                     }
-               }*/
+               }
                GameObject playerCollides = player.collides(objectsInView);
                if(playerCollides != null && playerCollides.getType().equals("portal"))
                {
@@ -115,6 +115,10 @@ public class GameRunner
           }
           if(Keyboard.isKeyPressed(Keyboard.Key.UP)) {
                player.jump();
+          }
+          //havent fully implemented yet
+          if(Keyboard.isKeyPressed(Keyboard.Key.DOWN)) {
+               player.crouch();
           }
           if(Keyboard.isKeyPressed(Keyboard.Key.ESCAPE)) {
                return 1;
@@ -162,37 +166,32 @@ public class GameRunner
                     window.draw(a);
                }
           }
-        for(GameObject a : level.enemies)
-        {
-            if(viewZone.intersection(a.getHitBox()) != null)
-            {
-                result.add(a);
-                window.draw(a);
-            }
-        }
+          for(GameObject a : level.enemies)
+          {
+               if(viewZone.intersection(a.getHitBox()) != null)
+               {
+                    result.add(a);
+                    window.draw(a);
+               }
+          }
           // Animates bullet once fired #changed to animate if there are any bullets
           if(!bullets.isEmpty()){
 
-               for (int  x = 0; x < bullets.size(); x++) {
+               for (int  x = 0; x < bullets.size(); x++)
+               {
                     window.draw(bullets.get(x));
                     bullets.get(x).moveBullet();
 
                     // De-spawns the bullet when it goes out of frame/ hits object
-                    if (!bullets.get(x).bulletInSight(window) || bullets.get(x).collides(result) != null) {
+                    GameObject bulletHit = bullets.get(x).collides(result);
+                    if (!bullets.get(x).bulletInSight(window) || bulletHit != null) {
 
-                         if(bullets.get(x).eCollides(level.enemies) != null) {
-
-                              for(int f = 0; f < level.enemies.size(); f++) {
-
-                                   if(level.enemies.get(f).bCollides(bullets) != null) {
-
-                                        if(level.enemies.get(f).dmghp() <= 0) {
-                                             
-                                             level.enemies.get(f).setCustomHitBox(0, 0, 0, 0);
-                                             System.out.println("Enemy dead");
-                                             level.enemies.remove(f);
-                                        }
-                                   }
+                         if(bulletHit != null && bulletHit.getClass() == Enemy.class)
+                         {
+                              if(((Enemy)bulletHit).dmghp() <= 0)
+                              {
+                                   System.out.println("Enemy dead");
+                                   level.enemies.remove((Enemy)bulletHit);
                               }
                          }
                          bullets.remove(x);
