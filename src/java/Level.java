@@ -18,6 +18,7 @@ public class Level
   public ArrayList<GameObject> background = new ArrayList<GameObject>();
   public ArrayList<Enemy> enemies = new ArrayList<Enemy>(); //had to change to public so i could access in GameRunner  for collsion damage detection
   private ArrayList<Platform> platforms = new ArrayList<Platform>();
+  public ArrayList<GameObject> fires = new ArrayList<GameObject>();
   private Player player;
   private GameObject portal;
   private FloatRect playArea;
@@ -88,6 +89,12 @@ public class Level
         {
           Platform temp = new Platform(Integer.parseInt(spl[1]), Integer.parseInt(spl[2]), filePath.concat("assets/").concat(spl[0]).concat(".png/"));
           platforms.add(temp);
+          objectList.add(temp);
+        }
+        else if(spl[0].contains("fire"))
+        {
+          GameObject temp = new GameObject(Integer.parseInt(spl[1]), Integer.parseInt(spl[2]), filePath.concat("assets/").concat(spl[0]).concat(".png/"), "fire", null);
+          fires.add(temp);
           objectList.add(temp);
         }
         else if(spl[0].contains("portal"))

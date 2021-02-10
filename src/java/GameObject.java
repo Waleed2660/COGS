@@ -200,7 +200,7 @@ public class GameObject extends Sprite
             }
 
         }
-        return null;
+        return null; 
     }
     
     /**
@@ -229,6 +229,22 @@ public class GameObject extends Sprite
         return null;
     }
     public GameObject bCollides(ArrayList<Bullet> listToDetect)
+    {
+        for(GameObject a : listToDetect)
+        {
+            if(!a.equals(this))
+            {
+                if(this.getHitBox().intersection(a.getHitBox()) != null)
+                {
+                    return a;
+                }
+            }
+
+        }
+        return null;
+    }
+    
+    public GameObject fCollides(ArrayList<Fire> listToDetect)
     {
         for(GameObject a : listToDetect)
         {

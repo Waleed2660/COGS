@@ -1,8 +1,10 @@
 import org.jsfml.graphics.*;
 import org.jsfml.window.Keyboard;
 import org.jsfml.window.event.Event;
+import org.jsfml.system.*;
 import java.util.ArrayList;
 import java.util.Timer;
+
 
 /**
  * Used to run the game
@@ -10,12 +12,14 @@ import java.util.Timer;
 public class GameRunner
 {
     private ArrayList<Bullet> bullets = new ArrayList<>();
+    private RectangleShape hpBar = new RectangleShape();
     private double lastBulletTime = System.currentTimeMillis();
     private double lastHitTime = 0;
+    private double lastBurnTime = 0;
     private MMWindow window;
     private Level level;
     private Player player;
-    private int check;
+    private float check = 100;
 
     //private GameOver over;
 
@@ -41,12 +45,11 @@ public class GameRunner
      */
     public int run()
     {
-         float xlocl = 10, ylocl = 10;
-         float winSizeX = window.getSize().x, winSizeY = window.getSize().y;
+          float winSizeX = window.getSize().x, winSizeY = window.getSize().y;
          
 
-        while(window.isOpen()) {
-
+          while(window.isOpen()) 
+          {
                ArrayList<GameObject> objectsInView = drawAll(level, window);
                if(this.controller(objectsInView) == 1)
                {
@@ -54,38 +57,48 @@ public class GameRunner
                }
 
                Event e = window.pollEvent();
-               if(e != null) {
-
-                    if(e.type == Event.Type.CLOSED) {
-
+               if(e != null) 
+               {
+                    if(e.type == Event.Type.CLOSED) 
+                    {
                          window.close();
                          //IMPORTANT CLOSES WINDOW UPON PRESSING CLOSE DO NOT ALTER
                     }
-                    if(e.type == Event.Type.MOUSE_BUTTON_PRESSED) {
-
-                         // Clickable Button
-                    }
-               }
-
-               if(player.eCollides(level.enemies) != null)
-               {
-                    if(System.currentTimeMillis() - lastHitTime > 500)
+               
+                    if(player.eCollides(level.enemies) != null)
                     {
-                         check = player.dmghp();
-                         System.out.println("Collision with Alive Enemy" + check);
-                         lastHitTime = System.currentTimeMillis();
-                         player.hitAway();
-                         if(check == 0 || check == -1)
+                         if(System.currentTimeMillis() - lastHitTime > 500)
                          {
-                              System.out.println("dead");
-                              player.setHP(100);
-                              window.resetView();
-                              return 0;
+                              check = player.dmghp(20);
+                              System.out.println("Collision with Alive Enemy" + check);
+                              lastHitTime = System.currentTimeMillis();
+                              player.hitAway();
                          }
-                    }
                          
                     }
+          
                }
+               if(player.collides(level.fires) != null)
+                    {
+                         if(System.currentTimeMillis() - lastBurnTime > 100)
+                         {
+                              check = player.dmghp(2);
+                              System.out.println("Collision with fire" + check);
+                              lastBurnTime = System.currentTimeMillis();
+                         }
+                    }
+                    if(check == 0 || check == -1)
+                    {
+                         System.out.println("dead");
+                         player.setHP(100);
+                         window.resetView();
+                         return 0;
+                    }
+
+               //hpBar.setPosition(Vector2f(window.getPosition().x - 50, window.getPostion().y - 50));
+               //hpBar.setSize(Vector2f(check,10));
+          }
+               
           /*GameObject playerCollides = player.collides(objectsInView);
           if(playerCollides != null && playerCollides.getType().equals("portal"))
           {
@@ -171,6 +184,7 @@ public class GameRunner
                 window.draw(a);
             }
         }
+         window.draw(hpBar);
           // Animates bullet once fired #changed to animate if there are any bullets
           if(!bullets.isEmpty()){
 
@@ -203,4 +217,5 @@ public class GameRunner
           window.display();
           return result;
     }
+
 }

@@ -20,9 +20,7 @@ public class Player extends GameObject
     private float maxSpeedX, jumpHeight, friction, g = 10/6;
     private int direction = 1;
     private double lastBulletTime = System.currentTimeMillis();
-    public int hp = 100; //5 hits to ko 20 hp per hit  // enemies dog - 1 hit ko robot 2 - hit ko
-    int health = 0; // used to store health for iframes
-
+    private float hp = 100; //5 hits to ko 20 hp per hit  // enemies dog - 1 hit ko robot 2 - hit ko // fires 2 damage more often than enemy damage
     private boolean inAir = false;
     private FloatRect playArea;
 
@@ -107,7 +105,7 @@ public class Player extends GameObject
     {
         speedY = jumpHeight/3;
     }
-
+    int x = 0;
     /**
      * Executes any movement for the player(With checking for collision).
      *  
@@ -120,10 +118,11 @@ public class Player extends GameObject
         boolean landed = false;
         boolean diagCheck = true;
         float tempX = speedX;
+        
 
         for(GameObject a : objectsInView)
         {
-            if(!a.equals(this) && a.getClass() != Enemy.class && !a.getType().equals("portal"))
+            if(!a.equals(this) && a.getClass() != Enemy.class && !a.getType().equals("portal") && !a.getType().equals("fire"))
             {
                 //  Checks if the player collides with anything on the y axis and if it does checks if its above or bellow and changes the speed
                 //  so it ends up right next to it. Same for the x axis.
@@ -239,16 +238,21 @@ public class Player extends GameObject
      * 
      * @param hp tracks the players health
      */
-    public int dmghp()
+    public float dmghp(int dmgpt)
     {
-        hp -= 20;
-        if(hp == 0)
+        hp -= dmgpt;
+        if(hp <= 0)
         {
             return -1;
         }
         return hp;
     }
 
+    /**
+     * Resets player's hp after death incase of restart
+     * 
+     * @param hp tracks the players health
+     */
     public void setHP(int hp)
     {
         this.hp = hp;
