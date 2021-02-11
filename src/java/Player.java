@@ -11,7 +11,7 @@ import org.jsfml.window.Keyboard.Key;
  * TODO:
  *  1. properly calculate Y speed in relation to jump height
  *  2. properly calculate the max Y speed in relation to jump height
- *  3. adjust the camera follow for Level 2
+ *  3. 
  */
 
 public class Player extends GameObject
@@ -20,8 +20,9 @@ public class Player extends GameObject
     private float maxSpeedX, jumpHeight, friction, g = 10/6;
     private int direction = 1;
     private double lastBulletTime = System.currentTimeMillis();
-    private float hp = 100; //5 hits to ko 20 hp per hit  // enemies dog - 1 hit ko robot 2 - hit ko // fires 2 damage more often than enemy damage
+    private float hp = 100000; //5 hits to ko 20 hp per hit  // enemies dog - 1 hit ko robot 2 - hit ko // fires 2 damage more often than enemy damage
     private boolean inAir = false;
+    private boolean crouched = false;
     private FloatRect playArea;
 
     /**
@@ -43,36 +44,6 @@ public class Player extends GameObject
         this.g = level.getGravity();
         this.playArea = level.getPlayArea();
     }
-
-    /**
-     * Checks if a key is pressed and does stuff accordingly. Moved to GameRunner for now.
-     * 
-     * @param bullets the bullets array for storing shot bullets
-     * @param window the window in which the player is
-     * @param blocks the GameObject to check for collision with
-     */
-    /*public void controller(ArrayList<Bullet> bullets, MMWindow window, ArrayList<GameObject> blocks)
-    {
-        if(Keyboard.isKeyPressed(Keyboard.Key.LEFT))
-        {
-            direction = -1;    // Updates Bullet travel direction
-            this.movement(direction, 0, blocks);
-        }
-        if(Keyboard.isKeyPressed(Keyboard.Key.RIGHT))
-        {
-            direction = 1;     // Updates Bullet travel direction
-            this.movement(direction, 0, blocks);
-        }
-
-        Event e = window.pollEvent();
-        if(e != null && e.type == Event.Type.KEY_PRESSED)
-        {
-            if(e.asKeyEvent().key == Keyboard.Key.SPACE)
-            {
-                this.shoot(bullets);
-            }
-        }
-    }*/
 
     /**
      * Increases the speed of the player causing him to move in the next movement call.
@@ -98,9 +69,19 @@ public class Player extends GameObject
         }
     }
 
-    /*
-    *Here for when the enenmy hits the player to get them away wasn't sure what else to do tbh
-    **/
+    /**
+     * Makes the player crouch.
+     * 
+     * Wasnt implemented yet.
+     */
+    public void crouch()
+    {
+        crouched = true;
+    }
+
+    /**
+    *  Here for when the enenmy hits the player to get them away wasn't sure what else to do tbh
+    */
     public void hitAway()
     {
         speedY = jumpHeight/3;
@@ -175,7 +156,7 @@ public class Player extends GameObject
         }
 
         //Checks that it doesnt go off the screen
-        if(this.getFutureHitBox(speedX*direction, speedY*-1).intersection(playArea) == null || this.getFutureHitBox(speedX*direction, speedY*-1).intersection(playArea).width != this.getLocalBounds().width)
+        if(this.getPosition().x+(speedX*direction) <= playArea.left || this.getPosition().x+(speedX*direction)+this.getLocalBounds().width >= playArea.left+playArea.width)
         {
             speedX = 0;
         }
@@ -184,7 +165,13 @@ public class Player extends GameObject
             this.getPosition().x >= window.getViewZone().width/3 &&
             this.getPosition().x <= window.getViewZone().left+(window.getViewZone().width/3)*2)
         {
-            window.moveView(speedX*direction);
+            window.moveView(speedX*direction, 0);
+        }
+        if(window.getFutureViewZone(0, speedY*-1).intersection(playArea).height == window.getViewZone().height &&
+            this.getPosition().y >= window.getViewZone().height/2 &&
+            this.getPosition().y <= window.getViewZone().top+window.getViewZone().height/2)
+        {
+            window.moveView(0, speedY*-1);
         }
 
         this.moveObject(speedX*direction, speedY*-1);
@@ -199,7 +186,7 @@ public class Player extends GameObject
             inAir = true;
         }
         speedY -= g;
-        
+        crouched = false;
         //needs adjusting
         if(speedY*-1 > jumpHeight/2)
         {
@@ -228,7 +215,7 @@ public class Player extends GameObject
     public Bullet shoot()
     {
         if (direction == 1) // Extended code so that bullet detect doesnt hit player and despawn player
-            return new Bullet(direction, this.getPosition().x + 40, this.getPosition().y + this.getLocalBounds().height / 2, "resources/laser.png");
+            return new Bullet(direction, this.getPosition().x + this.getHitBox().width + 20, this.getPosition().y + this.getLocalBounds().height / 2, "resources/laser.png");
         else
             return new Bullet(direction, this.getPosition().x - 20, this.getPosition().y + this.getLocalBounds().height / 2, "resources/laser.png");
     }

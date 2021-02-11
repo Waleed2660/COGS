@@ -123,7 +123,6 @@ public class GameObject extends Sprite
     public void setHitBoxToTexture()
     {
         hitBox = new FloatRect(this.getPosition(), new Vector2f(this.getLocalBounds().width, this.getLocalBounds().height));
-        //System.out.println(hitBox.toString());
     }
 
     /**
@@ -184,62 +183,20 @@ public class GameObject extends Sprite
     /**
      * A collision detection method that checks if the current object collides with any in the given list and returns the one it collides with.
      * 
-     * @param listToDetect GameObjects to check for collision with
+     * @param listToDetect objects to check for collision with
      * @return null - doesnt collide with anything, GameObject - the object it collides with
      */
-    public GameObject collides(ArrayList<GameObject> listToDetect)
+    public GameObject collides(ArrayList<?> listToDetect)
     {
-        for(GameObject a : listToDetect)
+        for(Object a : listToDetect)
         {
-            if(!a.equals(this))
+            if(!a.equals(this) && a instanceof GameObject)
             {
-                if(this.getHitBox().intersection(a.getHitBox()) != null)
+                if(this.getHitBox().intersection(((GameObject)a).getHitBox()) != null)
                 {
-                    return a;
+                    return (GameObject)a;
                 }
             }
-
-        }
-        return null; 
-    }
-    
-    /**
-     * Same as collides but for enemies
-     * 
-     * @param listToDetect Enemy list to check for collision with
-     * @return null - doesnt collide with anything, GameObject - the object it collides with
-     */
-    public GameObject eCollides(ArrayList<Enemy> listToDetect)
-    {
-        for(GameObject a : listToDetect)
-        {
-            if(!a.equals(this))
-            {
-                if(this.getFutureHitBox(10,0).intersection(a.getHitBox()) != null)
-                {
-                    return a;
-                }
-                else if(this.getFutureHitBox(-10,0).intersection(a.getHitBox()) != null)
-                {
-                    return a;
-                }
-            }
-
-        }
-        return null;
-    }
-    public GameObject bCollides(ArrayList<Bullet> listToDetect)
-    {
-        for(GameObject a : listToDetect)
-        {
-            if(!a.equals(this))
-            {
-                if(this.getHitBox().intersection(a.getHitBox()) != null)
-                {
-                    return a;
-                }
-            }
-
         }
         return null;
     }

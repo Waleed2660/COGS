@@ -32,9 +32,11 @@ public class GameRunner
     public GameRunner(MMWindow window, String levelNum)
     {
           this.window = window;
-          window.resetView();
+          hpBar.setPosition(new Vector2f(50,50));
+          hpBar.setSize(new Vector2f(check*2,20));
+          //window.resetView();
           window.setKeyRepeatEnabled(false);
-          this.level = new Level(levelNum, (float)2.5, 2, window.getViewZone());
+          this.level = new Level(levelNum, (float)2.5, 3, window.getViewZone());
           this.player = level.getPlayer();
     }
 
@@ -45,39 +47,31 @@ public class GameRunner
      */
     public int run()
     {
+          hpBar.setFillColor(Color.RED);
           float winSizeX = window.getSize().x, winSizeY = window.getSize().y;
-         
+          
 
           while(window.isOpen()) 
           {
                ArrayList<GameObject> objectsInView = drawAll(level, window);
+               GameObject playerCollides = player.collides(objectsInView);
                if(this.controller(objectsInView) == 1)
                {
                     return 0;
                }
-
-               Event e = window.pollEvent();
-               if(e != null) 
-               {
-                    if(e.type == Event.Type.CLOSED) 
-                    {
-                         window.close();
-                         //IMPORTANT CLOSES WINDOW UPON PRESSING CLOSE DO NOT ALTER
-                    }
                
-                    if(player.eCollides(level.enemies) != null)
+               if(player.collides(level.enemies) != null)
+               {
+                    if(System.currentTimeMillis() - lastHitTime > 500)
                     {
-                         if(System.currentTimeMillis() - lastHitTime > 500)
-                         {
-                              check = player.dmghp(20);
-                              System.out.println("Collision with Alive Enemy" + check);
-                              lastHitTime = System.currentTimeMillis();
-                              player.hitAway();
-                         }
-                         
+                         check = player.dmghp(20);
+                         System.out.println("Collision with Alive Enemy" + check);
+                         lastHitTime = System.currentTimeMillis();
+                         player.hitAway();
                     }
-          
+                         
                }
+          
                if(player.collides(level.fires) != null)
                     {
                          if(System.currentTimeMillis() - lastBurnTime > 100)
@@ -94,16 +88,12 @@ public class GameRunner
                          window.resetView();
                          return 0;
                     }
-
-               //hpBar.setPosition(Vector2f(window.getPosition().x - 50, window.getPostion().y - 50));
-               //hpBar.setSize(Vector2f(check,10));
+  
+               if(playerCollides != null && playerCollides.getType().equals("portal"))
+               {
+                    return 1;
+               }
           }
-               
-          /*GameObject playerCollides = player.collides(objectsInView);
-          if(playerCollides != null && playerCollides.getType().equals("portal"))
-          {
-               return 1;
-          }*/
           return 0;
      }
           
@@ -121,14 +111,22 @@ public class GameRunner
           if(Keyboard.isKeyPressed(Keyboard.Key.SPACE)) {
                renderBullets();
           }
-          if(Keyboard.isKeyPressed(Keyboard.Key.LEFT)) {
+          if(Keyboard.isKeyPressed(Keyboard.Key.LEFT)|| Keyboard.isKeyPressed(Keyboard.Key.A)) 
+          {
                player.walk(-1);
           }
-          if(Keyboard.isKeyPressed(Keyboard.Key.RIGHT)) {
+          if(Keyboard.isKeyPressed(Keyboard.Key.RIGHT)|| Keyboard.isKeyPressed(Keyboard.Key.D)) 
+          {
                player.walk(1);
           }
-          if(Keyboard.isKeyPressed(Keyboard.Key.UP)) {
+          if(Keyboard.isKeyPressed(Keyboard.Key.UP)|| Keyboard.isKeyPressed(Keyboard.Key.W)) 
+          {
                player.jump();
+          }
+          //havent fully implemented yet
+          if(Keyboard.isKeyPressed(Keyboard.Key.DOWN)|| Keyboard.isKeyPressed(Keyboard.Key.S)) 
+          {
+               player.crouch();
           }
           if(Keyboard.isKeyPressed(Keyboard.Key.ESCAPE)) {
                return 1;
@@ -141,10 +139,11 @@ public class GameRunner
      * Renders Bullets upon calling, also ensures delay in each shot
      */
     public void renderBullets(){
-        if (System.currentTimeMillis() - lastBulletTime > 500) {
-            bullets.add(player.shoot());
-            lastBulletTime = System.currentTimeMillis();
-        }
+          if (System.currentTimeMillis() - lastBulletTime > 500) 
+          {
+               bullets.add(player.shoot());
+               lastBulletTime = System.currentTimeMillis();
+          }
     }
 
     /**
@@ -188,26 +187,21 @@ public class GameRunner
           // Animates bullet once fired #changed to animate if there are any bullets
           if(!bullets.isEmpty()){
 
-               for (int  x = 0; x < bullets.size(); x++) {
+               for (int  x = 0; x < bullets.size(); x++)
+               {
                     window.draw(bullets.get(x));
                     bullets.get(x).moveBullet();
 
                     // De-spawns the bullet when it goes out of frame/ hits object
-                    if (!bullets.get(x).bulletInSight(window) || bullets.get(x).collides(result) != null) {
+                    GameObject bulletHit = bullets.get(x).collides(result);
+                    if (!bullets.get(x).bulletInSight(window) || bulletHit != null) {
 
-                         if(bullets.get(x).eCollides(level.enemies) != null) {
-
-                              for(int f = 0; f < level.enemies.size(); f++) {
-
-                                   if(level.enemies.get(f).bCollides(bullets) != null) {
-
-                                        if(level.enemies.get(f).dmghp() <= 0) {
-                                             
-                                             level.enemies.get(f).setCustomHitBox(0, 0, 0, 0);
-                                             System.out.println("Enemy dead");
-                                             level.enemies.remove(f);
-                                        }
-                                   }
+                         if(bulletHit != null && bulletHit.getClass() == Enemy.class)
+                         {
+                              if(((Enemy)bulletHit).dmghp() <= 0)
+                              {
+                                   System.out.println("Enemy dead");
+                                   level.enemies.remove((Enemy)bulletHit);
                               }
                          }
                          bullets.remove(x);
