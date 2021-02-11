@@ -59,7 +59,24 @@ public class GameRunner
                {
                     return 0;
                }
-               
+
+               Event e = window.pollEvent();
+               if(e != null) 
+               {
+
+                    if(e.type == Event.Type.CLOSED) 
+                    {
+
+                         window.close();
+                         //IMPORTANT CLOSES WINDOW UPON PRESSING CLOSE DO NOT ALTER
+                    }
+                    if(e.type == Event.Type.MOUSE_BUTTON_PRESSED) 
+                    {
+
+                         // Clickable Button
+                    }
+               }
+
                if(player.collides(level.enemies) != null)
                {
                     if(System.currentTimeMillis() - lastHitTime > 500)
@@ -69,18 +86,26 @@ public class GameRunner
                          lastHitTime = System.currentTimeMillis();
                          player.hitAway();
                     }
+
+                    if(check == 0 || check == -1)
+                    {
+                         System.out.println("dead");
+                         player.setHP(100);
+                         window.resetView();
+                         return 0;
+                    }
                          
                }
           
-               if(player.collides(level.fires) != null)
+               if(playerCollides != null && playerCollides.getType().equals("fire"))
+               {
+                    if(System.currentTimeMillis() - lastBurnTime > 100)
                     {
-                         if(System.currentTimeMillis() - lastBurnTime > 100)
-                         {
-                              check = player.dmghp(2);
-                              System.out.println("Collision with fire" + check);
-                              lastBurnTime = System.currentTimeMillis();
-                         }
+                         check = player.dmghp(2);
+                         System.out.println("Collision with fire" + check);
+                         lastBurnTime = System.currentTimeMillis();
                     }
+
                     if(check == 0 || check == -1)
                     {
                          System.out.println("dead");
@@ -89,6 +114,7 @@ public class GameRunner
                          return 0;
                     }
   
+               }
                if(playerCollides != null && playerCollides.getType().equals("portal"))
                {
                     return 1;
@@ -108,7 +134,8 @@ public class GameRunner
      */
      public int controller(ArrayList<GameObject> blocks)
      {
-          if(Keyboard.isKeyPressed(Keyboard.Key.SPACE)) {
+          if(Keyboard.isKeyPressed(Keyboard.Key.SPACE)) 
+          {
                renderBullets();
           }
           if(Keyboard.isKeyPressed(Keyboard.Key.LEFT)|| Keyboard.isKeyPressed(Keyboard.Key.A)) 
@@ -182,10 +209,11 @@ public class GameRunner
                 result.add(a);
                 window.draw(a);
             }
-        }
+         }
          window.draw(hpBar);
           // Animates bullet once fired #changed to animate if there are any bullets
-          if(!bullets.isEmpty()){
+          if(!bullets.isEmpty())
+          {
 
                for (int  x = 0; x < bullets.size(); x++)
                {
@@ -196,7 +224,7 @@ public class GameRunner
                     GameObject bulletHit = bullets.get(x).collides(result);
                     if (!bullets.get(x).bulletInSight(window) || bulletHit != null) {
 
-                         if(bulletHit != null && bulletHit.getClass() == Enemy.class)
+                         if(bulletHit != null && bulletHit instanceof Enemy)
                          {
                               if(((Enemy)bulletHit).dmghp() <= 0)
                               {
@@ -210,6 +238,6 @@ public class GameRunner
           }
           window.display();
           return result;
-    }
+     }
 
 }

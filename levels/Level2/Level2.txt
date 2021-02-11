@@ -1,797 +1,797 @@
-BackgroundRocket 0 0 1024 15360
-hull3x1 288 15328
-hull3x1 192 15328
-hull3x1 480 15328
-hull3x1 384 15328
-hull3x1 672 15328
-hull3x1 576 15328
-hull1x3 800 15232
-hull1x3 800 14848
-hull1x3 800 14944
-hull1x3 800 15136
-hull1x3 800 14752
-hull2x1 768 15328
-hull1x3 800 14656
-hull1x3 800 14560
-hull1x3 800 14464
-hull1x3 800 15040
-hull1x3 800 14176
-hull1x3 800 14080
-hull1x3 800 14272
-hull1x3 800 13984
-hull1x3 800 13792
-hull1x3 800 13696
-hull1x3 800 13600
-hull1x3 800 13504
-hull1x3 800 13888
-hull1x3 800 13408
-hull1x3 800 13216
-hull1x3 800 13120
-hull1x3 800 13024
-hull1x3 800 14368
-hull1x3 800 12832
-hull1x3 800 12736
-hull1x3 800 12640
-hull1x3 800 12928
-hull1x3 800 12544
-hull1x3 800 12352
-hull1x3 800 12448
-hull1x3 800 12160
-hull1x3 800 12064
-hull1x3 800 13312
-hull1x3 800 11968
-hull1x3 800 12256
-hull1x3 800 11872
-hull1x3 800 11584
-hull1x3 800 11680
-hull1x3 800 11776
-hull1x3 800 11488
-hull1x3 800 11296
-hull1x3 800 11104
-hull1x3 800 11200
-hull1x3 800 11392
-hull1x3 800 10912
-hull1x3 800 10624
-hull1x3 800 10720
-hull1x3 800 10528
-hull1x3 800 10816
-hull1x3 800 10336
-hull1x3 800 10048
-hull1x3 800 10240
-hull1x3 800 10144
-hull1x3 800 11008
-hull1x3 800 10432
-hull1x3 800 9952
-hull1x3 800 9760
-hull1x3 800 9664
-hull1x3 800 9856
-hull1x3 800 9568
-hull1x3 800 9472
-hull1x3 800 9184
-hull1x3 800 9280
-hull1x3 800 9376
-hull1x3 800 9088
-hull1x3 800 8992
-hull1x3 800 8800
-hull1x3 800 8896
-hull1x3 800 8704
-hull1x3 800 8608
-hull1x3 800 8320
-hull1x3 800 8224
-hull1x3 800 8128
-hull1x3 800 8512
-hull1x3 800 8032
-hull1x3 800 7936
-hull1x3 800 7648
-hull1x3 800 8416
-hull1x3 800 7552
-hull1x3 800 7456
-hull1x3 800 7744
-hull1x3 800 7264
-hull1x3 800 7168
-hull1x3 800 7840
-hull1x3 800 7072
-hull1x3 800 7360
-hull1x3 800 6784
-hull1x3 800 6976
-hull1x3 800 6880
-hull1x3 800 6592
-hull1x3 800 6496
-hull1x3 800 6400
-hull1x3 800 6304
-hull1x3 800 6688
-hull1x3 800 6112
-hull1x3 800 6208
-hull1x3 800 5920
-hull1x3 800 6016
-hull1x3 800 5824
-hull1x3 800 5632
-hull1x3 800 5728
-hull1x3 800 5344
-hull1x3 800 5536
-hull1x3 800 5248
-hull1x3 800 5440
-hull1x3 800 5056
-hull1x3 800 4960
-hull1x3 800 5152
-hull1x3 800 4768
-hull1x3 800 4576
-hull1x3 800 4480
-hull1x3 800 4384
-hull1x3 800 4672
-hull1x3 800 4192
-hull1x3 800 4864
-hull1x3 800 4288
-hull1x3 800 4000
-hull1x3 800 4096
-hull1x3 800 3808
-hull1x3 800 3712
-hull1x3 800 3616
-hull1x3 800 3424
-hull1x3 800 3904
-hull1x3 800 3232
-hull1x3 800 3520
-hull1x3 800 3328
-hull1x3 800 3040
-hull1x3 800 2944
-hull1x3 800 3136
-hull1x3 800 2656
-hull1x3 800 2752
-hull1x3 800 2464
-hull1x3 800 2560
-hull1x3 800 2848
-hull1x3 800 2176
-hull1x3 800 2368
-hull1x3 800 2080
-hull1x3 800 1984
-hull1x3 800 1888
-hull1x3 800 1792
-hull1x3 800 1696
-hull1x3 800 1600
-hull1x3 800 2272
-hull1x3 800 1312
-hull1x3 800 1504
-hull1x3 800 1120
-hull1x3 800 1216
-hull1x3 800 1408
-hull1x3 800 832
-hull1x3 800 1024
-hull1x3 800 928
-hull1x3 800 544
-hull1x3 800 640
-hull1x3 800 352
-hull1x3 800 256
-hull1x3 800 736
-hull1x3 800 160
-hull1x3 800 448
-hull1x3 800 64
-hull1x3 192 15232
-hull1x3 192 15136
-hull1x2 800 0
-hull1x3 192 14944
-hull1x3 192 15040
-hull1x3 192 14848
-hull1x3 192 14752
-hull1x3 192 14656
-hull1x3 192 14464
-hull1x3 192 14560
-hull1x3 192 14368
-hull1x3 192 14272
-hull1x3 192 14080
-hull1x3 192 13984
-hull1x3 192 14176
-hull1x3 192 13792
-hull1x3 192 13888
-hull1x3 192 13600
-hull1x3 192 13504
-hull1x3 192 13696
-hull1x3 192 13312
-hull1x3 192 13408
-hull1x3 192 13120
-hull1x3 192 13024
-hull1x3 192 13216
-hull1x3 192 12832
-hull1x3 192 12928
-hull1x3 192 12736
-hull1x3 192 12544
-hull1x3 192 12448
-hull1x3 192 12352
-hull1x3 192 12256
-hull1x3 192 12064
-hull1x3 192 12640
-hull1x3 192 11872
-hull1x3 192 12160
-hull1x3 192 11776
-hull1x3 192 11968
-hull1x3 192 11680
-hull1x3 192 11584
-hull1x3 192 11296
-hull1x3 192 11488
-hull1x3 192 11104
-hull1x3 192 11200
-hull1x3 192 11008
-hull1x3 192 11392
-hull1x3 192 10912
-hull1x3 192 10720
-hull1x3 192 10624
-hull1x3 192 10432
-hull1x3 192 10816
-hull1x3 192 10336
-hull1x3 192 10528
-hull1x3 192 10240
-hull1x3 192 10144
-hull1x3 192 10048
-hull1x3 192 9856
-hull1x3 192 9760
-hull1x3 192 9568
-hull1x3 192 9472
-hull1x3 192 9664
-hull1x3 192 9376
-hull1x3 192 9280
-hull1x3 192 9088
-hull1x3 192 8992
-hull1x3 192 8800
-hull1x3 192 9184
-hull1x3 192 8704
-hull1x3 192 8512
-hull1x3 192 8896
-hull1x3 192 8608
-hull1x3 192 9952
-hull1x3 192 8320
-hull1x3 192 8128
-hull1x3 192 8032
-hull1x3 192 7936
-hull1x3 192 7840
-hull1x3 192 8416
-hull1x3 192 7552
-hull1x3 192 7648
-hull1x3 192 8224
-hull1x3 192 7456
-hull1x3 192 7360
-hull1x3 192 7264
-hull1x3 192 7072
-hull1x3 192 7744
-hull1x3 192 6880
-hull1x3 192 6976
-hull1x3 192 6688
-hull1x3 192 6592
-hull1x3 192 6400
-hull1x3 192 6784
-hull1x3 192 6208
-hull1x3 192 6496
-hull1x3 192 6304
-hull1x3 192 7168
-hull1x3 192 6016
-hull1x3 192 5920
-hull1x3 192 6112
-hull1x3 192 5632
-hull1x3 192 5824
-hull1x3 192 5440
-hull1x3 192 5344
-hull1x3 192 5248
-hull1x3 192 5536
-hull1x3 192 5728
-hull1x3 192 4768
-hull1x3 192 5152
-hull1x3 192 4960
-hull1x3 192 5056
-hull1x3 192 4576
-hull1x3 192 4864
-hull1x3 192 4672
-hull1x3 192 4192
-hull1x3 192 4384
-hull1x3 192 4480
-hull1x3 192 3904
-hull1x3 192 4288
-hull1x3 192 3808
-hull1x3 192 3616
-hull1x3 192 4096
-hull1x3 192 3712
-hull1x3 192 3520
-hull1x3 192 3424
-hull1x3 192 4000
-hull1x3 192 3232
-hull1x3 192 3328
-hull1x3 192 3040
-hull1x3 192 3136
-hull1x3 192 2848
-hull1x3 192 2560
-hull1x3 192 2464
-hull1x3 192 2368
-hull1x3 192 2656
-hull1x3 192 2176
-hull1x3 192 2272
-hull1x3 192 2080
-hull1x3 192 2944
-hull1x3 192 1888
-hull1x3 192 2752
-hull1x3 192 1792
-hull1x3 192 1984
-hull1x3 192 1696
-hull1x3 192 1408
-hull1x3 192 1600
-hull1x3 192 1312
-hull1x3 192 1504
-hull1x3 192 1024
-hull1x3 192 1216
-hull1x3 192 832
-hull1x3 192 1120
-hull1x3 192 640
-hull1x3 192 736
-hull1x3 192 448
-hull1x3 192 544
-hull1x3 192 160
-hull1x3 192 928
-hull1x3 192 64
-hull1x3 192 352
-hull1x2 192 0
-hull1x3 192 256
-hull3x1 416 0
-hull3x1 512 0
-hull3x1 224 0
-hull3x1 608 0
-hull3x1 512 15168
-hull3x1 608 15168
-hull3x1 704 0
-hull3x1 704 15104
-hull3x1 320 0
-hull3x1 704 15136
-hull3x1 544 14944
-hull3x1 704 15168
-hull3x1 640 14944
-hull3x1 512 14080
-hull3x1 224 15136
-hull3x1 224 13600
-hull3x1 416 14080
-hull3x1 288 13312
-hull3x1 384 13312
-hull3x1 608 13312
-hull3x1 704 13280
-hull3x1 704 13248
-hull3x1 288 13056
-hull3x1 352 13152
-hull3x1 576 13952
-hull3x1 320 12544
-hull3x1 224 12544
-hull3x1 416 12544
-hull3x1 512 12544
-hull3x1 704 12416
-hull3x1 704 13312
-hull3x1 608 12416
-hull3x1 512 12416
-hull3x1 416 12416
-hull3x1 320 12416
-hull3x1 480 11776
-hull3x1 608 12544
-hull3x1 288 11776
-hull3x1 544 10912
-hull3x1 640 10912
-hull3x1 352 9696
-hull3x1 224 11456
-hull3x1 384 11776
-hull3x1 352 9376
-hull3x1 544 9376
-hull3x1 640 9376
-hull3x1 352 8768
-hull3x1 640 8480
-hull3x1 448 9376
-hull3x1 544 8320
-hull3x1 384 8320
-hull3x1 640 8768
-hull3x1 416 7968
-hull3x1 384 7072
-hull3x1 448 6400
-hull3x1 640 8128
-hull3x1 384 6144
-hull3x1 704 8096
-hull3x1 288 6144
-hull3x1 224 6016
-hull3x1 224 5952
-hull3x1 352 6400
-hull3x1 320 5664
-hull3x1 288 5984
-hull3x1 320 5824
-hull3x1 512 5664
-hull3x1 416 5664
-hull3x1 352 4544
-hull3x1 384 4576
-hull3x1 320 4512
-hull3x1 288 4480
-hull3x1 416 4608
-hull3x1 224 4416
-hull3x1 256 4448
-hull3x1 704 3872
-hull3x1 320 3904
-hull3x1 704 3744
-hull3x1 320 3840
-hull3x1 224 3424
-hull3x1 320 3424
-hull3x1 320 3584
-hull3x1 416 3424
-hull3x1 480 3392
-hull3x1 224 3904
-hull3x1 608 3328
-hull3x1 320 3872
-hull3x1 544 3360
-hull3x1 608 2272
-hull3x1 224 2176
-hull3x1 416 2112
-hull3x1 480 800
-hull3x1 512 2112
-hull2x1 384 15008
-hull2x1 224 15104
-hull2x1 640 15136
-hull2x1 224 14176
-hull3x1 704 2272
-hull2x1 608 14080
-hull2x1 224 13056
-hull2x1 224 11776
-hull2x1 512 11616
-hull2x1 448 13600
-hull2x1 736 13888
-hull2x1 288 11104
-hull2x1 416 9184
-hull2x1 224 9952
-hull2x1 448 11616
-hull2x1 736 9376
-hull2x1 736 9184
-hull2x1 288 9184
-hull2x1 224 9184
-hull2x1 512 8768
-hull2x1 384 8480
-hull2x1 576 9184
-hull2x1 320 6016
-hull2x1 224 6144
-hull2x1 512 8480
-hull2x1 416 5824
-hull2x1 224 5984
-hull2x1 640 3872
-hull2x1 320 5952
-hull2x1 512 4256
-hull2x1 736 4320
-hull2x1 640 3744
-hull2x1 640 3008
-hull2x1 480 5152
-hull2x1 704 2688
-hull2x1 512 2528
-hull2x1 384 2464
-hull2x1 416 1472
-hull2x1 512 1216
-hull2x1 416 1056
-hull1x3 768 13920
-hull1x3 768 14016
-hull2x1 480 2144
-hull1x3 640 13984
-hull2x1 576 2848
-hull1x3 288 13504
-hull1x3 288 13408
-hull1x3 416 10752
-hull1x3 448 10752
-hull1x3 736 13792
-hull1x3 448 10560
-hull1x3 448 10656
-hull1x3 416 9984
-hull1x3 416 10656
-hull1x3 384 9888
-hull1x3 416 9888
-hull1x3 384 9792
-hull1x3 416 10560
-hull1x3 672 9920
-hull1x3 640 9920
-hull1x3 672 9824
-hull1x3 672 9728
-hull1x3 640 9728
-hull1x3 640 9824
-hull1x3 384 9984
-hull1x3 416 9792
-hull1x3 288 8704
-hull1x3 288 8512
-hull1x3 320 7456
-hull1x3 320 7360
-hull1x3 320 7264
-hull1x3 320 7168
-hull1x3 320 6976
-hull1x3 320 7072
-hull1x3 320 6880
-hull1x3 320 6784
-hull1x3 288 8608
-hull1x3 320 6688
-hull1x3 448 6048
-hull1x3 448 5952
-hull1x3 224 6048
-hull1x3 224 5856
-hull1x3 224 5664
-hull1x3 224 5760
-hull1x3 352 1888
-hull1x3 352 3744
-hull1x3 352 1984
-hull1x3 640 1984
-hull1x3 640 1888
-hull1x3 448 5856
-hull1x2 608 1856
-hull1x2 320 1952
-hull1x2 608 2048
-hull1x2 672 1952
-hull1x2 352 3680
-hull1x2 352 3616
-hull1x2 384 2048
-hull1x2 320 5760
-hull1x2 384 1856
-hull1x2 576 5696
-hull1x2 320 5696
-hull1x2 576 6624
-hull1x2 608 6624
-hull1x2 608 7968
-hull1x2 608 8096
-hull1x2 608 8032
-hull1x2 416 9728
-hull1x2 288 8128
-hull1x2 768 10016
-hull1x2 384 9728
-hull1x2 320 10368
-hull1x2 288 10368
-hull1x2 288 13344
-hull1x2 352 13088
-hull1x2 416 14176
-platform 288 14880
-hull1x2 416 14112
-platform 352 14448
-platform 680 14016
-hull1x2 704 9856
-platform 704 14784
-platform 264 14448
-platform 224 13792
-platform 320 13600
-platform 320 13792
-platform 544 13184
-platform 352 12880
-platform 672 12784
-platform 704 12992
-platform 224 12160
-platform 416 12096
-platform 648 12096
-platform 544 12272
-hull1x2 544 11712
-platform 576 11760
-platform 384 11296
-hull1x2 544 11648
-platform 576 11920
-platform 432 11088
-platform 544 10720
-platform 480 11296
-platform 224 10816
-platform 576 11296
-platform 416 10240
-hull3x1 320 10816
-platform 576 10240
-platform 224 9696
-platform 640 10720
-platform 384 9024
-platform 672 10240
-platform 384 7872
-platform 704 8928
-platform 288 7872
-platform 288 9024
-platform 224 7552
-platform 512 7760
-platform 416 7360
-platform 384 7648
-platform 512 7360
-platform 608 7360
-platform 704 7360
-platform 704 7200
-platform 480 7648
-platform 352 6912
-platform 448 6912
-platform 224 7264
-platform 424 6688
-platform 224 6928
-platform 264 6528
-platform 544 6912
-platform 640 6304
-platform 576 5904
-platform 544 6304
-platform 704 6080
-platform 672 5760
-platform 512 5472
-platform 544 4896
-platform 576 5760
-platform 288 5376
-platform 608 6080
-platform 352 4768
-platform 672 4640
-platform 576 4144
-platform 544 4448
-platform 704 4032
-platform 416 4032
-platform 640 4448
-platform 320 4032
-platform 512 4032
-platform 224 4032
-platform 608 4032
-platform 704 3136
-platform 576 3136
-platform 224 3680
-platform 576 3648
-platform 480 3136
-platform 224 3136
-platform 320 3136
-platform 256 2816
-platform 384 2912
-platform 576 2528
-platform 288 2320
-hull2x1 544 1824
-hull2x1 416 1824
-platform 224 1632
-platform 320 1632
-platform 704 1024
-platform 512 576
-platform 416 576
-platform 224 432
-hull3x1 320 288
-hull3x1 416 288
-hull3x1 608 288
-hull3x1 512 288
-hull3x1 704 288
-portal 704 192
-platform 320 14624
-platform 224 14624
-platform 416 14624
-platform 512 14624
-platform 416 14240
-platform 512 14240
-platform 608 14240
-platform 704 14240
-hull1x3 736 13696
-hull2x1 672 13696
-robot 344 14352
-robot 576 15072
-robot 704 13600
-robot 480 14144
-robot 352 13216
-robot 512 12448
-robot 416 9280
-robot 672 8672
-robot 384 9600
-robot 480 7264
-robot 736 7264
-robot 736 6720
-robot 544 7552
-robot 448 7552
-robot 704 5984
-robot 608 4800
-robot 736 3648
-robot 768 1920
-robot 704 3040
-robot 480 1696
-dog 704 1856
-dog 672 2208
-dog 544 3072
-robot 352 3232
-dog 224 3968
-dog 256 4608
-robot 640 3552
-robot 736 7104
-dog 320 6080
-robot 416 3936
-dog 608 10176
-dog 640 9312
-robot 736 10144
-dog 256 11392
-dog 448 11712
-dog 352 12480
-dog 448 13536
-dog 672 14176
-dog 256 14560
-dog 416 7008
-dog 640 14880
-dog 672 15264
-dog 544 14560
-fire 704 13024
-fire 672 13024
-fire 736 13024
-fire 256 10400
-dog 384 8960
-fire 288 10496
-fire 256 10464
-fire 224 10432
-fire 640 13024
-fire 544 9664
-fire 256 10432
-fire 512 9664
-fire 288 10464
-fire 288 10432
-fire 224 10400
-fire 608 7648
-fire 672 7648
-fire 704 7648
-fire 736 7648
-fire 640 7648
-fire 768 7648
-fire 352 7552
-fire 416 5792
-fire 320 7584
-fire 320 7648
-fire 224 4128
-fire 256 4128
-fire 224 4160
-fire 256 4160
-fire 224 3360
-fire 416 2592
-fire 416 2560
-fire 416 2528
-fire 480 2688
-fire 224 2880
-fire 416 2624
-fire 256 2912
-fire 224 2944
-fire 224 2912
-fire 480 1312
-fire 448 2656
-fire 512 1312
-fire 256 2944
-fire 224 2976
-fire 512 1344
-fire 736 10720
-fire 736 10752
-fire 768 10720
-fire 768 10752
-fire 416 640
-fire 480 1344
-fire 320 640
-fire 352 640
-fire 384 640
-fire 224 640
-fire 288 640
-fire 608 640
-fire 640 640
-fire 576 640
-fire 704 640
-fire 672 640
-fire 768 640
-fire 256 640
-fire 384 5792
-fire 352 5792
-fire 736 640
-fire 352 5760
-fire 448 5792
-fire 384 5760
-fire 512 5792
-fire 416 5760
-fire 544 5760
-fire 544 5696
-fire 544 5728
-fire 480 5824
-fire 512 5728
-fire 512 5760
-fire 512 5696
-fire 512 5696
-fire 448 5760
-fire 448 5728
-fire 480 5792
-fire 480 5760
-fire 480 5696
-fire 480 5728
-fire 416 5728
-fire 448 5696
-fire 384 5728
-fire 384 5696
-fire 352 5696
-fire 576 6592
-fire 256 5920
-fire 352 5728
-fire 608 6592
-fire 640 8096
-fire 224 9152
-fire 256 9152
-fire 224 9120
-fire 736 9344
-fire 768 9312
-fire 256 11744
-fire 768 9344
-fire 224 11744
-fire 224 11712
-fire 672 8096
-fire 288 11744
-fire 416 5696
-player 288 15232
+BackgroundRocket sprite 0 0 1024 15360
+hull3x1 sprite 192 15328 96 32
+hull3x1 sprite 288 15328 96 32
+hull3x1 sprite 480 15328 96 32
+hull3x1 sprite 384 15328 96 32
+hull2x1 sprite 768 15328 64 32
+hull3x1 sprite 576 15328 96 32
+hull1x3 sprite 800 15136 32 96
+hull1x3 sprite 800 15040 32 96
+hull1x3 sprite 800 14944 32 96
+hull1x3 sprite 800 14848 32 96
+hull3x1 sprite 672 15328 96 32
+hull1x3 sprite 800 14752 32 96
+hull1x3 sprite 800 14656 32 96
+hull1x3 sprite 800 14560 32 96
+hull1x3 sprite 800 14368 32 96
+hull1x3 sprite 800 14080 32 96
+hull1x3 sprite 800 15232 32 96
+hull1x3 sprite 800 14176 32 96
+hull1x3 sprite 800 13984 32 96
+hull1x3 sprite 800 13888 32 96
+hull1x3 sprite 800 13792 32 96
+hull1x3 sprite 800 13696 32 96
+hull1x3 sprite 800 13600 32 96
+hull1x3 sprite 800 14272 32 96
+hull1x3 sprite 800 14464 32 96
+hull1x3 sprite 800 13312 32 96
+hull1x3 sprite 800 13408 32 96
+hull1x3 sprite 800 13504 32 96
+hull1x3 sprite 800 13120 32 96
+hull1x3 sprite 800 12928 32 96
+hull1x3 sprite 800 13216 32 96
+hull1x3 sprite 800 12832 32 96
+hull1x3 sprite 800 12736 32 96
+hull1x3 sprite 800 12544 32 96
+hull1x3 sprite 800 12640 32 96
+hull1x3 sprite 800 13024 32 96
+hull1x3 sprite 800 12448 32 96
+hull1x3 sprite 800 12160 32 96
+hull1x3 sprite 800 12256 32 96
+hull1x3 sprite 800 11968 32 96
+hull1x3 sprite 800 12064 32 96
+hull1x3 sprite 800 12352 32 96
+hull1x3 sprite 800 11680 32 96
+hull1x3 sprite 800 11872 32 96
+hull1x3 sprite 800 11584 32 96
+hull1x3 sprite 800 11776 32 96
+hull1x3 sprite 800 11392 32 96
+hull1x3 sprite 800 11488 32 96
+hull1x3 sprite 800 11200 32 96
+hull1x3 sprite 800 11008 32 96
+hull1x3 sprite 800 11296 32 96
+hull1x3 sprite 800 10912 32 96
+hull1x3 sprite 800 10816 32 96
+hull1x3 sprite 800 11104 32 96
+hull1x3 sprite 800 10720 32 96
+hull1x3 sprite 800 10528 32 96
+hull1x3 sprite 800 10432 32 96
+hull1x3 sprite 800 10624 32 96
+hull1x3 sprite 800 10144 32 96
+hull1x3 sprite 800 10048 32 96
+hull1x3 sprite 800 10336 32 96
+hull1x3 sprite 800 10240 32 96
+hull1x3 sprite 800 9856 32 96
+hull1x3 sprite 800 9760 32 96
+hull1x3 sprite 800 9952 32 96
+hull1x3 sprite 800 9664 32 96
+hull1x3 sprite 800 9472 32 96
+hull1x3 sprite 800 9376 32 96
+hull1x3 sprite 800 9568 32 96
+hull1x3 sprite 800 9184 32 96
+hull1x3 sprite 800 9088 32 96
+hull1x3 sprite 800 9280 32 96
+hull1x3 sprite 800 8800 32 96
+hull1x3 sprite 800 8992 32 96
+hull1x3 sprite 800 8608 32 96
+hull1x3 sprite 800 8896 32 96
+hull1x3 sprite 800 8416 32 96
+hull1x3 sprite 800 8320 32 96
+hull1x3 sprite 800 8512 32 96
+hull1x3 sprite 800 8704 32 96
+hull1x3 sprite 800 8032 32 96
+hull1x3 sprite 800 8128 32 96
+hull1x3 sprite 800 7840 32 96
+hull1x3 sprite 800 7744 32 96
+hull1x3 sprite 800 7936 32 96
+hull1x3 sprite 800 7648 32 96
+hull1x3 sprite 800 8224 32 96
+hull1x3 sprite 800 7360 32 96
+hull1x3 sprite 800 7552 32 96
+hull1x3 sprite 800 7456 32 96
+hull1x3 sprite 800 7072 32 96
+hull1x3 sprite 800 6976 32 96
+hull1x3 sprite 800 7264 32 96
+hull1x3 sprite 800 6784 32 96
+hull1x3 sprite 800 6880 32 96
+hull1x3 sprite 800 6592 32 96
+hull1x3 sprite 800 7168 32 96
+hull1x3 sprite 800 6400 32 96
+hull1x3 sprite 800 6496 32 96
+hull1x3 sprite 800 6688 32 96
+hull1x3 sprite 800 6208 32 96
+hull1x3 sprite 800 6112 32 96
+hull1x3 sprite 800 6304 32 96
+hull1x3 sprite 800 5824 32 96
+hull1x3 sprite 800 5728 32 96
+hull1x3 sprite 800 6016 32 96
+hull1x3 sprite 800 5632 32 96
+hull1x3 sprite 800 5920 32 96
+hull1x3 sprite 800 5536 32 96
+hull1x3 sprite 800 5440 32 96
+hull1x3 sprite 800 5152 32 96
+hull1x3 sprite 800 5344 32 96
+hull1x3 sprite 800 4960 32 96
+hull1x3 sprite 800 4864 32 96
+hull1x3 sprite 800 5248 32 96
+hull1x3 sprite 800 5056 32 96
+hull1x3 sprite 800 4672 32 96
+hull1x3 sprite 800 4768 32 96
+hull1x3 sprite 800 4576 32 96
+hull1x3 sprite 800 4384 32 96
+hull1x3 sprite 800 4288 32 96
+hull1x3 sprite 800 4192 32 96
+hull1x3 sprite 800 4480 32 96
+hull1x3 sprite 800 4096 32 96
+hull1x3 sprite 800 3904 32 96
+hull1x3 sprite 800 3712 32 96
+hull1x3 sprite 800 3808 32 96
+hull1x3 sprite 800 3616 32 96
+hull1x3 sprite 800 3520 32 96
+hull1x3 sprite 800 4000 32 96
+hull1x3 sprite 800 3328 32 96
+hull1x3 sprite 800 3424 32 96
+hull1x3 sprite 800 3136 32 96
+hull1x3 sprite 800 3232 32 96
+hull1x3 sprite 800 2944 32 96
+hull1x3 sprite 800 2656 32 96
+hull1x3 sprite 800 2752 32 96
+hull1x3 sprite 800 2848 32 96
+hull1x3 sprite 800 2560 32 96
+hull1x3 sprite 800 3040 32 96
+hull1x3 sprite 800 2464 32 96
+hull1x3 sprite 800 2272 32 96
+hull1x3 sprite 800 2368 32 96
+hull1x3 sprite 800 2176 32 96
+hull1x3 sprite 800 1984 32 96
+hull1x3 sprite 800 2080 32 96
+hull1x3 sprite 800 1696 32 96
+hull1x3 sprite 800 1888 32 96
+hull1x3 sprite 800 1792 32 96
+hull1x3 sprite 800 1504 32 96
+hull1x3 sprite 800 1600 32 96
+hull1x3 sprite 800 1408 32 96
+hull1x3 sprite 800 1120 32 96
+hull1x3 sprite 800 928 32 96
+hull1x3 sprite 800 1024 32 96
+hull1x3 sprite 800 832 32 96
+hull1x3 sprite 800 1312 32 96
+hull1x3 sprite 800 736 32 96
+hull1x3 sprite 800 1216 32 96
+hull1x3 sprite 800 448 32 96
+hull1x3 sprite 800 640 32 96
+hull1x3 sprite 800 256 32 96
+hull1x3 sprite 800 544 32 96
+hull1x3 sprite 800 352 32 96
+hull1x2 sprite 800 0 32 64
+hull1x3 sprite 800 160 32 96
+hull1x3 sprite 192 15040 32 96
+hull1x3 sprite 800 64 32 96
+hull1x3 sprite 192 15232 32 96
+hull1x3 sprite 192 14848 32 96
+hull1x3 sprite 192 14944 32 96
+hull1x3 sprite 192 14752 32 96
+hull1x3 sprite 192 15136 32 96
+hull1x3 sprite 192 14464 32 96
+hull1x3 sprite 192 14656 32 96
+hull1x3 sprite 192 14368 32 96
+hull1x3 sprite 192 14560 32 96
+hull1x3 sprite 192 14176 32 96
+hull1x3 sprite 192 13984 32 96
+hull1x3 sprite 192 14272 32 96
+hull1x3 sprite 192 13888 32 96
+hull1x3 sprite 192 13696 32 96
+hull1x3 sprite 192 13792 32 96
+hull1x3 sprite 192 14080 32 96
+hull1x3 sprite 192 13408 32 96
+hull1x3 sprite 192 13504 32 96
+hull1x3 sprite 192 13600 32 96
+hull1x3 sprite 192 13120 32 96
+hull1x3 sprite 192 13216 32 96
+hull1x3 sprite 192 13024 32 96
+hull1x3 sprite 192 12928 32 96
+hull1x3 sprite 192 12736 32 96
+hull1x3 sprite 192 13312 32 96
+hull1x3 sprite 192 12640 32 96
+hull1x3 sprite 192 12832 32 96
+hull1x3 sprite 192 12448 32 96
+hull1x3 sprite 192 12544 32 96
+hull1x3 sprite 192 12256 32 96
+hull1x3 sprite 192 12352 32 96
+hull1x3 sprite 192 11968 32 96
+hull1x3 sprite 192 12160 32 96
+hull1x3 sprite 192 11872 32 96
+hull1x3 sprite 192 11680 32 96
+hull1x3 sprite 192 11776 32 96
+hull1x3 sprite 192 11584 32 96
+hull1x3 sprite 192 11392 32 96
+hull1x3 sprite 192 11488 32 96
+hull1x3 sprite 192 12064 32 96
+hull1x3 sprite 192 11104 32 96
+hull1x3 sprite 192 11200 32 96
+hull1x3 sprite 192 11296 32 96
+hull1x3 sprite 192 10912 32 96
+hull1x3 sprite 192 10816 32 96
+hull1x3 sprite 192 11008 32 96
+hull1x3 sprite 192 10528 32 96
+hull1x3 sprite 192 10720 32 96
+hull1x3 sprite 192 10624 32 96
+hull1x3 sprite 192 10336 32 96
+hull1x3 sprite 192 10240 32 96
+hull1x3 sprite 192 10432 32 96
+hull1x3 sprite 192 10048 32 96
+hull1x3 sprite 192 9952 32 96
+hull1x3 sprite 192 10144 32 96
+hull1x3 sprite 192 9760 32 96
+hull1x3 sprite 192 9664 32 96
+hull1x3 sprite 192 9472 32 96
+hull1x3 sprite 192 9856 32 96
+hull1x3 sprite 192 9568 32 96
+hull1x3 sprite 192 9376 32 96
+hull1x3 sprite 192 9184 32 96
+hull1x3 sprite 192 9088 32 96
+hull1x3 sprite 192 8896 32 96
+hull1x3 sprite 192 8704 32 96
+hull1x3 sprite 192 8800 32 96
+hull1x3 sprite 192 8512 32 96
+hull1x3 sprite 192 8992 32 96
+hull1x3 sprite 192 9280 32 96
+hull1x3 sprite 192 8320 32 96
+hull1x3 sprite 192 8416 32 96
+hull1x3 sprite 192 8608 32 96
+hull1x3 sprite 192 8032 32 96
+hull1x3 sprite 192 8224 32 96
+hull1x3 sprite 192 7936 32 96
+hull1x3 sprite 192 7840 32 96
+hull1x3 sprite 192 8128 32 96
+hull1x3 sprite 192 7744 32 96
+hull1x3 sprite 192 7648 32 96
+hull1x3 sprite 192 7456 32 96
+hull1x3 sprite 192 7264 32 96
+hull1x3 sprite 192 7552 32 96
+hull1x3 sprite 192 7360 32 96
+hull1x3 sprite 192 6976 32 96
+hull1x3 sprite 192 6784 32 96
+hull1x3 sprite 192 6880 32 96
+hull1x3 sprite 192 7168 32 96
+hull1x3 sprite 192 6592 32 96
+hull1x3 sprite 192 7072 32 96
+hull1x3 sprite 192 6688 32 96
+hull1x3 sprite 192 6304 32 96
+hull1x3 sprite 192 6208 32 96
+hull1x3 sprite 192 6112 32 96
+hull1x3 sprite 192 6016 32 96
+hull1x3 sprite 192 6400 32 96
+hull1x3 sprite 192 5824 32 96
+hull1x3 sprite 192 5920 32 96
+hull1x3 sprite 192 5728 32 96
+hull1x3 sprite 192 5536 32 96
+hull1x3 sprite 192 6496 32 96
+hull1x3 sprite 192 5248 32 96
+hull1x3 sprite 192 5440 32 96
+hull1x3 sprite 192 5344 32 96
+hull1x3 sprite 192 5152 32 96
+hull1x3 sprite 192 5056 32 96
+hull1x3 sprite 192 5632 32 96
+hull1x3 sprite 192 4768 32 96
+hull1x3 sprite 192 4960 32 96
+hull1x3 sprite 192 4864 32 96
+hull1x3 sprite 192 4576 32 96
+hull1x3 sprite 192 4384 32 96
+hull1x3 sprite 192 4288 32 96
+hull1x3 sprite 192 4672 32 96
+hull1x3 sprite 192 4480 32 96
+hull1x3 sprite 192 4000 32 96
+hull1x3 sprite 192 4096 32 96
+hull1x3 sprite 192 4192 32 96
+hull1x3 sprite 192 3808 32 96
+hull1x3 sprite 192 3904 32 96
+hull1x3 sprite 192 3424 32 96
+hull1x3 sprite 192 3520 32 96
+hull1x3 sprite 192 3328 32 96
+hull1x3 sprite 192 3616 32 96
+hull1x3 sprite 192 3712 32 96
+hull1x3 sprite 192 3232 32 96
+hull1x3 sprite 192 3040 32 96
+hull1x3 sprite 192 2944 32 96
+hull1x3 sprite 192 3136 32 96
+hull1x3 sprite 192 2656 32 96
+hull1x3 sprite 192 2560 32 96
+hull1x3 sprite 192 2752 32 96
+hull1x3 sprite 192 2464 32 96
+hull1x3 sprite 192 2848 32 96
+hull1x3 sprite 192 2368 32 96
+hull1x3 sprite 192 2080 32 96
+hull1x3 sprite 192 1984 32 96
+hull1x3 sprite 192 2176 32 96
+hull1x3 sprite 192 1888 32 96
+hull1x3 sprite 192 1696 32 96
+hull1x3 sprite 192 2272 32 96
+hull1x3 sprite 192 1600 32 96
+hull1x3 sprite 192 1408 32 96
+hull1x3 sprite 192 1504 32 96
+hull1x3 sprite 192 1312 32 96
+hull1x3 sprite 192 1216 32 96
+hull1x3 sprite 192 1120 32 96
+hull1x3 sprite 192 1792 32 96
+hull1x3 sprite 192 928 32 96
+hull1x3 sprite 192 1024 32 96
+hull1x3 sprite 192 640 32 96
+hull1x3 sprite 192 832 32 96
+hull1x3 sprite 192 736 32 96
+hull1x3 sprite 192 448 32 96
+hull1x3 sprite 192 352 32 96
+hull1x3 sprite 192 160 32 96
+hull1x3 sprite 192 544 32 96
+hull1x2 sprite 192 0 32 64
+hull1x3 sprite 192 256 32 96
+hull3x1 sprite 320 0 96 32
+hull3x1 sprite 224 0 96 32
+hull3x1 sprite 416 0 96 32
+hull3x1 sprite 608 0 96 32
+hull1x3 sprite 192 64 32 96
+hull3x1 sprite 512 0 96 32
+hull3x1 sprite 512 15168 96 32
+hull3x1 sprite 608 15168 96 32
+hull3x1 sprite 704 0 96 32
+hull3x1 sprite 704 15104 96 32
+hull3x1 sprite 640 14944 96 32
+hull3x1 sprite 704 15168 96 32
+hull3x1 sprite 224 15136 96 32
+hull3x1 sprite 416 14080 96 32
+hull3x1 sprite 544 14944 96 32
+hull3x1 sprite 512 14080 96 32
+hull3x1 sprite 224 13600 96 32
+hull3x1 sprite 576 13952 96 32
+hull3x1 sprite 704 15136 96 32
+hull3x1 sprite 384 13312 96 32
+hull3x1 sprite 608 13312 96 32
+hull3x1 sprite 704 13280 96 32
+hull3x1 sprite 704 13312 96 32
+hull3x1 sprite 352 13152 96 32
+hull3x1 sprite 704 13248 96 32
+hull3x1 sprite 224 12544 96 32
+hull3x1 sprite 416 12544 96 32
+hull3x1 sprite 320 12544 96 32
+hull3x1 sprite 512 12544 96 32
+hull3x1 sprite 288 13312 96 32
+hull3x1 sprite 288 13056 96 32
+hull3x1 sprite 704 12416 96 32
+hull3x1 sprite 512 12416 96 32
+hull3x1 sprite 608 12544 96 32
+hull3x1 sprite 416 12416 96 32
+hull3x1 sprite 608 12416 96 32
+hull3x1 sprite 480 11776 96 32
+hull3x1 sprite 384 11776 96 32
+hull3x1 sprite 224 11456 96 32
+hull3x1 sprite 288 11776 96 32
+hull3x1 sprite 640 10912 96 32
+hull3x1 sprite 544 10912 96 32
+hull3x1 sprite 448 9376 96 32
+hull3x1 sprite 320 12416 96 32
+hull3x1 sprite 544 9376 96 32
+hull3x1 sprite 352 9376 96 32
+hull3x1 sprite 640 9376 96 32
+hull3x1 sprite 640 8480 96 32
+hull3x1 sprite 352 9696 96 32
+hull3x1 sprite 352 8768 96 32
+hull3x1 sprite 640 8768 96 32
+hull3x1 sprite 384 8320 96 32
+hull3x1 sprite 640 8128 96 32
+hull3x1 sprite 544 8320 96 32
+hull3x1 sprite 416 7968 96 32
+hull3x1 sprite 448 6400 96 32
+hull3x1 sprite 384 7072 96 32
+hull3x1 sprite 352 6400 96 32
+hull3x1 sprite 288 6144 96 32
+hull3x1 sprite 384 6144 96 32
+hull3x1 sprite 224 5952 96 32
+hull3x1 sprite 288 5984 96 32
+hull3x1 sprite 704 8096 96 32
+hull3x1 sprite 320 5664 96 32
+hull3x1 sprite 224 6016 96 32
+hull3x1 sprite 416 5664 96 32
+hull3x1 sprite 320 5824 96 32
+hull3x1 sprite 512 5664 96 32
+hull3x1 sprite 384 4576 96 32
+hull3x1 sprite 320 4512 96 32
+hull3x1 sprite 416 4608 96 32
+hull3x1 sprite 288 4480 96 32
+hull3x1 sprite 256 4448 96 32
+hull3x1 sprite 224 4416 96 32
+hull3x1 sprite 704 3744 96 32
+hull3x1 sprite 320 3872 96 32
+hull3x1 sprite 320 3904 96 32
+hull3x1 sprite 320 3840 96 32
+hull3x1 sprite 224 3904 96 32
+hull3x1 sprite 320 3424 96 32
+hull3x1 sprite 416 3424 96 32
+hull3x1 sprite 224 3424 96 32
+hull3x1 sprite 320 3584 96 32
+hull3x1 sprite 704 3872 96 32
+hull3x1 sprite 352 4544 96 32
+hull3x1 sprite 608 3328 96 32
+hull3x1 sprite 480 3392 96 32
+hull3x1 sprite 224 2176 96 32
+hull3x1 sprite 544 3360 96 32
+hull3x1 sprite 608 2272 96 32
+hull3x1 sprite 416 2112 96 32
+hull3x1 sprite 512 2112 96 32
+hull2x1 sprite 224 15104 64 32
+hull3x1 sprite 704 2272 96 32
+hull2x1 sprite 384 15008 64 32
+hull2x1 sprite 640 15136 64 32
+hull2x1 sprite 224 14176 64 32
+hull3x1 sprite 480 800 96 32
+hull2x1 sprite 448 13600 64 32
+hull2x1 sprite 608 14080 64 32
+hull2x1 sprite 224 11776 64 32
+hull2x1 sprite 224 13056 64 32
+hull2x1 sprite 448 11616 64 32
+hull2x1 sprite 512 11616 64 32
+hull2x1 sprite 736 13888 64 32
+hull2x1 sprite 224 9952 64 32
+hull2x1 sprite 288 11104 64 32
+hull2x1 sprite 576 9184 64 32
+hull2x1 sprite 416 9184 64 32
+hull2x1 sprite 736 9184 64 32
+hull2x1 sprite 224 9184 64 32
+hull2x1 sprite 736 9376 64 32
+hull2x1 sprite 512 8768 64 32
+hull2x1 sprite 512 8480 64 32
+hull2x1 sprite 224 6144 64 32
+hull2x1 sprite 384 8480 64 32
+hull2x1 sprite 320 5952 64 32
+hull2x1 sprite 416 5824 64 32
+hull2x1 sprite 224 5984 64 32
+hull2x1 sprite 480 5152 64 32
+hull2x1 sprite 320 6016 64 32
+hull2x1 sprite 288 9184 64 32
+hull2x1 sprite 736 4320 64 32
+hull2x1 sprite 512 4256 64 32
+hull2x1 sprite 640 3008 64 32
+hull2x1 sprite 576 2848 64 32
+hull2x1 sprite 640 3744 64 32
+hull2x1 sprite 512 2528 64 32
+hull2x1 sprite 704 2688 64 32
+hull2x1 sprite 640 3872 64 32
+hull2x1 sprite 416 1472 64 32
+hull2x1 sprite 480 2144 64 32
+hull2x1 sprite 416 1056 64 32
+hull2x1 sprite 512 1216 64 32
+hull2x1 sprite 384 2464 64 32
+hull1x3 sprite 768 14016 32 96
+hull1x3 sprite 640 13984 32 96
+hull1x3 sprite 288 13504 32 96
+hull1x3 sprite 288 13408 32 96
+hull1x3 sprite 448 10752 32 96
+hull1x3 sprite 736 13792 32 96
+hull1x3 sprite 768 13920 32 96
+hull1x3 sprite 416 10656 32 96
+hull1x3 sprite 416 10560 32 96
+hull1x3 sprite 448 10560 32 96
+hull1x3 sprite 416 10752 32 96
+hull1x3 sprite 448 10656 32 96
+hull1x3 sprite 416 9888 32 96
+hull1x3 sprite 416 9792 32 96
+hull1x3 sprite 384 9888 32 96
+hull1x3 sprite 384 9792 32 96
+hull1x3 sprite 384 9984 32 96
+hull1x3 sprite 672 9920 32 96
+hull1x3 sprite 640 9920 32 96
+hull1x3 sprite 672 9824 32 96
+hull1x3 sprite 416 9984 32 96
+hull1x3 sprite 672 9728 32 96
+hull1x3 sprite 640 9824 32 96
+hull1x3 sprite 288 8608 32 96
+hull1x3 sprite 288 8704 32 96
+hull1x3 sprite 640 9728 32 96
+hull1x3 sprite 320 7360 32 96
+hull1x3 sprite 288 8512 32 96
+hull1x3 sprite 320 7168 32 96
+hull1x3 sprite 320 7264 32 96
+hull1x3 sprite 320 7456 32 96
+hull1x3 sprite 320 6976 32 96
+hull1x3 sprite 224 6048 32 96
+hull1x3 sprite 320 7072 32 96
+hull1x3 sprite 448 6048 32 96
+hull1x3 sprite 320 6784 32 96
+hull1x3 sprite 320 6688 32 96
+hull1x3 sprite 448 5952 32 96
+hull1x3 sprite 448 5856 32 96
+hull1x3 sprite 320 6880 32 96
+hull1x3 sprite 224 5760 32 96
+hull1x3 sprite 224 5856 32 96
+hull1x3 sprite 352 3744 32 96
+hull1x3 sprite 352 1984 32 96
+hull1x3 sprite 640 1984 32 96
+hull1x3 sprite 352 1888 32 96
+hull1x2 sprite 608 1856 32 64
+hull1x3 sprite 640 1888 32 96
+hull1x2 sprite 608 2048 32 64
+hull1x3 sprite 224 5664 32 96
+hull1x2 sprite 320 1952 32 64
+hull1x2 sprite 384 1856 32 64
+hull1x2 sprite 384 2048 32 64
+hull1x2 sprite 672 1952 32 64
+hull1x2 sprite 352 3680 32 64
+hull1x2 sprite 320 5760 32 64
+hull1x2 sprite 320 5696 32 64
+hull1x2 sprite 608 6624 32 64
+hull1x2 sprite 576 5696 32 64
+hull1x2 sprite 608 8032 32 64
+hull1x2 sprite 608 8096 32 64
+hull1x2 sprite 608 7968 32 64
+hull1x2 sprite 416 9728 32 64
+hull1x2 sprite 352 3616 32 64
+hull1x2 sprite 576 6624 32 64
+hull1x2 sprite 288 8128 32 64
+hull1x2 sprite 704 9856 32 64
+hull1x2 sprite 768 10016 32 64
+hull1x2 sprite 288 10368 32 64
+hull1x2 sprite 320 10368 32 64
+hull1x2 sprite 384 9728 32 64
+hull1x2 sprite 352 13088 32 64
+hull1x2 sprite 416 14176 32 64
+platform sprite 288 14880 96 16
+hull1x2 sprite 416 14112 32 64
+platform sprite 704 14784 96 16
+hull1x2 sprite 288 13344 32 64
+platform sprite 264 14448 96 16
+platform sprite 680 14016 96 16
+platform sprite 224 13792 96 16
+platform sprite 320 13600 96 16
+platform sprite 320 13792 96 16
+platform sprite 352 14448 96 16
+platform sprite 544 13184 96 16
+platform sprite 672 12784 96 16
+platform sprite 704 12992 96 16
+platform sprite 224 12160 96 16
+platform sprite 544 12272 96 16
+platform sprite 648 12096 96 16
+platform sprite 416 12096 96 16
+platform sprite 352 12880 96 16
+platform sprite 576 11920 96 16
+hull1x2 sprite 544 11712 32 64
+platform sprite 576 11760 96 16
+hull1x2 sprite 544 11648 32 64
+platform sprite 576 11296 96 16
+platform sprite 384 11296 96 16
+platform sprite 544 10720 96 16
+platform sprite 432 11088 96 16
+platform sprite 480 11296 96 16
+platform sprite 224 10816 96 16
+platform sprite 640 10720 96 16
+platform sprite 576 10240 96 16
+platform sprite 416 10240 96 16
+hull3x1 sprite 320 10816 96 32
+platform sprite 672 10240 96 16
+platform sprite 384 9024 96 16
+platform sprite 288 9024 96 16
+platform sprite 704 8928 96 16
+platform sprite 224 9696 96 16
+platform sprite 480 7648 96 16
+platform sprite 384 7872 96 16
+platform sprite 288 7872 96 16
+platform sprite 512 7760 96 16
+platform sprite 224 7552 96 16
+platform sprite 512 7360 96 16
+platform sprite 608 7360 96 16
+platform sprite 416 7360 96 16
+platform sprite 704 7200 96 16
+platform sprite 704 7360 96 16
+platform sprite 448 6912 96 16
+platform sprite 384 7648 96 16
+platform sprite 352 6912 96 16
+platform sprite 224 7264 96 16
+platform sprite 544 6912 96 16
+platform sprite 424 6688 96 16
+platform sprite 544 6304 96 16
+platform sprite 224 6928 96 16
+platform sprite 264 6528 96 16
+platform sprite 608 6080 96 16
+platform sprite 576 5904 96 16
+platform sprite 704 6080 96 16
+platform sprite 672 5760 96 16
+platform sprite 576 5760 96 16
+platform sprite 512 5472 96 16
+platform sprite 288 5376 96 16
+platform sprite 352 4768 96 16
+platform sprite 672 4640 96 16
+platform sprite 544 4896 96 16
+platform sprite 640 4448 96 16
+platform sprite 640 6304 96 16
+platform sprite 704 4032 96 16
+platform sprite 576 4144 96 16
+platform sprite 544 4448 96 16
+platform sprite 512 4032 96 16
+platform sprite 608 4032 96 16
+platform sprite 320 4032 96 16
+platform sprite 224 4032 96 16
+platform sprite 576 3648 96 16
+platform sprite 416 4032 96 16
+platform sprite 224 3680 96 16
+platform sprite 320 3136 96 16
+platform sprite 480 3136 96 16
+platform sprite 704 3136 96 16
+platform sprite 576 3136 96 16
+platform sprite 288 2320 96 16
+platform sprite 224 3136 96 16
+platform sprite 384 2912 96 16
+platform sprite 256 2816 96 16
+platform sprite 576 2528 96 16
+hull2x1 sprite 416 1824 64 32
+platform sprite 704 1024 96 16
+platform sprite 320 1632 96 16
+hull2x1 sprite 544 1824 64 32
+platform sprite 224 1632 96 16
+hull3x1 sprite 416 288 96 32
+platform sprite 416 576 96 16
+platform sprite 224 432 96 16
+hull3x1 sprite 320 288 96 32
+platform sprite 512 576 96 16
+hull3x1 sprite 608 288 96 32
+platform sprite 224 14624 96 16
+hull3x1 sprite 704 288 96 32
+platform sprite 320 14624 96 16
+platform sprite 416 14624 96 16
+hull3x1 sprite 512 288 96 32
+platform sprite 512 14624 96 16
+portal sprite 704 192 64 96
+platform sprite 416 14240 96 16
+platform sprite 704 14240 96 16
+hull1x3 sprite 736 13696 32 96
+platform sprite 608 14240 96 16
+hull2x1 sprite 672 13696 64 32
+platform sprite 512 14240 96 16
+robot sprite 480 14144 32 96
+robot sprite 704 13600 32 96
+robot sprite 576 15072 32 96
+robot sprite 512 12448 32 96
+robot sprite 344 14352 32 96
+robot sprite 352 13216 32 96
+robot sprite 384 9600 32 96
+robot sprite 672 8672 32 96
+robot sprite 544 7552 32 96
+robot sprite 448 7552 32 96
+robot sprite 736 7264 32 96
+robot sprite 480 7264 32 96
+robot sprite 736 7104 32 96
+robot sprite 704 5984 32 96
+robot sprite 736 6720 32 96
+robot sprite 608 4800 32 96
+robot sprite 736 3648 32 96
+robot sprite 416 3936 32 96
+robot sprite 704 3040 32 96
+robot sprite 416 9280 32 96
+dog sprite 704 1856 64 64
+robot sprite 768 1920 32 96
+robot sprite 480 1696 32 96
+robot sprite 640 3552 32 96
+dog sprite 672 2208 64 64
+robot sprite 352 3232 32 96
+dog sprite 544 3072 64 64
+dog sprite 320 6080 64 64
+dog sprite 256 4608 64 64
+dog sprite 384 8960 64 64
+robot sprite 736 10144 32 96
+dog sprite 416 7008 64 64
+dog sprite 608 10176 64 64
+dog sprite 224 3968 64 64
+dog sprite 256 11392 64 64
+dog sprite 448 11712 64 64
+dog sprite 640 9312 64 64
+dog sprite 448 13536 64 64
+dog sprite 352 12480 64 64
+dog sprite 672 14176 64 64
+dog sprite 256 14560 64 64
+dog sprite 544 14560 64 64
+dog sprite 672 15264 64 64
+fire sprite 640 13024 32 32
+fire sprite 672 13024 32 32
+dog sprite 640 14880 64 64
+fire sprite 704 13024 32 32
+fire sprite 736 13024 32 32
+fire sprite 288 10496 32 32
+fire sprite 256 10464 32 32
+fire sprite 544 9664 32 32
+fire sprite 256 10400 32 32
+fire sprite 512 9664 32 32
+fire sprite 256 10432 32 32
+fire sprite 224 10432 32 32
+fire sprite 224 10400 32 32
+fire sprite 608 7648 32 32
+fire sprite 288 10464 32 32
+fire sprite 640 7648 32 32
+fire sprite 672 7648 32 32
+fire sprite 736 7648 32 32
+fire sprite 288 10432 32 32
+fire sprite 704 7648 32 32
+fire sprite 352 7552 32 32
+fire sprite 320 7648 32 32
+fire sprite 768 7648 32 32
+fire sprite 320 7584 32 32
+fire sprite 416 5792 32 32
+fire sprite 224 4128 32 32
+fire sprite 256 4128 32 32
+fire sprite 256 4160 32 32
+fire sprite 224 3360 32 32
+fire sprite 416 2528 32 32
+fire sprite 416 2560 32 32
+fire sprite 224 4160 32 32
+fire sprite 416 2624 32 32
+fire sprite 448 2656 32 32
+fire sprite 224 2880 32 32
+fire sprite 416 2592 32 32
+fire sprite 256 2912 32 32
+fire sprite 480 2688 32 32
+fire sprite 256 2944 32 32
+fire sprite 224 2944 32 32
+fire sprite 224 2976 32 32
+fire sprite 480 1312 32 32
+fire sprite 512 1344 32 32
+fire sprite 512 1312 32 32
+fire sprite 736 10720 32 32
+fire sprite 480 1344 32 32
+fire sprite 224 2912 32 32
+fire sprite 736 10752 32 32
+fire sprite 768 10752 32 32
+fire sprite 768 10720 32 32
+fire sprite 352 640 32 32
+fire sprite 384 640 32 32
+fire sprite 320 640 32 32
+fire sprite 288 640 32 32
+fire sprite 416 640 32 32
+fire sprite 256 640 32 32
+fire sprite 224 640 32 32
+fire sprite 640 640 32 32
+fire sprite 608 640 32 32
+fire sprite 576 640 32 32
+fire sprite 672 640 32 32
+fire sprite 704 640 32 32
+fire sprite 352 5792 32 32
+fire sprite 736 640 32 32
+fire sprite 768 640 32 32
+fire sprite 384 5792 32 32
+fire sprite 384 5760 32 32
+fire sprite 416 5760 32 32
+fire sprite 352 5760 32 32
+fire sprite 448 5792 32 32
+fire sprite 480 5824 32 32
+fire sprite 544 5760 32 32
+fire sprite 544 5696 32 32
+fire sprite 544 5728 32 32
+fire sprite 512 5696 32 32
+fire sprite 512 5696 32 32
+fire sprite 512 5728 32 32
+fire sprite 512 5760 32 32
+fire sprite 512 5792 32 32
+fire sprite 480 5760 32 32
+fire sprite 480 5792 32 32
+fire sprite 448 5728 32 32
+fire sprite 480 5728 32 32
+fire sprite 448 5760 32 32
+fire sprite 480 5696 32 32
+fire sprite 416 5728 32 32
+fire sprite 448 5696 32 32
+fire sprite 384 5728 32 32
+fire sprite 416 5696 32 32
+fire sprite 352 5696 32 32
+fire sprite 352 5728 32 32
+fire sprite 384 5696 32 32
+fire sprite 576 6592 32 32
+fire sprite 256 5920 32 32
+fire sprite 640 8096 32 32
+fire sprite 608 6592 32 32
+fire sprite 672 8096 32 32
+fire sprite 224 9152 32 32
+fire sprite 224 9120 32 32
+fire sprite 256 9152 32 32
+fire sprite 768 9312 32 32
+fire sprite 736 9344 32 32
+fire sprite 768 9344 32 32
+fire sprite 224 11744 32 32
+fire sprite 256 11744 32 32
+fire sprite 288 11744 32 32
+fire sprite 224 11712 32 32
+player sprite 288 15232 32 96
