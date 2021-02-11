@@ -67,7 +67,7 @@ public class GameRunner
                     }
                }
 
-               if(player.collides(level.enemies) != null)
+               /*if(player.collides(level.enemies) != null)
                {
                     if(System.currentTimeMillis() - lastHitTime > 500)
                     {
@@ -83,7 +83,7 @@ public class GameRunner
                               return 0;
                          }
                     }
-               }
+               }*/
                GameObject playerCollides = player.collides(objectsInView);
                if(playerCollides != null && playerCollides.getType().equals("portal"))
                {

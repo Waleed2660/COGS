@@ -119,7 +119,7 @@ public class Player extends GameObject
                         speedY = (a.getHitBox().top-(this.getPosition().y+this.getLocalBounds().height))*-1;
                     }
                     //if collides above
-                    else if(a.getHitBox().top+a.getHitBox().height <= this.getPosition().y && !(a instanceof Platform))
+                    else if(a.getHitBox().top+a.getHitBox().height <= this.getPosition().y && !a.getType().equals("platform"))
                     {
                         speedY = this.getPosition().y-(a.getHitBox().top+a.getHitBox().height);
                     }
@@ -129,15 +129,19 @@ public class Player extends GameObject
                 {
                     diagCheck = false;
                     //if collides on the right
-                    if(a.getHitBox().left >= this.getPosition().x+this.getLocalBounds().width && !(a instanceof Platform))
+                    if(!a.getType().equals("platform"))
                     {
-                        speedX = a.getHitBox().left-(this.getPosition().x+this.getLocalBounds().width);
+                        if(a.getHitBox().left >= this.getPosition().x+this.getLocalBounds().width)
+                        {
+                            speedX = a.getHitBox().left-(this.getPosition().x+this.getLocalBounds().width);
+                        }
+                        //if collides on the left
+                        else if(a.getHitBox().left+a.getHitBox().width <= this.getPosition().x)
+                        {
+                            speedX = this.getPosition().x-(a.getHitBox().left+a.getHitBox().width);
+                        }
                     }
-                    //if collides on the left
-                    else if(a.getHitBox().left+a.getHitBox().width <= this.getPosition().x && !(a instanceof Platform))
-                    {
-                        speedX = this.getPosition().x-(a.getHitBox().left+a.getHitBox().width);
-                    }
+
                 }
                 //If in air for collision diaganolly. Temporary fix to bug
                 if(diagCheck)
@@ -149,7 +153,6 @@ public class Player extends GameObject
                     }
                 }
             }
-
         }
 
         if(diagCheck)

@@ -16,9 +16,7 @@ public class Level
   //Arrays for different objects. could be usseful in the future but not right now
   public ArrayList<GameObject> background = new ArrayList<GameObject>();
   public ArrayList<Enemy> enemies = new ArrayList<Enemy>(); //had to change to public so i could access in GameRunner  for collsion damage detection
-  private ArrayList<Platform> platforms = new ArrayList<Platform>();
   private Player player;
-  private GameObject portal;
   private FloatRect playArea;
 
   private final float gravity;
@@ -87,12 +85,6 @@ public class Level
           Enemy temp = new Enemy(x, y, filePath.concat("assets/").concat(name).concat(".png/"), 2);
           enemies.add(temp);
         }
-        else if(name.contains("platform"))
-        {
-          Platform temp = new Platform(x, y, filePath.concat("assets/").concat(name).concat(".png/"));
-          platforms.add(temp);
-          objectList.add(temp);
-        }
         else
         {
           if(type.contains("hitbox"))
@@ -100,7 +92,7 @@ public class Level
             objectList.add(new GameObject(x, y, width, height, name));
           }
           else{
-            objectList.add(new GameObject(x, y, filePath.concat("assets/").concat(name).concat(".png/"), null));
+            objectList.add(new GameObject(x, y, filePath.concat("assets/").concat(name).concat(".png/"), name, null));
           }
         }
       }
