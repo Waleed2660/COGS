@@ -57,7 +57,7 @@ public class GameObject extends Sprite
         setHitBoxToTexture();
     }
 
-        /**
+    /**
      * Constructor for a game object with a texture also sets the texture.
      * 
      * @param x position
@@ -108,11 +108,12 @@ public class GameObject extends Sprite
      * @param y position
      * @param width
      * @param height
+     * @param type the type of object
      */
-    public GameObject(float x, float y, float width, float height)
+    public GameObject(float x, float y, float width, float height, String type)
     {
         super();
-        
+        this.type = type;
         this.setPosition(x, y);
         setCustomHitBox(x, y, width, height);
     }
@@ -181,10 +182,11 @@ public class GameObject extends Sprite
     }
 
     /**
-     * A collision detection method that checks if the current object collides with any in the given list and returns the one it collides with.
+     * A collision detection method that checks if the current object collides with any in the given list if the Objects in the list extend the
+     * GameObject class.
      * 
      * @param listToDetect objects to check for collision with
-     * @return null - doesnt collide with anything, GameObject - the object it collides with
+     * @return null - doesnt collide with anything or objects dont extend GameObject, GameObject - the object it collides with
      */
     public GameObject collides(ArrayList<?> listToDetect)
     {

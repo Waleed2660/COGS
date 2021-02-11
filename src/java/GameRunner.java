@@ -186,7 +186,7 @@ public class GameRunner
                     GameObject bulletHit = bullets.get(x).collides(result);
                     if (!bullets.get(x).bulletInSight(window) || bulletHit != null) {
 
-                         if(bulletHit != null && bulletHit.getClass() == Enemy.class)
+                         if(bulletHit != null && bulletHit instanceof Enemy)
                          {
                               if(((Enemy)bulletHit).dmghp() <= 0)
                               {
