@@ -65,7 +65,7 @@ public class Player extends GameObject
         if(!inAir)
         {
             //needs adjusting
-            speedY = jumpHeight/3;
+            speedY = jumpHeight/5;
             inAir = true;
         }
     }
@@ -85,7 +85,7 @@ public class Player extends GameObject
     */
     public void hitAway()
     {
-        speedY = jumpHeight/3;
+        speedY = jumpHeight/10;
     }
     int x = 0;
     /**
@@ -212,13 +212,11 @@ public class Player extends GameObject
     }
 
     /**
-     * Adds a bullet to the list given.
-     * 
-     * @param bullets list to add bullets to
+     * Returns Bullet Object
      */
     public Bullet shoot()
     {
-        if (direction == 1) // Extended code so that bullet detect doesnt hit player and despawn player
+        if (direction == 1) // Extended code so that bullet detect doesnt hit player and de-spawn player
             return new Bullet(direction, this.getPosition().x + this.getHitBox().width + 20, this.getPosition().y + this.getLocalBounds().height / 2, "resources/laser.png");
         else
             return new Bullet(direction, this.getPosition().x - 20, this.getPosition().y + this.getLocalBounds().height / 2, "resources/laser.png");
