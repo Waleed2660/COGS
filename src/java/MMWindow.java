@@ -8,9 +8,9 @@ public class MMWindow extends RenderWindow
     private View view;
     private FloatRect viewZone; // the rectangle that represents what the user can see
     /** 
-         * Used by MenuMaker
-         * <p>
-         * Used to create the window in the application.
+     * Used by MenuMaker
+     * 
+     * Used to create the window in the application.
     */
     public MMWindow(int res1, int res2, String name, boolean fullscreen)
     {
@@ -38,10 +38,11 @@ public class MMWindow extends RenderWindow
      * Moves the view by a certain offset only on the x axis.
      * 
      * @param xOff x axis offset to move the view by.
+     * @param yOff y axis offset to move the view by.
      */
-    public void moveView(float xOff)
+    public void moveView(float xOff, float yOff)
     {
-        view.move(xOff, 0);
+        view.move(xOff, yOff);
         viewZone = new FloatRect(this.getView().getCenter().x-this.getView().getSize().x/2, this.getView().getCenter().y-this.getView().getSize().y/2, this.getView().getSize().x, this.getView().getSize().y);
         this.setView(view);
     }

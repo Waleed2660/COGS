@@ -69,12 +69,18 @@ public class MenuMaker
         for (TextManager button : buttons) {
             if (button.buttonPressed(MouseX, MouseY, "Start"))
             {
+                window.resetView();
                 if(new GameRunner(window, "Level1").run() == 1)
                 {
                     window.resetView();
-                    if(new GameRunner(window, "Level3").run() == 1)
+                    window.moveView(0, 14720);
+                    if(new GameRunner(window, "Level2").run() == 1)
                     {
                         window.resetView();
+                        if(new GameRunner(window, "Level3").run() == 1)
+                        {
+                            
+                        }
                     }
                 }
                 window.resetView();

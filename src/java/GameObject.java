@@ -14,7 +14,6 @@ public class GameObject extends Sprite
 {
     private String type = "";
     private FloatRect hitBox;
-    private double lastBulletTime = System.currentTimeMillis();
     private Path textPath; 
     /**
      * Constructor for a game object with a texture also sets the texture.
@@ -58,7 +57,7 @@ public class GameObject extends Sprite
         setHitBoxToTexture();
     }
 
-        /**
+    /**
      * Constructor for a game object with a texture also sets the texture.
      * 
      * @param x position
@@ -109,11 +108,12 @@ public class GameObject extends Sprite
      * @param y position
      * @param width
      * @param height
+     * @param type the type of object
      */
-    public GameObject(float x, float y, float width, float height)
+    public GameObject(float x, float y, float width, float height, String type)
     {
         super();
-        
+        this.type = type;
         this.setPosition(x, y);
         setCustomHitBox(x, y, width, height);
     }
@@ -124,7 +124,6 @@ public class GameObject extends Sprite
     public void setHitBoxToTexture()
     {
         hitBox = new FloatRect(this.getPosition(), new Vector2f(this.getLocalBounds().width, this.getLocalBounds().height));
-        //System.out.println(hitBox.toString());
     }
 
     /**
@@ -183,49 +182,28 @@ public class GameObject extends Sprite
     }
 
     /**
-     * A collision detection method that checks if the current object collides with any in the given list and returns the one it collides with.
+     * A collision detection method that checks if the current object collides with any in the given list if the Objects in the list extend the
+     * GameObject class.
      * 
-     * @param listToDetect GameObjects to check for collision with
-     * @return null - doesnt collide with anything, GameObject - the object it collides with
+     * @param listToDetect objects to check for collision with
+     * @return null - doesnt collide with anything or objects dont extend GameObject, GameObject - the object it collides with
      */
-    public GameObject collides(ArrayList<GameObject> listToDetect)
+    public GameObject collides(ArrayList<?> listToDetect)
     {
-        for(GameObject a : listToDetect)
+        for(Object a : listToDetect)
         {
-            if(!a.equals(this))
+            if(!a.equals(this) && a instanceof GameObject)
             {
-                if(this.getHitBox().intersection(a.getHitBox()) != null)
+                if(this.getHitBox().intersection(((GameObject)a).getHitBox()) != null)
                 {
-                    return a;
+                    return (GameObject)a;
                 }
             }
-
         }
         return null;
     }
     
-    /**
-     * Same as collides but for enemies
-     * 
-     * @param listToDetect Enemy list to check for collision with
-     * @return null - doesnt collide with anything, GameObject - the object it collides with
-     */
-    public GameObject eCollides(ArrayList<Enemy> listToDetect)
-    {
-        for(GameObject a : listToDetect)
-        {
-            if(!a.equals(this))
-            {
-                if(this.getFutureHitBox(10,10).intersection(a.getHitBox()) != null)
-                {
-                    return a;
-                }
-            }
-
-        }
-        return null;
-    }
-    public GameObject bCollides(ArrayList<Bullet> listToDetect)
+    public GameObject fCollides(ArrayList<Fire> listToDetect)
     {
         for(GameObject a : listToDetect)
         {
@@ -239,18 +217,5 @@ public class GameObject extends Sprite
 
         }
         return null;
-    }
-
-    /**
-     * Returns true if given amount of time has been passed
-     * @param delay Delay you want in milliseconds
-     * @return  boolean value
-     */
-    public boolean insertDelay(double delay){
-        if (System.currentTimeMillis() - lastBulletTime > delay) {
-            lastBulletTime = System.currentTimeMillis();
-            return true;
-        }
-        return false;
     }
 }
