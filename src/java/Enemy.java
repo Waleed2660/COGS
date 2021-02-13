@@ -54,6 +54,15 @@ public class Enemy extends GameObject
                 if(this.getFutureHitBox(0, speedY*-1).intersection(a.getHitBox()) != null)
                 {
                     diagCheck = false;
+
+                    //  Keeps Enemy from falling from top platform
+                    if(this.getFutureHitBox(-5, speedY*-1).intersection(a.getHitBox()) == null) {
+                        direction = 1;  // Turns right if edge on left
+                    }
+                    else if(this.getFutureHitBox(5, speedY*-1).intersection(a.getHitBox()) == null) {
+                        direction = -1; // Turns left if edge on right
+                    }
+
                     //if collides bellow
                     if(a.getHitBox().top >= this.getPosition().y+this.getLocalBounds().height)
                     {
@@ -110,9 +119,7 @@ public class Enemy extends GameObject
     }
 
     /**
-     * Adds a bullet to the list given.
-     *
-     * @param bullets list to add bullets to
+    * Returns Bullet Object
      */
     public Bullet shoot()
     {
@@ -134,15 +141,16 @@ public class Enemy extends GameObject
 
         //  Checks for player on top & right side of enemy
         if(player.getPosition().x <= this.getPosition().x + 300 && player.getPosition().x >= this.getPosition().x &&
-                player.getPosition().y <= this.getPosition().y + 1000 && player.getPosition().y >= this.getPosition().y - 200 && insertDelay(3000))    {
+                player.getPosition().y <= this.getPosition().y + 500 && player.getPosition().y >= this.getPosition().y && insertDelay(2500))    {
+
             return true;
         }
         //  Checks for player on left side of enemy
         else if(player.getPosition().x <= this.getPosition().x && player.getPosition().x >= this.getPosition().x - 300 &&
-                player.getPosition().y <= this.getPosition().y + 1000 && player.getPosition().y >= this.getPosition().y - 200 && insertDelay(3000))    {
-            System.out.println("Player on LEFT");
-            return true;        }
+                player.getPosition().y <= this.getPosition().y + 500 && player.getPosition().y >= this.getPosition().y && insertDelay(2500))    {
 
+            return true;
+        }
         return false;
     }
 }
