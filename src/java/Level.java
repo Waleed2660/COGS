@@ -62,7 +62,7 @@ public class Level
 
         if(name.contains("player"))
         {
-          player = new Player(x, y, 15, 150, this, filePath.concat("assets/").concat(name).concat(".png/"));
+          player = new Player(x, y, 10, 150, this, filePath.concat("assets/").concat(name).concat(".png/"));
           objectList.add(player);
         }
         else if(name.contains("Background"))
