@@ -146,7 +146,7 @@ public class Player extends GameObject
                 if(diagCheck)
                 {
                     FloatRect diagCollision = this.getFutureHitBox(speedX*direction, speedY*-1).intersection(a.getHitBox());
-                    if(diagCollision != null && !(a instanceof Platform))
+                    if(diagCollision != null && !a.getType().equals("platform"))
                     {
                         tempX = 0;
                     }

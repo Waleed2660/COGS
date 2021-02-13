@@ -55,14 +55,6 @@ public class Enemy extends GameObject
                 {
                     diagCheck = false;
 
-                    //  Keeps Enemy from falling from top platform
-                    if(this.getFutureHitBox(-5, speedY*-1).intersection(a.getHitBox()) == null) {
-                        direction = 1;  // Turns right if edge on left
-                    }
-                    else if(this.getFutureHitBox(5, speedY*-1).intersection(a.getHitBox()) == null) {
-                        direction = -1; // Turns left if edge on right
-                    }
-
                     //if collides bellow
                     if(a.getHitBox().top >= this.getPosition().y+this.getLocalBounds().height)
                     {
@@ -75,12 +67,12 @@ public class Enemy extends GameObject
                 {
                     diagCheck = false;
                     //if collides on the right
-                    if(a.getHitBox().left >= this.getPosition().x+this.getLocalBounds().width && a.getClass() != Platform.class)
+                    if(a.getHitBox().left >= this.getPosition().x+this.getLocalBounds().width && !a.getType().equals("platform"))
                     {
                         direction = -1;
                     }
                     //if collides on the left
-                    else if(a.getHitBox().left+a.getHitBox().width <= this.getPosition().x && a.getClass() != Platform.class)
+                    else if(a.getHitBox().left+a.getHitBox().width <= this.getPosition().x && !a.getType().equals("platform"))
                     {
                         direction = 1;
                     }
@@ -89,7 +81,7 @@ public class Enemy extends GameObject
                 if(diagCheck)
                 {
                     FloatRect diagCollision = this.getFutureHitBox(speedX*direction, speedY*-1).intersection(a.getHitBox());
-                    if(diagCollision != null && a.getClass() != Platform.class)
+                    if(diagCollision != null && !a.getType().equals("platform"))
                     {
                         tempX = 0;
                     }
@@ -102,20 +94,19 @@ public class Enemy extends GameObject
             speedX = tempX;
         }
 
-        this.moveObject(speedX*direction, speedY*-1);
-
         if(landed)
         {
-            inAir = false;
             speedY = 0;
         }
-        else
+        else //doesnt let to fall off a platform
         {
-            inAir = true;
+            speedY = 0;
+            direction *= -1;
         }
+
+        this.moveObject(speedX*direction, speedY*-1);
+
         speedY -= g;
-
-
     }
 
     /**

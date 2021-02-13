@@ -48,8 +48,8 @@ public class GameRunner {
         hpBar.setFillColor(Color.RED);
         float winSizeX = window.getSize().x, winSizeY = window.getSize().y;
 
-
-        while (window.isOpen()) {
+        while (window.isOpen())
+        {
             ArrayList<GameObject> objectsInView = drawAll(level, window);
             GameObject playerCollides = player.collides(objectsInView);
             if (this.controller(objectsInView) == 1) {
@@ -121,7 +121,7 @@ public class GameRunner {
     public int controller(ArrayList<GameObject> blocks) {
         if (Keyboard.isKeyPressed(Keyboard.Key.SPACE)) {
             //Creates a Bullet Object inside Player, also Checks delay between each bullet
-            if (player.insertDelay(1000)) {
+            if (player.insertDelay(500)) {
                 bullets.add(player.shoot());
             }
         }
