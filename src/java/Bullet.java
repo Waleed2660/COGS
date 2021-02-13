@@ -3,8 +3,7 @@
  * This class provides basic bullet functionality
  */
 public class Bullet extends GameObject{
-    private float XSpeed = 15;
-    private float direction;
+    private final float direction;
 
     /**
      * Creates a bullet object with given texture and coordinates
@@ -21,7 +20,7 @@ public class Bullet extends GameObject{
     /**
      * Moves the bullet object given direction
     */
-    public void moveBullet(){
+    public void moveBullet(float XSpeed){
         this.moveObject(XSpeed*direction, 0);
     }
 
