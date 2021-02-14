@@ -19,6 +19,7 @@ public class GameRunner
     private MMWindow window;
     private Level level;
     private Player player;
+    private float startLocl;
     private float check = 100;
 
     //private GameOver over;
@@ -32,12 +33,13 @@ public class GameRunner
     public GameRunner(MMWindow window, String levelNum)
     {
           this.window = window;
-          hpBar.setPosition(new Vector2f(50,50));
+          hpBar.setPosition(new Vector2f(50,600));
           hpBar.setSize(new Vector2f(check*2,20));
           //window.resetView();
           window.setKeyRepeatEnabled(false);
           this.level = new Level(levelNum, (float)2.5, 3, window.getViewZone());
           this.player = level.getPlayer();
+          startLocl = player.getPosition().x + 30;
     }
 
     /**
@@ -185,6 +187,11 @@ public class GameRunner
           ArrayList<GameObject> result = new ArrayList<GameObject>();
           FloatRect viewZone = window.getViewZone();
           window.clear(Color.BLACK);
+          if(player.getPosition().x > startLocl)
+          {
+               hpBar.setPosition(new Vector2f(player.getPosition().x,600));
+          }
+          hpBar.setSize(new Vector2f(check*2,20));
 
           //window.draw(level.background);
           for(GameObject b : level.background)
