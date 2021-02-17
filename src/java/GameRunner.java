@@ -31,12 +31,20 @@ public class GameRunner {
      */
     public GameRunner(MMWindow window, String levelNum) {
         this.window = window;
+        window.resetView();
+        window.clear(Color.BLACK);
+        window.draw(new TextManager("Loading ...", window.getViewZone().left+window.getViewZone().width*(float)0.1, window.getViewZone().top+(window.getViewZone().height*(float)0.8), 50));
+        window.display();
+
         hpBar.setPosition(new Vector2f(50, 50));
         hpBar.setSize(new Vector2f(check * 2, 20));
-        //window.resetView();
+        
         window.setKeyRepeatEnabled(false);
-        this.level = new Level(levelNum, (float) 2.5, 3, window.getViewZone());
+
+        this.level = new Level(levelNum, (float) -2.5, (float)0.4, window.getViewZone());
+
         this.player = level.getPlayer();
+        window.moveView(window.getViewZone().width*((int)(player.getGlobalBounds().left/window.getViewZone().width)), window.getViewZone().height*((int)(player.getGlobalBounds().top/window.getViewZone().height)));
     }
 
     /**
@@ -103,6 +111,7 @@ public class GameRunner {
 
             }
             if (playerCollides != null && playerCollides.getType().equals("portal")) {
+                window.resetView();
                 return 1;
             }
         }
@@ -173,28 +182,28 @@ public class GameRunner {
         // Handles Enemy objects
         handleEnemy(viewZone,result);
 
-            window.draw(hpBar);
-            // Animates bullet once fired #changed to animate if there are any bullets
-            if (!bullets.isEmpty()) {
+        window.draw(hpBar);
+        // Animates bullet once fired #changed to animate if there are any bullets
+        if (!bullets.isEmpty()) {
 
-                for (int x = 0; x < bullets.size(); x++) {
-                    window.draw(bullets.get(x));
-                    bullets.get(x).moveBullet(30);
+            for (int x = 0; x < bullets.size(); x++) {
+                window.draw(bullets.get(x));
+                bullets.get(x).moveBullet(30);
 
-                    // De-spawns the bullet when it goes out of frame/ hits object
-                    GameObject bulletHit = bullets.get(x).collides(result);
-                    if (!bullets.get(x).bulletInSight(window) || bulletHit != null) {
+                // De-spawns the bullet when it goes out of frame/ hits object
+                GameObject bulletHit = bullets.get(x).collides(result);
+                if (!bullets.get(x).bulletInSight(window) || bulletHit != null) {
 
-                        if (bulletHit != null && bulletHit instanceof Enemy) {
-                            if (((Enemy) bulletHit).dmghp() <= 0) {
-                                System.out.println("Enemy dead");
-                                level.enemies.remove(bulletHit);
-                            }
+                    if (bulletHit != null && bulletHit instanceof Enemy) {
+                        if (((Enemy) bulletHit).dmghp() <= 0) {
+                            System.out.println("Enemy dead");
+                            level.enemies.remove(bulletHit);
                         }
-                        bullets.remove(x);
                     }
+                    bullets.remove(x);
                 }
             }
+        }
         window.display();
         return result;
     }

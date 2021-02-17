@@ -14,13 +14,14 @@ public class TextManager extends Text{
      * @param y height of object
      * @param xPos  Position on x-axis
      * @param yPos  Position on y-axis
+     * @param fontSize the size of the font
     */
-    public TextManager(String str,float xPos, float yPos) {
+    public TextManager(String str,float xPos, float yPos, int fontSize) {
         super();                            // creates an empty text
         createFont();
         this.setString(str);
         this.setColor(Color.WHITE);
-        this.setCharacterSize((int)(xPos * 0.24));
+        this.setCharacterSize(fontSize);
         this.setStyle(Text.BOLD);
         this.setFont(arial);
         this.setOrigin(0, 0);          // center of rectangle

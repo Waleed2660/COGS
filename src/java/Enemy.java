@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class Enemy extends GameObject
 {
-    private float speedY = 0, speedX = 5, g = 10/6;
+    private float speedY = 0, speedX = 5, g = (float)-2.5;
     private int direction = -1;
 
     public int hp = 100; //5 hits to ko 20 hp per hit  // enemies dog - 1 hit ko robot 2 - hit ko
@@ -106,7 +106,7 @@ public class Enemy extends GameObject
 
         this.moveObject(speedX*direction, speedY*-1);
 
-        speedY -= g;
+        speedY += g;
     }
 
     /**
@@ -115,10 +115,10 @@ public class Enemy extends GameObject
     public Bullet shoot()
     {
         if (direction == 1) { // Extended code so that bullet detect doesnt hit player and despawn player
-            return new Bullet(direction, this.getPosition().x + 40, this.getPosition().y + this.getLocalBounds().height / 2, "resources/laser.png");
+            return new Bullet(direction, this.getPosition().x + 40, this.getPosition().y + this.getLocalBounds().height / 2, "resources/common/laser.png");
         }
         else {
-            return new Bullet(direction, this.getPosition().x - 20, this.getPosition().y + this.getLocalBounds().height / 2, "resources/laser.png");
+            return new Bullet(direction, this.getPosition().x - 20, this.getPosition().y + this.getLocalBounds().height / 2, "resources/common/laser.png");
         }
     }
 

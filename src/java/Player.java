@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import org.jsfml.window.event.Event;
-
 import org.jsfml.graphics.FloatRect;
 import org.jsfml.window.Keyboard;
 import org.jsfml.window.Keyboard.Key;
@@ -65,7 +64,7 @@ public class Player extends GameObject
         if(!inAir)
         {
             //needs adjusting
-            speedY = jumpHeight/5;
+            speedY = (float)Math.sqrt(-2*g*jumpHeight);
             inAir = true;
         }
     }
@@ -87,7 +86,7 @@ public class Player extends GameObject
     {
         speedY = jumpHeight/10;
     }
-    int x = 0;
+    
     /**
      * Executes any movement for the player(With checking for collision).
      *  
@@ -189,24 +188,19 @@ public class Player extends GameObject
         {
             inAir = true;
         }
-        speedY -= g;
+        speedY += g;
         crouched = false;
-        //needs adjusting
-        if(speedY*-1 > jumpHeight/2)
-        {
-            speedY = (jumpHeight/2)*-1;
-        }
 
-        // reduces the speed gradually
+        // reduces the speed gradually relative to the friction coefficient 
         if(!landed && speedX > 0)
         {
-            speedX -= friction/2;
+            speedX -= maxSpeedX*(friction/2);
         }
         else if(speedX > 0)
         {
-            speedX -= friction;
+            speedX -= maxSpeedX*friction;
         }
-        else{
+        if(speedX < 0){
             speedX = 0;
         }
     }
@@ -217,9 +211,9 @@ public class Player extends GameObject
     public Bullet shoot()
     {
         if (direction == 1) // Extended code so that bullet detect doesnt hit player and de-spawn player
-            return new Bullet(direction, this.getPosition().x + this.getHitBox().width + 20, this.getPosition().y + this.getLocalBounds().height / 2, "resources/laser.png");
+            return new Bullet(direction, this.getPosition().x + this.getHitBox().width + 20, this.getPosition().y + this.getLocalBounds().height / 2, "resources/common/laser.png");
         else
-            return new Bullet(direction, this.getPosition().x - 20, this.getPosition().y + this.getLocalBounds().height / 2, "resources/laser.png");
+            return new Bullet(direction, this.getPosition().x - 20, this.getPosition().y + this.getLocalBounds().height / 2, "resources/common/laser.png");
     }
 
     /**

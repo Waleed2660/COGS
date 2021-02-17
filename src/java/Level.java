@@ -36,7 +36,7 @@ public class Level
     levelNum = levNum;
     this.gravity = gravity;
     this.friction = friction;
-    addFromFile("./levels/".concat(levelNum).concat("/"), view);
+    addFromFile("./levels/"+levNum+"/", view);
   }
 
   /**
@@ -47,7 +47,7 @@ public class Level
   private void addFromFile(String filePath, FloatRect view)
   {
     try {
-      File myObj = new File(filePath.concat(levelNum).concat(".txt"));
+      File myObj = new File(filePath+levelNum+".txt");
       Scanner myReader = new Scanner(myObj);
       while (myReader.hasNextLine()) {
         String data = myReader.nextLine();
@@ -62,29 +62,57 @@ public class Level
 
         if(name.contains("player"))
         {
-          player = new Player(x, y, 10, 150, this, filePath.concat("assets/").concat(name).concat(".png/"));
-          objectList.add(player);
+          if(new File("./resources/player/"+name+".png").isFile())
+          {
+            player = new Player(x, y, 15, 160, this, "./resources/player/player.png");
+            objectList.add(player);
+          }
+          else
+          {
+            //some error message for not being able to find the file
+          }
         }
         else if(name.contains("Background"))
         {
           playArea = new FloatRect(x, y, width, height);
-          for(int i = 0; i < width/view.width; i++)
+          if(new File(filePath+"assets/"+name+".png").isFile())
           {
-            for(int j = 0; j < height/view.height; j++)
+            for(int i = 0; i < width/view.width; i++)
             {
-              background.add(new GameObject(view.width*i, view.height*j, filePath.concat("assets/").concat(name).concat(".png/"), new FloatRect(view.width*i, view.height*j, view.width, view.height)));
+              for(int j = 0; j < height/view.height; j++)
+              {
+                background.add(new GameObject(view.width*i, view.height*j, filePath+"assets/"+name+".png", new FloatRect(view.width*i, view.height*j, view.width, view.height)));
+              }
             }
+          }
+          else
+          {
+            //some error message for not being able to find the file
           }
         }
         else if(name.contains("dog"))
         {
-          Enemy temp = new Enemy(x, y, filePath.concat("assets/").concat(name).concat(".png/"), 1);
-          enemies.add(temp);
+          if(new File("./resources/enemies/"+name+".png").isFile())
+          {
+            Enemy temp = new Enemy(x, y, "./resources/enemies/"+name+".png", 1);
+            enemies.add(temp);
+          }
+          else
+          {
+            //some error message for not being able to find the file
+          }
         }
         else if(name.contains("robot"))
         {
-          Enemy temp = new Enemy(x, y, filePath.concat("assets/").concat(name).concat(".png/"), 2);
-          enemies.add(temp);
+          if(new File("./resources/enemies/"+name+".png").isFile())
+          {
+            Enemy temp = new Enemy(x, y, "./resources/enemies/"+name+".png", 1);
+            enemies.add(temp);
+          }
+          else
+          {
+            //some error message for not being able to find the file
+          }
         }
         else
         {
@@ -93,7 +121,15 @@ public class Level
             objectList.add(new GameObject(x, y, width, height, name));
           }
           else{
-            objectList.add(new GameObject(x, y, filePath.concat("assets/").concat(name).concat(".png/"), name, null));
+            String path = findFilePath(name);
+            if(path != null)
+            {
+              objectList.add(new GameObject(x, y, path, name, null));
+            }
+            else
+            {
+              //some error message for not being able to find the file
+            }
           }
         }
       }
@@ -138,5 +174,32 @@ public class Level
   public FloatRect getPlayArea()
   {
     return playArea;
+  }
+
+  /**
+   * Finds the possible path to file or returns null if not found
+   * 
+   * @param name name of file to find
+   * @return string path or null
+   */
+  private String findFilePath(String name)
+  {
+    if(new File("./resources/"+name+"/"+name+".png").isFile())
+    {
+      return "./resources/"+name+"/"+name+".png";
+    }
+    else if(new File("./levels/"+levelNum+"/assets/"+name+".png").isFile())
+    {
+      return "./levels/"+levelNum+"/assets/"+name+".png";
+    }
+    else if(new File("./resources/common/"+name+".png").isFile())
+    {
+      return "./resources/common/"+name+".png";
+    }
+    else if(new File("./resources/"+name+".png").isFile())
+    {
+      return "./resources/"+name+".png";
+    }
+    return null;
   }
 }
