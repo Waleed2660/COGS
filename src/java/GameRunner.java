@@ -226,27 +226,26 @@ public class GameRunner {
                     hostileBullets.add(a.shoot());
                 }
 
-                if (!hostileBullets.isEmpty()) {
-                    //  Render Bullets fired by Enemies
-                    for (int x = 0; x < hostileBullets.size(); x++) {
-
-                        Bullet bullet = hostileBullets.get(x);
-                        bullet.moveBullet(5);
-                        window.draw((bullet));
-
-                        // De-spawns bullets upon impact
-                        if((bullet).collides(result) != null) {
-
-                                    /* Player's health can be updated upon taking hit here */
-
-                            hostileBullets.remove(x);
-                        }
-                    }
-                }
-
                 // Renders Enemies
                 result.add(a);
                 window.draw(a);
+            }
+        }
+        if (!hostileBullets.isEmpty()) {
+            //  Render Bullets fired by Enemies
+            for (int x = 0; x < hostileBullets.size(); x++) {
+
+                Bullet bullet = hostileBullets.get(x);
+                bullet.moveBullet(20);
+                window.draw((bullet));
+
+                // De-spawns bullets upon impact
+                if((bullet).collides(result) != null) {
+
+                    /* Player's health can be updated upon taking hit here */
+
+                    hostileBullets.remove(x);
+                }
             }
         }
     }
