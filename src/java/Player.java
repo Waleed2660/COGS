@@ -7,17 +7,11 @@ import org.jsfml.window.Keyboard.Key;
 /**
  * A class that represents the player entity. Extends GameObject.
  */
-/**
- * TODO:
- *  1. properly calculate Y speed in relation to jump height
- *  2. properly calculate the max Y speed in relation to jump height
- *  3. 
- */
 
 public class Player extends GameObject
 {
     private float speedY = 0, speedX = 0;
-    private float maxSpeedX, jumpHeight, friction, g = 10/6;
+    private float maxSpeedX, jumpHeight, friction, g;
     private int direction = 1;
     private double lastBulletTime = System.currentTimeMillis();
     private float hp = 100000; //5 hits to ko 20 hp per hit  // enemies dog - 1 hit ko robot 2 - hit ko // fires 2 damage more often than enemy damage
@@ -63,7 +57,6 @@ public class Player extends GameObject
     {
         if(!inAir)
         {
-            //needs adjusting
             speedY = (float)Math.sqrt(-2*g*jumpHeight);
             inAir = true;
         }
@@ -99,7 +92,6 @@ public class Player extends GameObject
         boolean landed = false;
         boolean diagCheck = true;
         float tempX = speedX;
-        
 
         for(GameObject a : objectsInView)
         {

@@ -187,12 +187,13 @@ public class GameRunner {
         if (!bullets.isEmpty()) {
 
             for (int x = 0; x < bullets.size(); x++) {
+                Bullet bullet = hostileBullets.get(x);
                 window.draw(bullets.get(x));
                 bullets.get(x).moveBullet(30);
 
                 // De-spawns the bullet when it goes out of frame/ hits object
-                GameObject bulletHit = bullets.get(x).collides(result);
-                if (!bullets.get(x).bulletInSight(window) || bulletHit != null) {
+                GameObject bulletHit = bullet.collides(result);
+                if (!bullet.bulletInSight(window) || bulletHit != null) {
 
                     if (bulletHit != null && bulletHit instanceof Enemy) {
                         if (((Enemy) bulletHit).dmghp() <= 0) {
@@ -240,11 +241,13 @@ public class GameRunner {
                 window.draw((bullet));
 
                 // De-spawns bullets upon impact
-                if((bullet).collides(result) != null) {
+                GameObject bulletHit = bullet.collides(result);
+                if (!bullet.bulletInSight(window) || bulletHit != null) {
 
-                    /* Player's health can be updated upon taking hit here */
-
-                    hostileBullets.remove(x);
+                    if (bulletHit != null && bulletHit instanceof Player) {
+                        //do something when player gets hit
+                    }
+                    bullets.remove(x);
                 }
             }
         }

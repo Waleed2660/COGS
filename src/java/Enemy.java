@@ -15,10 +15,21 @@ public class Enemy extends GameObject
     int health = 0; // used to store health for iframes
     private boolean inAir = false;
 
-
-    public Enemy(float x, float y, String texPath,int hp)
+    /**
+     * Constructor for enemy object
+     * 
+     * @param x coordinate
+     * @param y coordinate
+     * @param texPath texture file path
+     * @param speed movement speed
+     * @param level the level that this enemy is on
+     * @param hp the max hit points of the enemy
+     */
+    public Enemy(float x, float y, String texPath, float speed, Level level, int hp)
     {
         super(x, y, texPath, null);
+        this.speedX = speed;
+        this.g = level.getGravity();
         this.hp = hp;
     }
 
@@ -33,12 +44,12 @@ public class Enemy extends GameObject
     }
 
     /**
-     * Executes any movement for the player(With checking for collision).
+     * Executes any movement for the enemy(With checking for collision).
      *
      * @param objectsInView an array of the object that are in view and should be checked for collision.
      * @param window the game window.
      */
-    public void movement(ArrayList<GameObject> objectsInView, MMWindow window)
+    public void movement(ArrayList<GameObject> objectsInView)
     {
         //falling flag
         boolean landed = false;

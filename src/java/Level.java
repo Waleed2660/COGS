@@ -94,7 +94,7 @@ public class Level
         {
           if(new File("./resources/enemies/"+name+".png").isFile())
           {
-            Enemy temp = new Enemy(x, y, "./resources/enemies/"+name+".png", 1);
+            Enemy temp = new Enemy(x, y, "./resources/enemies/"+name+".png", 5, this, 1);
             enemies.add(temp);
           }
           else
@@ -106,7 +106,7 @@ public class Level
         {
           if(new File("./resources/enemies/"+name+".png").isFile())
           {
-            Enemy temp = new Enemy(x, y, "./resources/enemies/"+name+".png", 1);
+            Enemy temp = new Enemy(x, y, "./resources/enemies/"+name+".png", 5, this, 1);
             enemies.add(temp);
           }
           else

@@ -44,7 +44,6 @@ public class GameObject extends Sprite {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            //this.setPosition(size.left, size.top);
             this.setPosition(x, y);
         }
         setHitBoxToTexture();
@@ -178,22 +177,6 @@ public class GameObject extends Sprite {
         }
         return null;
     }
-    
-    /*public GameObject fCollides(ArrayList<Fire> listToDetect)
-    {
-        for(GameObject a : listToDetect)
-        {
-            if(!a.equals(this))
-            {
-                if(this.getHitBox().intersection(a.getHitBox()) != null)
-                {
-                    return a;
-                }
-            }
-
-        }
-        return null;
-    }*/
 
     /**
      * Returns true if given amount of time has been passed
