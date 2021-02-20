@@ -187,9 +187,9 @@ public class GameRunner {
         if (!bullets.isEmpty()) {
 
             for (int x = 0; x < bullets.size(); x++) {
-                Bullet bullet = hostileBullets.get(x);
-                window.draw(bullets.get(x));
-                bullets.get(x).moveBullet(30);
+                Bullet bullet = bullets.get(x);
+                window.draw(bullet);
+                bullet.moveBullet(30);
 
                 // De-spawns the bullet when it goes out of frame/ hits object
                 GameObject bulletHit = bullet.collides(result);
@@ -233,6 +233,7 @@ public class GameRunner {
             }
         }
         if (!hostileBullets.isEmpty()) {
+
             //  Render Bullets fired by Enemies
             for (int x = 0; x < hostileBullets.size(); x++) {
 
@@ -247,7 +248,7 @@ public class GameRunner {
                     if (bulletHit != null && bulletHit instanceof Player) {
                         //do something when player gets hit
                     }
-                    bullets.remove(x);
+                    hostileBullets.remove(x);
                 }
             }
         }
