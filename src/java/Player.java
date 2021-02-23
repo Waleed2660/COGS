@@ -49,7 +49,7 @@ public class Player extends Entity
         this.direction = direction;
         if(speedX <= speed)
         {
-            speedX += speed*(friction*2);
+            speedX += speed*(friction*1.5);
         }
     }
 
@@ -89,7 +89,7 @@ public class Player extends Entity
      * @param objectsInView an array of the object that are in view and should be checked for collision.
      */
     @Override
-    public void movement(ArrayList<GameObject> objectsInView)
+    public void update(ArrayList<GameObject> objectsInView)
     {
         //falling flag
         boolean landed = false;
@@ -108,8 +108,16 @@ public class Player extends Entity
                     //if collides bellow
                     if(a.getHitBox().top >= this.getPosition().y+this.getLocalBounds().height)
                     {
-                        landed = true;
-                        speedY = (a.getHitBox().top-(this.getPosition().y+this.getLocalBounds().height))*-1;
+                        if(a.getType().equals("platform") && crouched)
+                        {
+                            inAir = true;
+                        }
+                        else
+                        {
+                            landed = true;
+                            speedY = (a.getHitBox().top-(this.getPosition().y+this.getLocalBounds().height))*-1;
+                        }
+
                     }
                     //if collides above
                     else if(a.getHitBox().top+a.getHitBox().height <= this.getPosition().y && !a.getType().equals("platform"))
@@ -165,7 +173,8 @@ public class Player extends Entity
         {
             window.moveView(speedX*direction, 0);
         }
-        if(window.getFutureViewZone(0, speedY*-1).intersection(playArea).height == window.getViewZone().height &&
+        if( window.getFutureViewZone(0, speedY*-1).top > playArea.top &&
+            window.getFutureViewZone(0, speedY*-1).top+window.getViewZone().height < playArea.top+playArea.height &&
             this.getPosition().y >= window.getViewZone().height/2 &&
             this.getPosition().y <= window.getViewZone().top+window.getViewZone().height/2)
         {
@@ -186,7 +195,7 @@ public class Player extends Entity
         speedY += g;
         crouched = false;
 
-        // reduces the speed gradually relative to the friction coefficient 
+        // reduces the speed gradually relative to the friction coefficient
         if(!landed && speedX > 0)
         {
             speedX -= speed*(friction/2);

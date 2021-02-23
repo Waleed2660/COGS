@@ -65,7 +65,14 @@ public class Level
         {
           if(new File("./resources/player/"+name+".png").isFile())
           {
-            player = new Player(x, y, 15, 160, this, window, "./resources/player/player.png");
+            if(levelNum.equals("Level2"))
+            {
+              player = new Player(x, y, 15, 400, this, window, "./resources/player/player.png");
+            }
+            else
+            {
+              player = new Player(x, y, 15, 170, this, window, "./resources/player/player.png");
+            }
             objectList.add(player);
           }
           else

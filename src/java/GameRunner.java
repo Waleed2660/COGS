@@ -40,8 +40,14 @@ public class GameRunner {
         hpBar.setSize(new Vector2f(check * 2, 20));
         
         window.setKeyRepeatEnabled(false);
-
-        this.level = new Level(levelNum, (float) -2.5, (float)0.4, window);
+        if(levelNum.equals("Level3"))
+        {
+            this.level = new Level(levelNum, (float) -1, (float)0.4, window);
+        }
+        else
+        {
+            this.level = new Level(levelNum, (float) -2.5, (float)0.4, window);
+        }
 
         this.player = level.getPlayer();
         window.moveView(window.getViewZone().width*((int)(player.getGlobalBounds().left/window.getViewZone().width)), window.getViewZone().height*((int)(player.getGlobalBounds().top/window.getViewZone().height)));
@@ -150,7 +156,7 @@ public class GameRunner {
         if (Keyboard.isKeyPressed(Keyboard.Key.ESCAPE)) {
             return 1;
         }
-        player.movement(blocks);
+        player.update(blocks);
         return 0;
     }
 
@@ -189,7 +195,7 @@ public class GameRunner {
             for (int x = 0; x < bullets.size(); x++) {
                 Bullet bullet = bullets.get(x);
                 window.draw(bullet);
-                bullet.movement(null);
+                bullet.update(null);
 
                 // De-spawns the bullet when it goes out of frame/ hits object
                 GameObject bulletHit = bullet.collides(result);
@@ -220,7 +226,7 @@ public class GameRunner {
             if (viewZone.intersection(a.getHitBox()) != null) {
 
                 //Initiates movement for each enemy
-                a.movement(level.objectList);
+                a.update(level.objectList);
 
                 // Enemy only shoots if player is in range
                 if (a.lookForPlayer(player) && a.shoot() != null) {
@@ -238,7 +244,7 @@ public class GameRunner {
             for (int x = 0; x < hostileBullets.size(); x++) {
 
                 Bullet bullet = hostileBullets.get(x);
-                bullet.movement(null);
+                bullet.update(null);
                 window.draw((bullet));
 
                 // De-spawns bullets upon impact

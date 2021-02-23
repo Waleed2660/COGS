@@ -1,4 +1,4 @@
-BackgroundEarth sprite 0 0 15360 640
+BackgroundEarth sprite 0 0 15360 640 
 portal hitbox 15200 184 32 208
 ground hitbox 15200 392 160 152
 ground hitbox 0 544 15360 95.8125
