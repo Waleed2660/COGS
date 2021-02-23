@@ -7,24 +7,18 @@ import org.jsfml.window.Keyboard.Key;
 /**
  * A class that represents the player entity. Extends GameObject.
  */
-/**
- * TODO:
- *  1. properly calculate Y speed in relation to jump height
- *  2. properly calculate the max Y speed in relation to jump height
- *  3. adjust the camera follow for Level 2
- */
 
-public class Player extends GameObject
+public class Player extends Entity
 {
     private float speedY = 0, speedX = 0;
-    private float maxSpeedX, jumpHeight, friction, g = 10/6;
+    private float jumpHeight, friction;
     private int direction = 1;
     private double lastBulletTime = System.currentTimeMillis();
-    public int hp = 100; //5 hits to ko 20 hp per hit  // enemies dog - 1 hit ko robot 2 - hit ko
-    int health = 0; // used to store health for iframes
-
+    private float hp = 100000; //5 hits to ko 20 hp per hit  // enemies dog - 1 hit ko robot 2 - hit ko // fires 2 damage more often than enemy damage
     private boolean inAir = false;
+    private boolean crouched = false;
     private FloatRect playArea;
+    private MMWindow window;
 
     /**
      * Constructor for player.
@@ -36,45 +30,14 @@ public class Player extends GameObject
      * @param level the level the player is in
      * @param texPath texture path
      */
-    public Player(float x, float y, float maxSpeedX, float jumpHeight, Level level, String texPath)
+    public Player(float x, float y, float maxSpeedX, float jumpHeight, Level level, MMWindow window, String texPath)
     {
-        super(x, y, texPath, null);
-        this.maxSpeedX = maxSpeedX;
+        super(x, y, texPath, maxSpeedX, level);
         this.jumpHeight = jumpHeight;
+        this.window = window;
         this.friction = level.getFriction();
-        this.g = level.getGravity();
         this.playArea = level.getPlayArea();
     }
-
-    /**
-     * Checks if a key is pressed and does stuff accordingly. Moved to GameRunner for now.
-     * 
-     * @param bullets the bullets array for storing shot bullets
-     * @param window the window in which the player is
-     * @param blocks the GameObject to check for collision with
-     */
-    /*public void controller(ArrayList<Bullet> bullets, MMWindow window, ArrayList<GameObject> blocks)
-    {
-        if(Keyboard.isKeyPressed(Keyboard.Key.LEFT))
-        {
-            direction = -1;    // Updates Bullet travel direction
-            this.movement(direction, 0, blocks);
-        }
-        if(Keyboard.isKeyPressed(Keyboard.Key.RIGHT))
-        {
-            direction = 1;     // Updates Bullet travel direction
-            this.movement(direction, 0, blocks);
-        }
-
-        Event e = window.pollEvent();
-        if(e != null && e.type == Event.Type.KEY_PRESSED)
-        {
-            if(e.asKeyEvent().key == Keyboard.Key.SPACE)
-            {
-                this.shoot(bullets);
-            }
-        }
-    }*/
 
     /**
      * Increases the speed of the player causing him to move in the next movement call.
@@ -84,7 +47,10 @@ public class Player extends GameObject
     public void walk(int direction)
     {
         this.direction = direction;
-        speedX = maxSpeedX;
+        if(speedX <= speed)
+        {
+            speedX += speed*(friction*2);
+        }
     }
 
     /**
@@ -94,27 +60,36 @@ public class Player extends GameObject
     {
         if(!inAir)
         {
-            //needs adjusting
-            speedY = jumpHeight/3;
+            speedY = (float)Math.sqrt(-2*g*jumpHeight);
             inAir = true;
         }
     }
 
-    /*
-    *Here for when the enenmy hits the player to get them away wasn't sure what else to do tbh
-    **/
-    public void hitAway()
+    /**
+     * Makes the player crouch.
+     * 
+     * Wasnt implemented yet.
+     */
+    public void crouch()
     {
-        speedY = jumpHeight/3;
+        crouched = true;
     }
 
+    /**
+    *  Here for when the enenmy hits the player to get them away wasn't sure what else to do tbh
+    */
+    public void hitAway()
+    {
+        speedY = jumpHeight/10;
+    }
+    
     /**
      * Executes any movement for the player(With checking for collision).
      *  
      * @param objectsInView an array of the object that are in view and should be checked for collision.
-     * @param window the game window.
      */
-    public void movement(ArrayList<GameObject> objectsInView, MMWindow window)
+    @Override
+    public void movement(ArrayList<GameObject> objectsInView)
     {
         //falling flag
         boolean landed = false;
@@ -123,7 +98,7 @@ public class Player extends GameObject
 
         for(GameObject a : objectsInView)
         {
-            if(!a.equals(this) && a.getClass() != Enemy.class && !a.getType().equals("portal"))
+            if(!a.equals(this) && !(a instanceof Enemy) && !a.getType().equals("portal") && !a.getType().equals("fire"))
             {
                 //  Checks if the player collides with anything on the y axis and if it does checks if its above or bellow and changes the speed
                 //  so it ends up right next to it. Same for the x axis.
@@ -137,7 +112,7 @@ public class Player extends GameObject
                         speedY = (a.getHitBox().top-(this.getPosition().y+this.getLocalBounds().height))*-1;
                     }
                     //if collides above
-                    else if(a.getHitBox().top+a.getHitBox().height <= this.getPosition().y && a.getClass() != Platform.class)
+                    else if(a.getHitBox().top+a.getHitBox().height <= this.getPosition().y && !a.getType().equals("platform"))
                     {
                         speedY = this.getPosition().y-(a.getHitBox().top+a.getHitBox().height);
                     }
@@ -147,27 +122,30 @@ public class Player extends GameObject
                 {
                     diagCheck = false;
                     //if collides on the right
-                    if(a.getHitBox().left >= this.getPosition().x+this.getLocalBounds().width && a.getClass() != Platform.class)
+                    if(!a.getType().equals("platform"))
                     {
-                        speedX = a.getHitBox().left-(this.getPosition().x+this.getLocalBounds().width);
+                        if(a.getHitBox().left >= this.getPosition().x+this.getLocalBounds().width)
+                        {
+                            speedX = a.getHitBox().left-(this.getPosition().x+this.getLocalBounds().width);
+                        }
+                        //if collides on the left
+                        else if(a.getHitBox().left+a.getHitBox().width <= this.getPosition().x)
+                        {
+                            speedX = this.getPosition().x-(a.getHitBox().left+a.getHitBox().width);
+                        }
                     }
-                    //if collides on the left
-                    else if(a.getHitBox().left+a.getHitBox().width <= this.getPosition().x && a.getClass() != Platform.class)
-                    {
-                        speedX = this.getPosition().x-(a.getHitBox().left+a.getHitBox().width);
-                    }
+
                 }
                 //If in air for collision diaganolly. Temporary fix to bug
                 if(diagCheck)
                 {
                     FloatRect diagCollision = this.getFutureHitBox(speedX*direction, speedY*-1).intersection(a.getHitBox());
-                    if(diagCollision != null && a.getClass() != Platform.class)
+                    if(diagCollision != null && !a.getType().equals("platform"))
                     {
                         tempX = 0;
                     }
                 }
             }
-
         }
 
         if(diagCheck)
@@ -176,7 +154,7 @@ public class Player extends GameObject
         }
 
         //Checks that it doesnt go off the screen
-        if(this.getFutureHitBox(speedX*direction, speedY*-1).intersection(playArea) == null || this.getFutureHitBox(speedX*direction, speedY*-1).intersection(playArea).width != this.getLocalBounds().width)
+        if(this.getPosition().x+(speedX*direction) <= playArea.left || this.getPosition().x+(speedX*direction)+this.getLocalBounds().width >= playArea.left+playArea.width)
         {
             speedX = 0;
         }
@@ -185,7 +163,13 @@ public class Player extends GameObject
             this.getPosition().x >= window.getViewZone().width/3 &&
             this.getPosition().x <= window.getViewZone().left+(window.getViewZone().width/3)*2)
         {
-            window.moveView(speedX*direction);
+            window.moveView(speedX*direction, 0);
+        }
+        if(window.getFutureViewZone(0, speedY*-1).intersection(playArea).height == window.getViewZone().height &&
+            this.getPosition().y >= window.getViewZone().height/2 &&
+            this.getPosition().y <= window.getViewZone().top+window.getViewZone().height/2)
+        {
+            window.moveView(0, speedY*-1);
         }
 
         this.moveObject(speedX*direction, speedY*-1);
@@ -199,39 +183,32 @@ public class Player extends GameObject
         {
             inAir = true;
         }
-        speedY -= g;
-        
-        //needs adjusting
-        if(speedY*-1 > jumpHeight/2)
-        {
-            speedY = (jumpHeight/2)*-1;
-        }
+        speedY += g;
+        crouched = false;
 
-        // reduces the speed gradually
+        // reduces the speed gradually relative to the friction coefficient 
         if(!landed && speedX > 0)
         {
-            speedX -= friction/2;
+            speedX -= speed*(friction/2);
         }
         else if(speedX > 0)
         {
-            speedX -= friction;
+            speedX -= speed*friction;
         }
-        else{
+        if(speedX < 0){
             speedX = 0;
         }
     }
 
     /**
-     * Adds a bullet to the list given.
-     * 
-     * @param bullets list to add bullets to
+     * Returns Bullet Object
      */
     public Bullet shoot()
     {
-        if (direction == 1) // Extended code so that bullet detect doesnt hit player and despawn player
-            return new Bullet(direction, this.getPosition().x + 40, this.getPosition().y + this.getLocalBounds().height / 2, "resources/laser.png");
+        if (direction == 1) // Extended code so that bullet detect doesnt hit player and de-spawn player
+            return new Bullet(direction, this.getPosition().x + this.getHitBox().width + 20, this.getPosition().y + this.getLocalBounds().height / 2, 30, "resources/common/laser.png");
         else
-            return new Bullet(direction, this.getPosition().x - 20, this.getPosition().y + this.getLocalBounds().height / 2, "resources/laser.png");
+            return new Bullet(direction, this.getPosition().x - 20, this.getPosition().y + this.getLocalBounds().height / 2, 30, "resources/common/laser.png");
     }
 
     /**
@@ -239,21 +216,23 @@ public class Player extends GameObject
      * 
      * @param hp tracks the players health
      */
-    public int dmghp()
+    public float dmghp(int dmgpt)
     {
-        hp -= 20;
-        if(hp == 0)
+        hp -= dmgpt;
+        if(hp <= 0)
         {
             return -1;
         }
         return hp;
     }
 
+    /**
+     * Resets player's hp after death incase of restart
+     * 
+     * @param hp tracks the players health
+     */
     public void setHP(int hp)
     {
         this.hp = hp;
-
-        //bullets.add(new Bullet(direction, this.getPosition().x+this.getLocalBounds().width*direction, this.getPosition().y+this.getLocalBounds().height/2, "resources/laser.png"));
-
     }
 }

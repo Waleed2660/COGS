@@ -14,12 +14,10 @@ public class Level
   private String levelNum;
   public ArrayList<GameObject> objectList = new ArrayList<GameObject>(); //public for now should improve the way to access it and change it eventually
   //Arrays for different objects. could be usseful in the future but not right now
-  private ArrayList<GameObject> ground = new ArrayList<GameObject>();
   public ArrayList<GameObject> background = new ArrayList<GameObject>();
   public ArrayList<Enemy> enemies = new ArrayList<Enemy>(); //had to change to public so i could access in GameRunner  for collsion damage detection
-  private ArrayList<Platform> platforms = new ArrayList<Platform>();
+  public ArrayList<GameObject> fires = new ArrayList<GameObject>();
   private Player player;
-  private GameObject portal;
   private FloatRect playArea;
 
   private final float gravity;
@@ -31,14 +29,14 @@ public class Level
    * @param levNum - the level to construct. Currently can be Level1, Level2 or Level3. Should make the choices into enums
    * @param gravity gravity force to be applied in the level
    * @param friction friction force to be applied in the level
-   * @param view the view to load
+   * @param window the game window
    */
-  public Level(String levNum, float gravity, float friction, FloatRect view)
+  public Level(String levNum, float gravity, float friction, MMWindow window)
   {
     levelNum = levNum;
     this.gravity = gravity;
     this.friction = friction;
-    addFromFile("./levels/".concat(levelNum).concat("/"), view);
+    addFromFile("./levels/"+levNum+"/", window);
   }
 
   /**
@@ -46,58 +44,94 @@ public class Level
    *
    * @param filePath the file path of the folder where assets and level information are stored
    */
-  private void addFromFile(String filePath, FloatRect view)
+  private void addFromFile(String filePath, MMWindow window)
   {
+    FloatRect view = window.getViewZone();
     try {
-      File myObj = new File(filePath.concat(levelNum).concat(".txt"));
+      File myObj = new File(filePath+levelNum+".txt");
       Scanner myReader = new Scanner(myObj);
       while (myReader.hasNextLine()) {
         String data = myReader.nextLine();
         String[] spl = data.split(" ");
 
-        if(spl[0].equals("Ground"))
+        String name = spl[0];
+        String type = spl[1];
+        float x = Float.parseFloat(spl[2]);
+        float y = Float.parseFloat(spl[3]);
+        float width = Float.parseFloat(spl[4]);
+        float height = Float.parseFloat(spl[5]);
+
+        if(name.contains("player"))
         {
-          GameObject temp = new GameObject(Float.parseFloat(spl[1]), Float.parseFloat(spl[2]), Float.parseFloat(spl[3]), Float.parseFloat(spl[4]));
-          ground.add(temp);
-          objectList.add(temp);
-        }
-        else if(spl[0].equals("player"))
-        {
-          player = new Player(Float.parseFloat(spl[1]), Float.parseFloat(spl[2]), 10, 100, this, filePath.concat("assets/").concat(spl[0]).concat(".png/"));
-          objectList.add(player);
-        }
-        else if(spl[0].contains("Background"))
-        {
-          playArea = new FloatRect(Integer.parseInt(spl[1]), Integer.parseInt(spl[2]), Integer.parseInt(spl[3]), Integer.parseInt(spl[4]));
-          for(int i = 0; i < Integer.parseInt(spl[3])/view.width; i++)
+          if(new File("./resources/player/"+name+".png").isFile())
           {
-            background.add(new GameObject(view.width*i, 0, filePath.concat("assets/").concat(spl[0]).concat(".png/"), new FloatRect(view.width*i, 0, view.width, Integer.parseInt(spl[4]))));
+            player = new Player(x, y, 15, 160, this, window, "./resources/player/player.png");
+            objectList.add(player);
+          }
+          else
+          {
+            //some error message for not being able to find the file
           }
         }
-        else if(spl[0].contains("dog"))
+        else if(name.contains("Background"))
         {
-          Enemy temp = new Enemy(Integer.parseInt(spl[1]), Integer.parseInt(spl[2]), filePath.concat("assets/").concat(spl[0]).concat(".png/"), 1);
-          enemies.add(temp);
+          playArea = new FloatRect(x, y, width, height);
+          if(new File(filePath+"assets/"+name+".png").isFile())
+          {
+            for(int i = 0; i < width/view.width; i++)
+            {
+              for(int j = 0; j < height/view.height; j++)
+              {
+                background.add(new GameObject(view.width*i, view.height*j, filePath+"assets/"+name+".png", new FloatRect(view.width*i, view.height*j, view.width, view.height)));
+              }
+            }
+          }
+          else
+          {
+            //some error message for not being able to find the file
+          }
         }
-        else if(spl[0].contains("robot"))
+        else if(name.contains("dog"))
         {
-          Enemy temp = new Enemy(Integer.parseInt(spl[1]), Integer.parseInt(spl[2]), filePath.concat("assets/").concat(spl[0]).concat(".png/"), 2);
-          enemies.add(temp);
+          if(new File("./resources/enemies/"+name+".png").isFile())
+          {
+            Enemy temp = new Enemy(x, y, "./resources/enemies/"+name+".png", 5, this, 1);
+            enemies.add(temp);
+          }
+          else
+          {
+            //some error message for not being able to find the file
+          }
         }
-        else if(spl[0].contains("platform"))
+        else if(name.contains("robot"))
         {
-          Platform temp = new Platform(Integer.parseInt(spl[1]), Integer.parseInt(spl[2]), filePath.concat("assets/").concat(spl[0]).concat(".png/"));
-          platforms.add(temp);
-          objectList.add(temp);
-        }
-        else if(spl[0].contains("portal"))
-        {
-          portal = new GameObject(Integer.parseInt(spl[1]), Integer.parseInt(spl[2]), filePath.concat("assets/").concat(spl[0]).concat(".png/"), "portal", null);
-          objectList.add(portal);
+          if(new File("./resources/enemies/"+name+".png").isFile())
+          {
+            Enemy temp = new Enemy(x, y, "./resources/enemies/"+name+".png", 5, this, 1);
+            enemies.add(temp);
+          }
+          else
+          {
+            //some error message for not being able to find the file
+          }
         }
         else
         {
-          objectList.add(new GameObject(Integer.parseInt(spl[1]), Integer.parseInt(spl[2]), filePath.concat("assets/").concat(spl[0]).concat(".png/"), null));
+          if(type.contains("hitbox"))
+          {
+            objectList.add(new GameObject(x, y, width, height, name));
+          }
+          else{
+            String path = findFilePath(name);
+            if(path != null)
+            {
+              objectList.add(new GameObject(x, y, path, name, null));
+            }
+            else
+            {
+              //some error message for not being able to find the file
+            }
+          }
         }
       }
       myReader.close();
@@ -141,5 +175,32 @@ public class Level
   public FloatRect getPlayArea()
   {
     return playArea;
+  }
+
+  /**
+   * Finds the possible path to file or returns null if not found
+   * 
+   * @param name name of file to find
+   * @return string path or null
+   */
+  private String findFilePath(String name)
+  {
+    if(new File("./resources/"+name+"/"+name+".png").isFile())
+    {
+      return "./resources/"+name+"/"+name+".png";
+    }
+    else if(new File("./levels/"+levelNum+"/assets/"+name+".png").isFile())
+    {
+      return "./levels/"+levelNum+"/assets/"+name+".png";
+    }
+    else if(new File("./resources/common/"+name+".png").isFile())
+    {
+      return "./resources/common/"+name+".png";
+    }
+    else if(new File("./resources/"+name+".png").isFile())
+    {
+      return "./resources/"+name+".png";
+    }
+    return null;
   }
 }

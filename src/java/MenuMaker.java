@@ -9,10 +9,8 @@ public class MenuMaker
     private Dimension screenRes = Toolkit.getDefaultToolkit().getScreenSize();
     //private int width = screenRes.width, height = screenRes.height; //used for setting resolution of window
     private int width = 1024, height = 640; //used for setting resolution of window
-    private int xBPos = width/2, yBPos = height/2; //used for setting button size and position
     public MMWindow window = new MMWindow(width,height,"Main menu", false); // changed temp to public for GameOver access
     private TextManager buttons[] = new TextManager[4];     // Hold buttons for Menu
-    //private GameRunner game = new GameRunner(window, "Level1");
 
     /**
      * Creates the main menu (for now very basic)
@@ -28,10 +26,10 @@ public class MenuMaker
     public void makerMenu()
     {
         // Creating Button
-        buttons[0] = new TextManager("Start",xBPos/(float)6, yBPos+(yBPos*(float)0.10));
-        buttons[1] = new TextManager("Help",xBPos/(float)6, yBPos+(yBPos*(float)0.25));
-        buttons[2] = new TextManager("Settings",xBPos/(float)6, yBPos+(yBPos*(float)0.40));
-        buttons[3] = new TextManager("Exit",xBPos/(float)6, yBPos+(yBPos*(float)0.55));
+        buttons[0] = new TextManager("Start",window.getViewZone().left+window.getViewZone().width*(float)0.1, window.getViewZone().top+(window.getViewZone().height*(float)0.5), 30);
+        buttons[1] = new TextManager("Help",window.getViewZone().left+window.getViewZone().width*(float)0.1, window.getViewZone().top+(window.getViewZone().height*(float)0.6), 30);
+        buttons[2] = new TextManager("Settings",window.getViewZone().left+window.getViewZone().width*(float)0.1, window.getViewZone().top+(window.getViewZone().height*(float)0.7), 30);
+        buttons[3] = new TextManager("Exit",window.getViewZone().left+window.getViewZone().width*(float)0.1, window.getViewZone().top+(window.getViewZone().height*(float)0.8), 30);
 
 
         while(window.isOpen()) {
@@ -71,10 +69,12 @@ public class MenuMaker
             {
                 if(new GameRunner(window, "Level1").run() == 1)
                 {
-                    window.resetView();
-                    if(new GameRunner(window, "Level3").run() == 1)
+                    if(new GameRunner(window, "Level2").run() == 1)
                     {
-                        window.resetView();
+                        if(new GameRunner(window, "Level3").run() == 1)
+                        {
+                            // game ends here
+                        }
                     }
                 }
                 window.resetView();
