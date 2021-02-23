@@ -16,7 +16,6 @@ public class Level
   //Arrays for different objects. could be usseful in the future but not right now
   public ArrayList<GameObject> background = new ArrayList<GameObject>();
   public ArrayList<Enemy> enemies = new ArrayList<Enemy>(); //had to change to public so i could access in GameRunner  for collsion damage detection
-  public ArrayList<GameObject> fires = new ArrayList<GameObject>();
   private Player player;
   private FloatRect playArea;
 
@@ -49,7 +48,8 @@ public class Level
     try {
       File myObj = new File(filePath.concat(levelNum).concat(".txt"));
       Scanner myReader = new Scanner(myObj);
-      while (myReader.hasNextLine()) {
+      while (myReader.hasNextLine()) 
+      {
         String data = myReader.nextLine();
         String[] spl = data.split(" ");
 

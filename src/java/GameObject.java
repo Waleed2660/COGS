@@ -203,6 +203,11 @@ public class GameObject extends Sprite
         return null;
     }
     
+    /**
+     * Checks for fire collision
+     * 
+     */
+
     public GameObject fCollides(ArrayList<Fire> listToDetect)
     {
         for(GameObject a : listToDetect)
