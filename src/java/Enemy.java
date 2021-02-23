@@ -1,12 +1,11 @@
 import org.jsfml.graphics.FloatRect;
-
 import java.util.ArrayList;
 
 /**
  * A class that represents an enemy entity. Can be either dog or robot. Extends GameObject.
  */
 
-public class Enemy extends GameObject
+public class Enemy extends Entity
 {
     private float speedY = 0, speedX = 5, g = (float)-2.5;
     private int direction = -1;
@@ -27,7 +26,7 @@ public class Enemy extends GameObject
      */
     public Enemy(float x, float y, String texPath, float speed, Level level, int hp)
     {
-        super(x, y, texPath, null);
+        super(x, y, texPath, speed, null);
         this.speedX = speed;
         this.g = level.getGravity();
         this.hp = hp;
@@ -47,8 +46,8 @@ public class Enemy extends GameObject
      * Executes any movement for the enemy(With checking for collision).
      *
      * @param objectsInView an array of the object that are in view and should be checked for collision.
-     * @param window the game window.
      */
+    @Override
     public void movement(ArrayList<GameObject> objectsInView)
     {
         //falling flag
@@ -58,7 +57,7 @@ public class Enemy extends GameObject
 
         for(GameObject a : objectsInView)
         {
-            if(!a.equals(this) && a.getClass() != Enemy.class && !a.getType().equals("portal"))
+            if(!a.equals(this) && a.getClass() != Enemy.class)
             {
                 //  Checks if the player collides with anything on the y axis and if it does checks if its above or bellow and changes the speed
                 //  so it ends up right next to it. Same for the x axis.
@@ -126,10 +125,10 @@ public class Enemy extends GameObject
     public Bullet shoot()
     {
         if (direction == 1) { // Extended code so that bullet detect doesnt hit player and despawn player
-            return new Bullet(direction, this.getPosition().x + 40, this.getPosition().y + this.getLocalBounds().height / 2, "resources/common/laser.png");
+            return new Bullet(direction, this.getPosition().x + 40, this.getPosition().y + this.getLocalBounds().height / 2, 30, "resources/common/laser.png");
         }
         else {
-            return new Bullet(direction, this.getPosition().x - 20, this.getPosition().y + this.getLocalBounds().height / 2, "resources/common/laser.png");
+            return new Bullet(direction, this.getPosition().x - 20, this.getPosition().y + this.getLocalBounds().height / 2, 30, "resources/common/laser.png");
         }
     }
 

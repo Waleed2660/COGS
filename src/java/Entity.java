@@ -4,13 +4,28 @@ public abstract class Entity extends GameObject
 {
     private double lastBulletTime = System.currentTimeMillis();
 
-    private float speed, g;
+    protected final float speed, g;
 
+    /**
+     * Constructor for an enityt object
+     * 
+     * @param x coordinate
+     * @param y coordinate
+     * @param texPath the path to the texture
+     * @param speed the entity speed on the x axis
+     * @param level the level the object is in (used to get enviromental variables like gravity). Can be null if gravity is not used
+     */
     public Entity(float x, float y, String texPath, float speed, Level level)
     {
         super(x, y, texPath, null);
         this.speed = speed;
-        g = level.getGravity();
+        if(level != null)
+        {
+            g = level.getGravity();
+        }
+        else{
+            g = 0;
+        }
     }
 
     /**

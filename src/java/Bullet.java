@@ -1,8 +1,9 @@
+import java.util.ArrayList;
 
 /**
  * This class provides basic bullet functionality
  */
-public class Bullet extends GameObject{
+public class Bullet extends Entity{
     private final float direction;
 
     /**
@@ -12,16 +13,17 @@ public class Bullet extends GameObject{
      * @param y           y-coordinate for the object
      * @param texturePath the path to the texture to set
      */
-    public Bullet(float direction, float x, float y, String texturePath) {
-        super(x, y, texturePath, null);
+    public Bullet(float direction, float x, float y, float speed, String texturePath) {
+        super(x, y, texturePath, speed, null);
         this.direction = direction;
     }
 
     /**
      * Moves the bullet object given direction
     */
-    public void moveBullet(float XSpeed){
-        this.moveObject(XSpeed*direction, 0);
+    @Override
+    public void movement(ArrayList<GameObject> objectsInView){
+        this.moveObject(speed*direction, 0);
     }
 
     /**

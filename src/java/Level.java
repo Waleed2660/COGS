@@ -29,14 +29,14 @@ public class Level
    * @param levNum - the level to construct. Currently can be Level1, Level2 or Level3. Should make the choices into enums
    * @param gravity gravity force to be applied in the level
    * @param friction friction force to be applied in the level
-   * @param view the view to load
+   * @param window the game window
    */
-  public Level(String levNum, float gravity, float friction, FloatRect view)
+  public Level(String levNum, float gravity, float friction, MMWindow window)
   {
     levelNum = levNum;
     this.gravity = gravity;
     this.friction = friction;
-    addFromFile("./levels/"+levNum+"/", view);
+    addFromFile("./levels/"+levNum+"/", window);
   }
 
   /**
@@ -44,8 +44,9 @@ public class Level
    *
    * @param filePath the file path of the folder where assets and level information are stored
    */
-  private void addFromFile(String filePath, FloatRect view)
+  private void addFromFile(String filePath, MMWindow window)
   {
+    FloatRect view = window.getViewZone();
     try {
       File myObj = new File(filePath+levelNum+".txt");
       Scanner myReader = new Scanner(myObj);
@@ -64,7 +65,7 @@ public class Level
         {
           if(new File("./resources/player/"+name+".png").isFile())
           {
-            player = new Player(x, y, 15, 160, this, "./resources/player/player.png");
+            player = new Player(x, y, 15, 160, this, window, "./resources/player/player.png");
             objectList.add(player);
           }
           else

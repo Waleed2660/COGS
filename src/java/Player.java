@@ -8,16 +8,17 @@ import org.jsfml.window.Keyboard.Key;
  * A class that represents the player entity. Extends GameObject.
  */
 
-public class Player extends GameObject
+public class Player extends Entity
 {
     private float speedY = 0, speedX = 0;
-    private float maxSpeedX, jumpHeight, friction, g;
+    private float jumpHeight, friction;
     private int direction = 1;
     private double lastBulletTime = System.currentTimeMillis();
     private float hp = 100000; //5 hits to ko 20 hp per hit  // enemies dog - 1 hit ko robot 2 - hit ko // fires 2 damage more often than enemy damage
     private boolean inAir = false;
     private boolean crouched = false;
     private FloatRect playArea;
+    private MMWindow window;
 
     /**
      * Constructor for player.
@@ -29,13 +30,12 @@ public class Player extends GameObject
      * @param level the level the player is in
      * @param texPath texture path
      */
-    public Player(float x, float y, float maxSpeedX, float jumpHeight, Level level, String texPath)
+    public Player(float x, float y, float maxSpeedX, float jumpHeight, Level level, MMWindow window, String texPath)
     {
-        super(x, y, texPath, null);
-        this.maxSpeedX = maxSpeedX;
+        super(x, y, texPath, maxSpeedX, level);
         this.jumpHeight = jumpHeight;
+        this.window = window;
         this.friction = level.getFriction();
-        this.g = level.getGravity();
         this.playArea = level.getPlayArea();
     }
 
@@ -47,7 +47,10 @@ public class Player extends GameObject
     public void walk(int direction)
     {
         this.direction = direction;
-        speedX = maxSpeedX;
+        if(speedX <= speed)
+        {
+            speedX += speed*(friction*2);
+        }
     }
 
     /**
@@ -84,9 +87,9 @@ public class Player extends GameObject
      * Executes any movement for the player(With checking for collision).
      *  
      * @param objectsInView an array of the object that are in view and should be checked for collision.
-     * @param window the game window.
      */
-    public void movement(ArrayList<GameObject> objectsInView, MMWindow window)
+    @Override
+    public void movement(ArrayList<GameObject> objectsInView)
     {
         //falling flag
         boolean landed = false;
@@ -186,11 +189,11 @@ public class Player extends GameObject
         // reduces the speed gradually relative to the friction coefficient 
         if(!landed && speedX > 0)
         {
-            speedX -= maxSpeedX*(friction/2);
+            speedX -= speed*(friction/2);
         }
         else if(speedX > 0)
         {
-            speedX -= maxSpeedX*friction;
+            speedX -= speed*friction;
         }
         if(speedX < 0){
             speedX = 0;
@@ -203,9 +206,9 @@ public class Player extends GameObject
     public Bullet shoot()
     {
         if (direction == 1) // Extended code so that bullet detect doesnt hit player and de-spawn player
-            return new Bullet(direction, this.getPosition().x + this.getHitBox().width + 20, this.getPosition().y + this.getLocalBounds().height / 2, "resources/common/laser.png");
+            return new Bullet(direction, this.getPosition().x + this.getHitBox().width + 20, this.getPosition().y + this.getLocalBounds().height / 2, 30, "resources/common/laser.png");
         else
-            return new Bullet(direction, this.getPosition().x - 20, this.getPosition().y + this.getLocalBounds().height / 2, "resources/common/laser.png");
+            return new Bullet(direction, this.getPosition().x - 20, this.getPosition().y + this.getLocalBounds().height / 2, 30, "resources/common/laser.png");
     }
 
     /**
@@ -231,8 +234,5 @@ public class Player extends GameObject
     public void setHP(int hp)
     {
         this.hp = hp;
-
-        //bullets.add(new Bullet(direction, this.getPosition().x+this.getLocalBounds().width*direction, this.getPosition().y+this.getLocalBounds().height/2, "resources/laser.png"));
-
     }
 }
