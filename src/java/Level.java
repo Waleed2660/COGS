@@ -115,13 +115,6 @@ public class Level
             //some error message for not being able to find the file
           }
         }
-        else if(type.contains("powerUp"))
-        {
-          if(new File("./resources/common/"+name+".png").isFile())
-          {
-            
-          }
-        }
         else
         {
           if(type.contains("hitbox"))

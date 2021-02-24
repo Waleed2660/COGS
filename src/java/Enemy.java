@@ -55,6 +55,7 @@ public class Enemy extends Entity
     {
         //falling flag
         boolean landed = false;
+        boolean edge = false;
         boolean diagCheck = true;
         float tempX = speedX;
 
@@ -67,7 +68,10 @@ public class Enemy extends Entity
                 if(this.getFutureHitBox(0, speedY*-1).intersection(a.getHitBox()) != null)
                 {
                     diagCheck = false;
-
+                    if(this.getFutureHitBox(0, speedY*-1).intersection(a.getHitBox()).width != this.getLocalBounds().width)
+                    {
+                        edge = true;
+                    }
                     //if collides bellow
                     if(a.getHitBox().top >= this.getPosition().y+this.getLocalBounds().height)
                     {
@@ -111,9 +115,8 @@ public class Enemy extends Entity
         {
             speedY = 0;
         }
-        else //doesnt let to fall off a platform
+        if(edge)
         {
-            speedY = 0;
             direction *= -1;
         }
 

@@ -252,7 +252,7 @@ public class GameRunner {
 
                 Bullet bullet = hostileBullets.get(x);
                 bullet.update(null);
-                window.draw((bullet));
+                window.draw(bullet);
 
                 // De-spawns bullets upon impact
                 GameObject bulletHit = bullet.collides(result);
