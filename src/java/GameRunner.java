@@ -56,7 +56,7 @@ public class GameRunner {
     /**
      * Runs the level and controls game flow.
      *
-     * @return return 0 if return to menu, 1 if load next level
+     * @return return 0 if return to menu, 1 if load next level, 2 if died and should reload
      */
     public int run() {
         hpBar.setFillColor(Color.RED);
@@ -78,10 +78,6 @@ public class GameRunner {
                     window.close();
                     //IMPORTANT CLOSES WINDOW UPON PRESSING CLOSE DO NOT ALTER
                 }
-                if (e.type == Event.Type.MOUSE_BUTTON_PRESSED) {
-
-                    // Clickable Button
-                }
             }
 
             if (player.collides(level.enemies) != null) {
@@ -96,7 +92,7 @@ public class GameRunner {
                     System.out.println("dead");
                     player.setHP(100);
                     window.resetView();
-                    return 0;
+                    return 2;
                 }
 
             }
@@ -112,7 +108,7 @@ public class GameRunner {
                     System.out.println("dead");
                     player.setHP(100);
                     window.resetView();
-                    return 0;
+                    return 2;
                 }
 
             }
