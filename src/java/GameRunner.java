@@ -2,6 +2,8 @@ import org.jsfml.graphics.*;
 import org.jsfml.window.Keyboard;
 import org.jsfml.window.event.Event;
 import org.jsfml.system.*;
+
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Timer;
 
@@ -19,7 +21,8 @@ public class GameRunner {
     private MMWindow window;
     private Level level;
     private Player player;
-    private float check = 100;
+    private double rpfStart = 0, invStart = 0;
+    private float check = 100, hpInc = 20;
     private boolean invincible = false, machinegun = false, hpPack = false;
 
     //private GameOver over;
@@ -83,41 +86,86 @@ public class GameRunner {
 
             if (player.collides(level.enemies) != null) 
             {
-                if (System.currentTimeMillis() - lastHitTime > 500) 
+                if(System.currentTimeMillis() - invStart >5000)
                 {
-                    check = player.dmghp(20);
-                    System.out.println("Collision with Alive Enemy" + check);
-                    lastHitTime = System.currentTimeMillis();
-                    player.hitAway();
-                }
+                    if (System.currentTimeMillis() - lastHitTime > 500) 
+                    {
+                        check = player.dmghp(20);
+                        lastHitTime = System.currentTimeMillis();
+                        player.hitAway();
+                    }
 
-                if (check == 0 || check == -1) 
-                {
-                    System.out.println("dead");
-                    player.setHP(100);
-                    window.resetView();
-                    return 0;
+                    if (check == 0 || check == -1) 
+                    {
+                        System.out.println("dead");
+                        player.setHP(100);
+                        window.resetView();
+                        return 0;
+                    }
                 }
 
             }
-
+            
             if (playerCollides != null && playerCollides.getType().equals("fire")) 
             {
-                if (System.currentTimeMillis() - lastBurnTime > 100) 
+                if(System.currentTimeMillis() - invStart > 5000)
                 {
-                    check = player.dmghp(2);
-                    System.out.println("Collision with fire" + check);
-                    lastBurnTime = System.currentTimeMillis();
+                    if (System.currentTimeMillis() - lastBurnTime > 100) 
+                    {
+                        check = player.dmghp(2);
+                        System.out.println("Collision with fire" + check);
+                        lastBurnTime = System.currentTimeMillis();
+                    }
+
+                    if (check == 0 || check == -1) 
+                    {
+                        player.setHP(100);
+                        window.resetView();
+                        return 0;
+                    }
                 }
 
-                if (check == 0 || check == -1) 
+            }
+            if(playerCollides != null && playerCollides.getType().equals("hp"))
+            {
+                
+                for(int h = 0; h < level.objectList.size(); h++ )
                 {
-                    System.out.println("dead");
-                    player.setHP(100);
-                    window.resetView();
-                    return 0;
+                    GameObject hpInd = level.objectList.get(h);
+                    if(hpInd.pCollides(player)!= null)
+                    {
+                        level.objectList.remove(h);
+                        h = level.objectList.size();
+                    }
                 }
-
+                check +=20;
+                player.setHP(check);
+            }
+            if(playerCollides != null && playerCollides.getType().equals("rapidfire"))
+            {
+                rpfStart = System.currentTimeMillis();
+                for(int h = 0; h < level.objectList.size(); h++ )
+                {
+                    GameObject rpInd = level.objectList.get(h);
+                    if(rpInd.pCollides(player)!= null)
+                    {
+                        level.objectList.remove(h);
+                        h = level.objectList.size();
+                    }
+                }
+            }
+            if(playerCollides != null && playerCollides.getType().equals("invincibility"))
+            {
+                invStart = System.currentTimeMillis();
+                for(int h = 0; h < level.objectList.size(); h++ )
+                {
+                    GameObject invInd = level.objectList.get(h);
+                    if(invInd.pCollides(player)!= null)
+                    {
+                        level.objectList.remove(h);
+                        h = level.objectList.size();
+                    }
+                }
             }
             if (playerCollides != null && playerCollides.getType().equals("portal")) 
             {
@@ -140,8 +188,20 @@ public class GameRunner {
     public int controller(ArrayList<GameObject> blocks) {
         if (Keyboard.isKeyPressed(Keyboard.Key.SPACE)) {
             //Creates a Bullet Object inside Player, also Checks delay between each bullet
-            if (player.insertDelay(500)) {
-                bullets.add(player.shoot());
+            
+            if(System.currentTimeMillis() - rpfStart < 10000)
+            {
+                if(player.insertDelay(250))
+                {
+                    bullets.add(player.shoot());
+                }
+            }
+            else
+            {
+                if (player.insertDelay(500)) 
+                {
+                    bullets.add(player.shoot());
+                }
             }
         }
         if (Keyboard.isKeyPressed(Keyboard.Key.LEFT) || Keyboard.isKeyPressed(Keyboard.Key.A)) {
@@ -209,8 +269,8 @@ public class GameRunner {
                 if (!bullet.bulletInSight(window) || bulletHit != null) {
 
                     if (bulletHit != null && bulletHit instanceof Enemy) {
-                        if (((Enemy) bulletHit).dmghp() <= 0) {
-                            System.out.println("Enemy dead");
+                        if (((Enemy) bulletHit).dmghp() <= 0) 
+                        {
                             level.enemies.remove(bulletHit);
                         }
                     }
