@@ -59,7 +59,7 @@ public class GameRunner {
     /**
      * Runs the level and controls game flow.
      *
-     * @return return 0 if return to menu, 1 if load next level
+     * @return return 0 if return to menu, 1 if load next level, 2 if died and should reload
      */
     public int run() {
         hpBar.setFillColor(Color.RED);
@@ -97,13 +97,11 @@ public class GameRunner {
 
                     if (check == 0 || check == -1) 
                     {
-                        System.out.println("dead");
                         player.setHP(100);
                         window.resetView();
-                        return 0;
+                        return 2;
                     }
                 }
-
             }
             
             if (playerCollides != null && playerCollides.getType().equals("fire")) 
@@ -121,7 +119,7 @@ public class GameRunner {
                     {
                         player.setHP(100);
                         window.resetView();
-                        return 0;
+                        return 2;
                     }
                 }
 
