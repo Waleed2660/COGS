@@ -67,7 +67,7 @@ public class MenuMaker
         for (TextManager button : buttons) {
             if (button.buttonPressed(MouseX, MouseY, "Start"))
             {
-                if(new GameRunner(window, "Level1").run() == 1)
+                if(new GameRunner(window, "Level3").run() == 1)
                 {
                     if(new GameRunner(window, "Level2").run() == 1)
                     {

@@ -98,7 +98,7 @@ public class Player extends Entity
 
         for(GameObject a : objectsInView)
         {
-            if(!a.equals(this) && !(a instanceof Enemy) && !a.getType().equals("portal") && !a.getType().equals("fire"))
+            if(!a.equals(this) && !(a instanceof Enemy) && !a.getType().equals("portal") && !a.getType().equals("fire") && !a.getType().equals("hp") && !a.getType().equals("rapidfire") && !a.getType().equals("invincibility"))
             {
                 //  Checks if the player collides with anything on the y axis and if it does checks if its above or bellow and changes the speed
                 //  so it ends up right next to it. Same for the x axis.
