@@ -2,7 +2,6 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-
 import org.jsfml.graphics.*;
 import org.jsfml.system.Vector2f;
 

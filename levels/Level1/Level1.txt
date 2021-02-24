@@ -1,4 +1,4 @@
-BackgroundEarth sprite 0 0 15360 640
+BackgroundEarth sprite 0 0 15360 640 
 portal hitbox 15200 184 32 208
 ground hitbox 15200 392 160 152
 ground hitbox 0 544 15360 95.8125
@@ -231,4 +231,5 @@ fire sprite 14048 320 32 32
 fire sprite 4032 512 32 32
 fire sprite 4000 512 32 32
 player sprite 64 448 32 96
+rapidfire powerUp 72 448 32 32
 fire sprite 3936 512 32 32

@@ -115,9 +115,12 @@ public class Level
             //some error message for not being able to find the file
           }
         }
-        else if(name.contains("powerUp"))
+        else if(type.contains("powerUp"))
         {
-          if(new File("./resources/common/"+name))
+          if(new File("./resources/common/"+name+".png").isFile())
+          {
+            
+          }
         }
         else
         {

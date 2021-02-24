@@ -47,5 +47,5 @@ public abstract class Entity extends GameObject
      *  
      * @param objectsInView an array of the object that are in view and should be checked for collision.
      */
-    public abstract void movement(ArrayList<GameObject> objectsInView);
+    public abstract void update(ArrayList<GameObject> objectsInView);
 }

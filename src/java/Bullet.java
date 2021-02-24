@@ -22,7 +22,7 @@ public class Bullet extends Entity{
      * Moves the bullet object given direction
     */
     @Override
-    public void movement(ArrayList<GameObject> objectsInView){
+    public void update(ArrayList<GameObject> objectsInView){
         this.moveObject(speed*direction, 0);
     }
 

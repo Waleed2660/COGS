@@ -51,7 +51,7 @@ public class Enemy extends Entity
      * @param objectsInView an array of the object that are in view and should be checked for collision.
      */
     @Override
-    public void movement(ArrayList<GameObject> objectsInView)
+    public void update(ArrayList<GameObject> objectsInView)
     {
         //falling flag
         boolean landed = false;
@@ -60,7 +60,7 @@ public class Enemy extends Entity
 
         for(GameObject a : objectsInView)
         {
-            if(!a.equals(this) && a.getClass() != Enemy.class)
+            if(!a.equals(this) && a.getClass() != Enemy.class && a.getClass() != Player.class)
             {
                 //  Checks if the player collides with anything on the y axis and if it does checks if its above or bellow and changes the speed
                 //  so it ends up right next to it. Same for the x axis.
