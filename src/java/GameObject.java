@@ -176,16 +176,4 @@ public class GameObject extends Sprite {
         }
         return result;
     }
-
-    public GameObject pCollides(Player player) {
-            if (!player.equals(this) && player instanceof GameObject) 
-            {
-                if (this.getHitBox().intersection(((GameObject) player).getHitBox()) != null) 
-                {
-                    return (GameObject) player;
-                }
-            }
-        return null;
-    }
-    
 }

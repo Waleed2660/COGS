@@ -268,6 +268,8 @@ public class GameRunner {
      * @param result    ArrayList containing objects within viewZone
      */
     public void handleEnemy(FloatRect viewZone, ArrayList<GameObject> result){
+
+        //in theory bullets check for collision first since there are no enemies in result so far so there wouldnt be a need to check if it collides with an enemy
         if (!hostileBullets.isEmpty()) {
 
             //  Render Bullets fired by Enemies
