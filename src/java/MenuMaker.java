@@ -3,7 +3,7 @@ public interface MenuMaker
     /**
      * Method for displaying all the menu contents
      */
-    public void displayMenu(MMWindow window);
+    public void displayMenu();
 
     /**
      * Method for checking what button was pressed and do stuff accordingly

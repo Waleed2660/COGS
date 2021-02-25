@@ -23,7 +23,7 @@ public class PauseMenu implements MenuMaker{
 
 
     @Override
-    public void displayMenu(MMWindow window) {
+    public void displayMenu() {
 
         float mouseX = Mouse.getPosition(window).x + window.getViewZone().left
                 , mouseY = Mouse.getPosition(window).y + window.getViewZone().top;
@@ -74,10 +74,18 @@ public class PauseMenu implements MenuMaker{
         }
     }
 
+    /**
+     * Used to check if pause menu is opened
+     * @return  boolean
+     */
     public Boolean pauseMenuIsOpen() {
         return pauseMenuIsOpen;
     }
 
+    /**
+     * Used to terminate PauseMenu
+     * @return
+     */
     public Boolean getReturnToMenu() { return returnToMenu; }
 
     public void openPauseMenu(MMWindow window){

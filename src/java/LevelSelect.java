@@ -19,7 +19,7 @@ public class LevelSelect extends LevelManager implements MenuMaker
         buttons[3] = new TextManager("Back",window.getViewZone().left+window.getViewZone().width*(float)0.1, window.getViewZone().top+(window.getViewZone().height*(float)0.8), 30);
     }
 
-    public void displayMenu(MMWindow window)
+    public void displayMenu()
     {
         open = true;
         
