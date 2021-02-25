@@ -237,4 +237,5 @@ hp sprite 10112 512 32 32
 hp sprite 12640 384 32 32
 invincibility sprite 4640 224 32 32
 player sprite 64 448 32 96
+fire sprite 3936 512 32 32
 rapidfire sprite 1568 512 32 32

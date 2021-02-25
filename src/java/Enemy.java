@@ -9,10 +9,8 @@ public class Enemy extends Entity
 {
     private float speedY = 0, speedX = 5, g = (float)-2.5;
     private int direction = -1;
-
-    public int hp = 100; //5 hits to ko 20 hp per hit  // enemies dog - 1 hit ko robot 2 - hit ko
-    int health = 0; // used to store health for iframes
     private boolean inAir = false;
+    int hp;
 
     /**
      * Constructor for enemy object
@@ -32,6 +30,11 @@ public class Enemy extends Entity
         this.hp = hp;
     }
 
+    /**
+     * Damages enemy health
+     * 
+     * @return
+     */
     public int dmghp()
     {
         hp -= 1;

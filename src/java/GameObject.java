@@ -2,7 +2,6 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-
 import org.jsfml.graphics.*;
 import org.jsfml.system.Vector2f;
 
@@ -176,4 +175,16 @@ public class GameObject extends Sprite {
         }
         return null;
     }
+
+    public GameObject pCollides(Player player) {
+            if (!player.equals(this) && player instanceof GameObject) 
+            {
+                if (this.getHitBox().intersection(((GameObject) player).getHitBox()) != null) 
+                {
+                    return (GameObject) player;
+                }
+            }
+        return null;
+    }
+    
 }

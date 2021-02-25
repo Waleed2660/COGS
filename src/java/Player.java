@@ -14,7 +14,7 @@ public class Player extends Entity
     private float jumpHeight, friction;
     private int direction = 1;
     private double lastBulletTime = System.currentTimeMillis();
-    private float hp = 100000; //5 hits to ko 20 hp per hit  // enemies dog - 1 hit ko robot 2 - hit ko // fires 2 damage more often than enemy damage
+    private float hp = 100; //5 hits to ko 20 hp per hit  // enemies dog - 1 hit ko robot 2 - hit ko // fires 2 damage more often than enemy damage
     private boolean inAir = false;
     private boolean crouched = false;
     private FloatRect playArea;
@@ -238,9 +238,9 @@ public class Player extends Entity
     /**
      * Resets player's hp after death incase of restart
      * 
-     * @param hp tracks the players health
+     * @param hp tracks the player's health
      */
-    public void setHP(int hp)
+    public void setHP(float hp)
     {
         this.hp = hp;
     }
