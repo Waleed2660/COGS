@@ -2,7 +2,7 @@ import org.jsfml.graphics.Color;
 import org.jsfml.window.Mouse;
 import org.jsfml.window.event.Event;
 
-public class LevelSelect implements MenuMaker
+public class LevelSelect extends LevelManager implements MenuMaker
 {
     private TextManager[] buttons = new TextManager[4];
     private MMWindow window;
@@ -59,15 +59,15 @@ public class LevelSelect implements MenuMaker
         {
             if (button.buttonPressed(MouseX, MouseY, "Level 1: Earth"))
             {
-                LevelManager.runLevels(1, numOfLevels, window);
+                this.runLevels(1, numOfLevels, window);
             }
             if (button.buttonPressed(MouseX, MouseY, "Level 2: Rocket"))
             {
-                LevelManager.runLevels(2, numOfLevels, window);
+                this.runLevels(2, numOfLevels, window);
             }
             if (button.buttonPressed(MouseX, MouseY, "Level 3: Moon"))
             {
-                LevelManager.runLevels(3, numOfLevels, window);
+                this.runLevels(3, numOfLevels, window);
             }
             if (button.buttonPressed(MouseX, MouseY, "Back"))  open = false;
         }

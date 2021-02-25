@@ -1,6 +1,6 @@
 public class LevelManager
 {
-    public static void runLevels(int startLevel, int numOfLevels, MMWindow window)
+    public void runLevels(int startLevel, int numOfLevels, MMWindow window)
     {
         for(int i = startLevel; i <= numOfLevels; i++)
         {

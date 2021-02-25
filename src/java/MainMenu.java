@@ -4,7 +4,7 @@ import org.jsfml.window.Mouse;
 import org.jsfml.window.event.Event;
 import java.awt.*;
 
-public class MainMenu implements MenuMaker
+public class MainMenu extends LevelManager implements MenuMaker
 {
     private int numOfLevels = 3;
 
@@ -75,7 +75,7 @@ public class MainMenu implements MenuMaker
         for (TextManager button : buttons) {
             if (button.buttonPressed(MouseX, MouseY, "Start"))
             {
-                LevelManager.runLevels(1, numOfLevels, window);
+                this.runLevels(1, numOfLevels, window);
             }
             if (button.buttonPressed(MouseX, MouseY, "Level Select"))
             {
