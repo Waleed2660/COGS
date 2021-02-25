@@ -237,9 +237,5 @@ hp sprite 10112 512 32 32
 hp sprite 12640 384 32 32
 invincibility sprite 4640 224 32 32
 player sprite 64 448 32 96
-<<<<<<< HEAD
-rapidfire powerUp 72 448 32 32
 fire sprite 3936 512 32 32
-=======
 rapidfire sprite 1568 512 32 32
->>>>>>> 56e0fa66cd848043c194105d88dc8d62b883201a
