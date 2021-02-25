@@ -31,16 +31,16 @@ public class MainMenu extends LevelManager implements MenuMaker
 
         levelSelect = new LevelSelect(window, numOfLevels);
 
-        displayMenu(window);
+        displayMenu();
     }
     
     @Override
-    public void displayMenu(MMWindow window)
+    public void displayMenu()
     {
         // Creating Button
         while(window.isOpen())
         {
-            window.clear(Color.BLACK);
+            window.clear();
             // Real-Time Location parameters for Cursor
             float MouseX = Mouse.getPosition(window).x, MouseY = Mouse.getPosition(window).y;
 
@@ -79,7 +79,7 @@ public class MainMenu extends LevelManager implements MenuMaker
             }
             if (button.buttonPressed(MouseX, MouseY, "Level Select"))
             {
-                levelSelect.displayMenu(window);
+                levelSelect.displayMenu();
             }
             if (button.buttonPressed(MouseX, MouseY, "Settings"))  {}
             if (button.buttonPressed(MouseX, MouseY, "Exit"))  window.close();

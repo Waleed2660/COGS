@@ -74,7 +74,7 @@ public class GameRunner {
                 pMenu.openPauseMenu(window);
                 while (pMenu.pauseMenuIsOpen()){
                     // Renders Menu
-                    pMenu.displayMenu(window);
+                    pMenu.displayMenu();
                     // Returns to Main Menu
                     if (pMenu.getReturnToMenu()){
                         return 0;
