@@ -21,6 +21,7 @@ public class GameRunner {
     private MMWindow window;
     private Level level;
     private Player player;
+    private PauseMenu pMenu;
     private double rpfStart = 0, invStart = 0;
     private float check = 100, hpInc = 20;
     private boolean invincible = false, machinegun = false, hpPack = false;
@@ -39,7 +40,8 @@ public class GameRunner {
         window.display();
 
         hpBar.setSize(new Vector2f(check*2,20));
-        
+        pMenu = new PauseMenu(window);
+
         window.setKeyRepeatEnabled(false);
         if(levelNum.equals("Level3"))
         {
@@ -68,7 +70,16 @@ public class GameRunner {
             ArrayList<GameObject> objectsInView = drawAll(level, window);
             ArrayList<GameObject> playerCollides = player.collides(objectsInView);
             if (this.controller(objectsInView) == 1) {
-                return 0;
+                // Sets new location for buttons as ViewZone changes
+                pMenu.openPauseMenu(window);
+                while (pMenu.pauseMenuIsOpen()){
+                    // Renders Menu
+                    pMenu.displayMenu(window);
+                    // Returns to Main Menu
+                    if (pMenu.getReturnToMenu()){
+                        return 0;
+                    }
+                }
             }
 
             Event e = window.pollEvent();
