@@ -66,7 +66,7 @@ public class GameRunner {
         while (window.isOpen())
         {
             ArrayList<GameObject> objectsInView = drawAll(level, window);
-            GameObject playerCollides = player.collides(objectsInView);
+            ArrayList<GameObject> playerCollides = player.collides(objectsInView);
             if (this.controller(objectsInView) == 1) {
                 return 0;
             }
@@ -82,7 +82,7 @@ public class GameRunner {
                 }
             }
 
-            if (player.collides(level.enemies) != null) 
+            if (!player.collides(level.enemies).isEmpty()) 
             {
                 if(System.currentTimeMillis() - invStart >5000)
                 {
@@ -102,73 +102,53 @@ public class GameRunner {
                 }
             }
             
-            if (playerCollides != null && playerCollides.getType().equals("fire")) 
+            for(GameObject a : playerCollides)
             {
-                if(System.currentTimeMillis() - invStart > 5000)
+                if (a.getType().equals("fire")) 
                 {
-                    if (System.currentTimeMillis() - lastBurnTime > 100) 
+                    if(System.currentTimeMillis() - invStart > 5000)
                     {
-                        check = player.dmghp(2);
-                        System.out.println("Collision with fire" + check);
-                        lastBurnTime = System.currentTimeMillis();
+                        if (System.currentTimeMillis() - lastBurnTime > 100) 
+                        {
+                            check = player.dmghp(2);
+                            System.out.println("Collision with fire" + check);
+                            lastBurnTime = System.currentTimeMillis();
+                        }
+
+                        if (check == 0 || check == -1) 
+                        {
+                            player.setHP(100);
+                            window.resetView();
+                            return 2;
+                        }
                     }
 
-                    if (check == 0 || check == -1) 
-                    {
-                        player.setHP(100);
-                        window.resetView();
-                        return 2;
-                    }
                 }
+                if(a.getType().equals("hp"))
+                {
+                    level.objectList.remove(a);
+                    check +=20;
+                    player.setHP(check);
+                }
+                if(a.getType().equals("rapidfire"))
+                {
+                    rpfStart = System.currentTimeMillis();
+                    level.objectList.remove(a);
+                }
+                if(a.getType().equals("invincibility"))
+                {
+                    invStart = System.currentTimeMillis();
 
-            }
-            if(playerCollides != null && playerCollides.getType().equals("hp"))
-            {
-                
-                for(int h = 0; h < level.objectList.size(); h++ )
-                {
-                    GameObject hpInd = level.objectList.get(h);
-                    if(hpInd.pCollides(player)!= null)
-                    {
-                        level.objectList.remove(h);
-                        h = level.objectList.size();
-                    }
+                    level.objectList.remove(a);
                 }
-                check +=20;
-                player.setHP(check);
-            }
-            if(playerCollides != null && playerCollides.getType().equals("rapidfire"))
-            {
-                rpfStart = System.currentTimeMillis();
-                for(int h = 0; h < level.objectList.size(); h++ )
+                if (a.getType().equals("portal")) 
                 {
-                    GameObject rpInd = level.objectList.get(h);
-                    if(rpInd.pCollides(player)!= null)
-                    {
-                        level.objectList.remove(h);
-                        h = level.objectList.size();
-                    }
+                    window.resetView();
+                    return 1;
                 }
-            }
-            if(playerCollides != null && playerCollides.getType().equals("invincibility"))
-            {
-                invStart = System.currentTimeMillis();
-                for(int h = 0; h < level.objectList.size(); h++ )
-                {
-                    GameObject invInd = level.objectList.get(h);
-                    if(invInd.pCollides(player)!= null)
-                    {
-                        level.objectList.remove(h);
-                        h = level.objectList.size();
-                    }
-                }
-            }
-            if (playerCollides != null && playerCollides.getType().equals("portal")) 
-            {
-                window.resetView();
-                return 1;
             }
         }
+            
         return 0;
     }
 
@@ -261,15 +241,19 @@ public class GameRunner {
                 bullet.update(null);
 
                 // De-spawns the bullet when it goes out of frame/ hits object
-                GameObject bulletHit = bullet.collides(result);
-                if (!bullet.bulletInSight(window) || bulletHit != null) {
-
-                    if (bulletHit != null && bulletHit instanceof Enemy) {
-                        if (((Enemy) bulletHit).dmghp() <= 0) 
-                        {
-                            level.enemies.remove(bulletHit);
+                ArrayList<GameObject> bulletHit = bullet.collides(result);
+                if (!bullet.bulletInSight(window) || !bulletHit.isEmpty()) {
+                    for(GameObject a : bulletHit)
+                    {
+                        if (a instanceof Enemy) {
+                            if (((Enemy) a).dmghp() <= 0) 
+                            {
+                                level.enemies.remove(a);
+                                break;
+                            }
                         }
                     }
+                    
                     bullets.remove(x);
                 }
             }
@@ -284,6 +268,29 @@ public class GameRunner {
      * @param result    ArrayList containing objects within viewZone
      */
     public void handleEnemy(FloatRect viewZone, ArrayList<GameObject> result){
+        if (!hostileBullets.isEmpty()) {
+
+            //  Render Bullets fired by Enemies
+            for (int x = 0; x < hostileBullets.size(); x++) {
+
+                Bullet bullet = hostileBullets.get(x);
+                bullet.update(null);
+                window.draw(bullet);
+
+                // De-spawns bullets upon impact
+                ArrayList<GameObject> bulletHit = bullet.collides(result);
+                if (!bullet.bulletInSight(window) || !bulletHit.isEmpty()) {
+
+                    if(bulletHit.contains((GameObject)player))
+                    {
+                        //do something when player is hit by bullet
+                        System.out.println("Hit by bullet");
+                    }
+                    hostileBullets.remove(x);
+                }
+            }
+        }
+
         for (Enemy a : level.enemies) {  //Changed object type to Enemy in order to access methods
 
             if (viewZone.intersection(a.getHitBox()) != null) {
@@ -299,26 +306,6 @@ public class GameRunner {
                 // Renders Enemies
                 result.add(a);
                 window.draw(a);
-            }
-        }
-        if (!hostileBullets.isEmpty()) {
-
-            //  Render Bullets fired by Enemies
-            for (int x = 0; x < hostileBullets.size(); x++) {
-
-                Bullet bullet = hostileBullets.get(x);
-                bullet.update(null);
-                window.draw(bullet);
-
-                // De-spawns bullets upon impact
-                GameObject bulletHit = bullet.collides(result);
-                if (!bullet.bulletInSight(window) || bulletHit != null) {
-
-                    if (bulletHit != null && bulletHit instanceof Player) {
-                        //do something when player gets hit
-                    }
-                    hostileBullets.remove(x);
-                }
             }
         }
     }

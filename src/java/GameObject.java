@@ -165,15 +165,16 @@ public class GameObject extends Sprite {
      * @param listToDetect objects to check for collision with
      * @return null - doesnt collide with anything or objects dont extend GameObject, GameObject - the object it collides with
      */
-    public GameObject collides(ArrayList<?> listToDetect) {
+    public ArrayList<GameObject> collides(ArrayList<?> listToDetect) {
+        ArrayList<GameObject> result = new ArrayList<>();
         for (Object a : listToDetect) {
             if (!a.equals(this) && a instanceof GameObject) {
                 if (this.getHitBox().intersection(((GameObject) a).getHitBox()) != null) {
-                    return (GameObject) a;
+                    result.add((GameObject)a);
                 }
             }
         }
-        return null;
+        return result;
     }
 
     public GameObject pCollides(Player player) {
