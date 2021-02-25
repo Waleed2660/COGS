@@ -10,7 +10,7 @@ public class Enemy extends Entity
     private float speedY = 0, speedX = 5, g = (float)-2.5;
     private int direction = -1;
     private boolean inAir = false;
-    int hp;
+    private int hp;
 
     /**
      * Constructor for enemy object
@@ -33,7 +33,7 @@ public class Enemy extends Entity
     /**
      * Damages enemy health
      * 
-     * @return
+     * @return hp value if above 0 else returns 0
      */
     public int dmghp()
     {
