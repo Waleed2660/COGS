@@ -3,6 +3,10 @@ import org.jsfml.window.Keyboard;
 import org.jsfml.window.Mouse;
 import org.jsfml.window.event.Event;
 import java.awt.*;
+import java.io.File;
+import org.jsfml.graphics.*;
+import java.util.ArrayList;
+
 
 public class MainMenu extends LevelManager implements MenuMaker
 {
@@ -40,13 +44,24 @@ public class MainMenu extends LevelManager implements MenuMaker
         // Creating Button
         while(window.isOpen())
         {
-            window.clear();
+            window.clear(Color.BLACK);
             // Real-Time Location parameters for Cursor
             float MouseX = Mouse.getPosition(window).x, MouseY = Mouse.getPosition(window).y;
+
+            FloatRect view = window.getViewZone();
+
+            if(new File("resources/common/back.png").isFile())
+            {
+                ArrayList<GameObject> background = new ArrayList<GameObject>();
+                background.add(new GameObject(0, 0, "resources/common/back.png", view));
+                for(GameObject a : background)
+                    window.draw(a);
+            }
 
             for (TextManager button : buttons) {
                 window.draw(button);    // Draws all buttons
             }
+
 
             window.display();
 

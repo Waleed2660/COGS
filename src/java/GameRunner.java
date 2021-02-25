@@ -233,7 +233,7 @@ public class GameRunner {
                 window.draw(a);
             }
         }
-        hpBar.setPosition(window.getViewZone().left+100,600);
+        hpBar.setPosition(window.getViewZone().left+100,window.getViewZone().top+600);
         hpBar.setSize(new Vector2f(check*2,20));
 
 

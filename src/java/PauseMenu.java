@@ -3,6 +3,9 @@ import org.jsfml.system.Vector2f;
 import org.jsfml.system.Vector2i;
 import org.jsfml.window.Mouse;
 import org.jsfml.window.event.Event;
+import org.jsfml.graphics.*;
+import java.util.ArrayList;
+import java.io.File;
 
 public class PauseMenu implements MenuMaker{
     private TextManager buttons[] = new TextManager[3];
@@ -30,11 +33,22 @@ public class PauseMenu implements MenuMaker{
 
         window.clear(Color.BLACK);
 
-        // Renders pMenu Buttons
-        for (TextManager b : buttons) {
-            window.draw(b);
+        FloatRect view = window.getViewZone();
+
+        if(new File("resources/common/back.png").isFile())
+        {
+            ArrayList<GameObject> background = new ArrayList<GameObject>();
+            background.add(new GameObject(0, 0, "resources/common/back.png", view));
+            for(GameObject a : background)
+            window.draw(a);
         }
 
+        // Renders pMenu Buttons
+        for (TextManager b : buttons) 
+        {
+            window.draw(b);
+        }
+        
         // Handles Mouse Input
         for (Event event : window.pollEvents()) {
             for (TextManager b : buttons) {
