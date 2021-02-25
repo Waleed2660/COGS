@@ -25,8 +25,6 @@ public class GameRunner {
     private float check = 100, hpInc = 20;
     private boolean invincible = false, machinegun = false, hpPack = false;
 
-    //private GameOver over;
-
     /**
      * Creates the gamerunner for a specific level and gives the window to use
      *
