@@ -74,31 +74,10 @@ public class GameRunner {
             Event e = window.pollEvent();
             if (e != null) 
             {
-
                 if (e.type == Event.Type.CLOSED) 
                 {
                     window.close();
                     //IMPORTANT CLOSES WINDOW UPON PRESSING CLOSE DO NOT ALTER
-                }
-            }
-
-            if (!player.collides(level.enemies).isEmpty()) 
-            {
-                if(System.currentTimeMillis() - invStart >5000)
-                {
-                    if (System.currentTimeMillis() - lastHitTime > 500) 
-                    {
-                        check = player.dmghp(20);
-                        lastHitTime = System.currentTimeMillis();
-                        player.hitAway();
-                    }
-
-                    if (check == 0 || check == -1) 
-                    {
-                        player.setHP(100);
-                        window.resetView();
-                        return 2;
-                    }
                 }
             }
             
@@ -145,6 +124,25 @@ public class GameRunner {
                 {
                     window.resetView();
                     return 1;
+                }
+                if (a instanceof Enemy)
+                {
+                    if(System.currentTimeMillis() - invStart >5000)
+                    {
+                        if (System.currentTimeMillis() - lastHitTime > 500) 
+                        {
+                            check = player.dmghp(20);
+                            lastHitTime = System.currentTimeMillis();
+                            player.hitAway();
+                        }
+    
+                        if (check == 0 || check == -1) 
+                        {
+                            player.setHP(100);
+                            window.resetView();
+                            return 2;
+                        }
+                    }
                 }
             }
         }
