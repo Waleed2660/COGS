@@ -40,6 +40,7 @@ public class PauseMenu implements MenuMaker{
             for (TextManager b : buttons) {
                 if (event.type == Event.Type.CLOSED) {
                     //CLOSES WINDOW UPON PRESSING CLOSE DO NOT ALTER
+                    returnToMenu = true;
                     window.close();
                 }
                 // Blinks Button
@@ -67,6 +68,7 @@ public class PauseMenu implements MenuMaker{
                 returnToMenu = true;
             }
             else if (b.buttonPressed(MouseX, MouseY, "Exit")) {
+                returnToMenu = true;
                 window.close();
             }
         }
