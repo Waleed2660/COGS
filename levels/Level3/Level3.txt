@@ -4,7 +4,6 @@ rapidfire sprite 192 448 32 32
 rapidfire sprite 192 480 32 32
 hp sprite 3120 384 32 32
 hp sprite 3312 384 32 32
-portal sprite 13248 448 64 96
 hp sprite 8736 176 32 32
 rapidfire sprite 9216 448 32 32
 invincibility sprite 9760 176 32 32

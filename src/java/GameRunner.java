@@ -15,15 +15,17 @@ public class GameRunner {
     private ArrayList<Bullet> bullets = new ArrayList<>();
     private ArrayList<Bullet> hostileBullets = new ArrayList<>();
     private RectangleShape hpBar = new RectangleShape();
+    private RectangleShape bossHpBar = new RectangleShape();
     private double lastBulletTime = System.currentTimeMillis();
     private double lastHitTime = 0;
     private double lastBurnTime = 0;
     private MMWindow window;
+    private String levelNum;
     private Level level;
     private Player player;
     private PauseMenu pMenu;
     private double rpfStart = 0, invStart = 0;
-    private float check = 100, hpInc = 20;
+    private float check = 100, hpInc = 20, bossHp = 100;
     private boolean invincible = false, machinegun = false, hpPack = false;
 
     /**
@@ -34,6 +36,7 @@ public class GameRunner {
      */
     public GameRunner(MMWindow window, String levelNum) {
         this.window = window;
+        this.levelNum = levelNum;
         window.resetView();
         window.clear(Color.BLACK);
         window.draw(new TextManager("Loading ...", window.getViewZone().left+window.getViewZone().width*(float)0.1, window.getViewZone().top+(window.getViewZone().height*(float)0.8), 50));
@@ -46,6 +49,8 @@ public class GameRunner {
         if(levelNum.equals("Level3"))
         {
             this.level = new Level(levelNum, (float) -1, (float)0.4, window);
+            bossHpBar.setSize(new Vector2f(bossHp*2,60));
+            System.out.println("level3");
         }
         else
         {
@@ -63,6 +68,7 @@ public class GameRunner {
      */
     public int run() {
         hpBar.setFillColor(Color.RED);
+        bossHpBar.setFillColor(Color.BLUE);
         float winSizeX = window.getSize().x, winSizeY = window.getSize().y;
 
         while (window.isOpen())
@@ -233,6 +239,12 @@ public class GameRunner {
                 window.draw(a);
             }
         }
+        if(levelNum.equals("Level3"))
+        {
+            bossHpBar.setPosition(14824,100);
+            bossHpBar.setSize(new Vector2f(bossHp*2,60));
+        }
+        
         hpBar.setPosition(window.getViewZone().left+100,window.getViewZone().top+600);
         hpBar.setSize(new Vector2f(check*2,20));
 

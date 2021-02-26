@@ -14,7 +14,7 @@ public class Player extends Entity
     private float jumpHeight, friction;
     private int direction = 1;
     private double lastBulletTime = System.currentTimeMillis();
-    private float hp = 100; //5 hits to ko 20 hp per hit  // enemies dog - 1 hit ko robot 2 - hit ko // fires 2 damage more often than enemy damage
+    private float hp = 100000; //5 hits to ko 20 hp per hit  // enemies dog - 1 hit ko robot 2 - hit ko // fires 2 damage more often than enemy damage
     private boolean inAir = false;
     private boolean crouched = false;
     private FloatRect playArea;

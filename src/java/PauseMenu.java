@@ -40,7 +40,7 @@ public class PauseMenu implements MenuMaker{
             ArrayList<GameObject> background = new ArrayList<GameObject>();
             background.add(new GameObject(0, 0, "resources/common/back.png", view));
             for(GameObject a : background)
-            window.draw(a);
+                window.draw(a);
         }
 
         // Renders pMenu Buttons

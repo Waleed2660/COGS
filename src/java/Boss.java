@@ -23,6 +23,15 @@ public class Boss extends Sprite
         return hp;
     }
 
+    /**
+     * used to retrieve hp
+     * @return hp
+     */
+    public int gethp()
+    {
+        return hp;
+    }
+
     
     /**
      * Shoots red laser
