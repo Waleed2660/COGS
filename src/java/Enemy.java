@@ -14,8 +14,6 @@ public class Enemy extends Entity
     private boolean inAir = false;
     private int hp;
 
-    private Texture corpse;
-
     /**
      * Constructor for enemy object
      * 
@@ -26,13 +24,12 @@ public class Enemy extends Entity
      * @param level the level that this enemy is on
      * @param hp the max hit points of the enemy
      */
-    public Enemy(float x, float y, String texPath, float speed, Level level, int hp, Texture corpse)
+    public Enemy(float x, float y, String texPath, float speed, Level level, int hp)
     {
         super(x, y, texPath, speed, null);
         this.speedX = speed;
         this.g = level.getGravity();
         this.hp = hp;
-        this.corpse = corpse;
     }
 
     /**
@@ -67,7 +64,7 @@ public class Enemy extends Entity
 
         for(GameObject a : objectsInView)
         {
-            if(!a.equals(this) && a.getClass() != Enemy.class && a.getClass() != Player.class)
+            if(!a.equals(this) && a.getClass() != Enemy.class && a.getClass() != Player.class && !a.getType().equals("noCollision"))
             {
                 //  Checks if the player collides with anything on the y axis and if it does checks if its above or bellow and changes the speed
                 //  so it ends up right next to it. Same for the x axis.
@@ -127,6 +124,7 @@ public class Enemy extends Entity
             direction *= -1;
         }
 
+        this.animate();
         this.moveObject(speedX*direction, speedY*-1);
 
         speedY += g;

@@ -106,7 +106,7 @@ public class Player extends Entity
 
         for(GameObject a : objectsInView)
         {
-            if(!a.equals(this) && !(a instanceof Enemy) && !a.getType().equals("portal") && !a.getType().equals("fire") && !a.getType().equals("hp") && !a.getType().equals("rapidfire") && !a.getType().equals("invincibility"))
+            if(!a.equals(this) && !(a instanceof Enemy) && !a.getType().equals("portal") && !a.getType().equals("fire") && !a.getType().equals("hp") && !a.getType().equals("rapidfire") && !a.getType().equals("invincibility") && !a.getType().equals("noCollision"))
             {
                 //  Checks if the player collides with anything on the y axis and if it does checks if its above or bellow and changes the speed
                 //  so it ends up right next to it. Same for the x axis.
@@ -189,6 +189,7 @@ public class Player extends Entity
             window.moveView(0, speedY*-1);
         }
 
+        this.animate();
         this.moveObject(speedX*direction, speedY*-1);
         
         if(landed)
@@ -265,9 +266,24 @@ public class Player extends Entity
     /**
      * Loads character sprites. Contains code for switching between sprites in order.
      */
-    public void animation()
+    public void animate()
     {
-        this.setTexture(walkingAnim.get(textureNumber));
+        if(insertDelayAnimation(70))
+        {
+            if(speedX > 0)
+            {
+                this.setTexture(walkingAnim.get(textureNumber));
+                textureNumber += 1;
+                if(textureNumber > walkingAnim.size()-1)
+                {
+                    textureNumber = 0;
+                }
+            }
+            else
+            {
+                this.setTexture(idle);
+            }
+        }
         if(direction == -1)
         {
             this.setOrigin((float)this.getLocalBounds().width, 0);
@@ -277,13 +293,6 @@ public class Player extends Entity
         {
             this.setOrigin(0, 0);
             this.setScale((float)direction, (float)1);
-        }
-    
-        System.out.println(this.getOrigin());
-        textureNumber += 1;
-        if(textureNumber > walkingAnim.size()-1)
-        {
-            textureNumber = 0;
         }
     }
 }

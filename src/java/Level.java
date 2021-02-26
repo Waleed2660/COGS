@@ -48,19 +48,6 @@ public class Level
   private void addFromFile(String filePath, MMWindow window)
   {
     FloatRect view = window.getViewZone();
-    Texture robotCogs = null;
-    if(new File("./resources/enemies/cogs.png").isFile())
-    {
-      try {
-        robotCogs.loadFromFile(Paths.get("./resources/enemies/cogs.png"));
-      } catch (IOException e) {
-        e.printStackTrace();
-      }
-    }
-    else
-    {
-      //some error message for not being able to find the file
-    }
     try {
       File myObj = new File(filePath+levelNum+".txt");
       Scanner myReader = new Scanner(myObj);
@@ -124,7 +111,7 @@ public class Level
         {
           if(new File("./resources/enemies/"+name+".png").isFile())
           {
-            Enemy temp = new Enemy(x, y, "./resources/enemies/"+name+".png", 5, this, 1, robotCogs);
+            Enemy temp = new Enemy(x, y, "./resources/enemies/"+name+".png", 5, this, 1);
             enemies.add(temp);
           }
           else
@@ -136,7 +123,7 @@ public class Level
         {
           if(new File("./resources/enemies/"+name+".png").isFile())
           {
-            Enemy temp = new Enemy(x, y, "./resources/enemies/"+name+".png", 5, this, 1, robotCogs);
+            Enemy temp = new Enemy(x, y, "./resources/enemies/"+name+".png", 5, this, 1);
             enemies.add(temp);
           }
           else

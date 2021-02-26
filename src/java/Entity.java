@@ -3,6 +3,7 @@ import java.util.ArrayList;
 public abstract class Entity extends GameObject
 {
     private double lastBulletTime = System.currentTimeMillis();
+    private double lastAnimation = System.currentTimeMillis();
 
     protected final float speed, g;
 
@@ -37,6 +38,20 @@ public abstract class Entity extends GameObject
     public boolean insertDelay(double delay) {
         if (System.currentTimeMillis() - lastBulletTime > delay) {
             lastBulletTime = System.currentTimeMillis();
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Returns true if given amount of time has been passed
+     *
+     * @param delay Delay you want in milliseconds
+     * @return boolean value
+     */
+    public boolean insertDelayAnimation(double delay) {
+        if (System.currentTimeMillis() - lastAnimation > delay) {
+            lastAnimation = System.currentTimeMillis();
             return true;
         }
         return false;

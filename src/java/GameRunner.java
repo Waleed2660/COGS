@@ -16,6 +16,7 @@ import java.nio.file.Paths;
 public class GameRunner {
     private ArrayList<Bullet> bullets = new ArrayList<>();
     private ArrayList<Bullet> hostileBullets = new ArrayList<>();
+    private ArrayList<GameObject> cogList = new ArrayList<GameObject>();
     private RectangleShape hpBar = new RectangleShape();
     private RectangleShape bossHpBar = new RectangleShape();
     private double lastBulletTime = System.currentTimeMillis();
@@ -71,7 +72,8 @@ public class GameRunner {
     public int run() {
         hpBar.setFillColor(Color.RED);
         bossHpBar.setFillColor(Color.BLUE);
-        float winSizeX = window.getSize().x, winSizeY = window.getSize().y;
+
+        float winSizeX = window.getSize().x, winSizeY = window.getSize().y; 
 
         while (window.isOpen())
         {
@@ -146,6 +148,7 @@ public class GameRunner {
                 }
                 if (a instanceof Enemy)
                 {
+                    
                     if(System.currentTimeMillis() - invStart >5000)
                     {
                         if (System.currentTimeMillis() - lastHitTime > 500) 
@@ -200,11 +203,9 @@ public class GameRunner {
 
         if (Keyboard.isKeyPressed(Keyboard.Key.LEFT) || Keyboard.isKeyPressed(Keyboard.Key.A)) {
             player.walk(-1);
-            player.animation();
         }
         if (Keyboard.isKeyPressed(Keyboard.Key.RIGHT) || Keyboard.isKeyPressed(Keyboard.Key.D)) {
             player.walk(1);
-            player.animation();
         }
         if (Keyboard.isKeyPressed(Keyboard.Key.UP) || Keyboard.isKeyPressed(Keyboard.Key.W)) {
             player.jump();
@@ -236,6 +237,13 @@ public class GameRunner {
         for (GameObject b : level.background) {
             if (viewZone.intersection(b.getHitBox()) != null) {
                 window.draw(b);
+            }
+        }
+        for(GameObject c : cogList)
+        {
+            if(viewZone.intersection(c.getHitBox()) !=null)
+            {
+                window.draw(c);
             }
         }
         for (GameObject a : level.objectList) {
@@ -273,9 +281,10 @@ public class GameRunner {
                     {
                         if (a instanceof Enemy) {
                             if (((Enemy) a).dmghp() <= 0) 
-                            {  
-                                ((Enemy) a).setSpeed(0);
-                                //level.enemies.remove(a);
+                            {
+                                GameObject temp = new GameObject(a.getPosition().x, a.getPosition().y, "./resources/enemies/cogs.png", null);
+                                cogList.add(new GameObject(a.getPosition().x, a.getPosition().y+a.getLocalBounds().height-temp.getLocalBounds().height, "./resources/enemies/cogs.png", null));
+                                level.enemies.remove(a);
                                 break;
                             }
                         }
