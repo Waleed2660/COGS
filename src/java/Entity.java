@@ -47,7 +47,6 @@ public abstract class Entity extends GameObject
     {
         if(new File(path).isFile())
         {
-            
             try {
                 SoundBuffer temp = new SoundBuffer();
                 temp.loadFromFile(Paths.get(path));

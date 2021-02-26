@@ -134,6 +134,14 @@ public class Level
             //some error message for not being able to find the file
           }
         }
+        else if(name.contains("boss"))
+        {
+          if(new File("./levels/Level3/assets/"+name+".png").isFile())
+          {
+            Boss temp= new Boss(x, y, "./levels/Level3/assets/"+name+".png", this);
+            enemies.add(temp);
+          }
+        }
         else
         {
           if(type.contains("hitbox"))
