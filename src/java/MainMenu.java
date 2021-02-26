@@ -18,6 +18,8 @@ public class MainMenu extends LevelManager implements MenuMaker
     private MMWindow window = new MMWindow(width,height,"Main menu", false);
     private LevelSelect levelSelect;
 
+    private GameObject background;
+
     private TextManager buttons[] = new TextManager[4];     // Hold buttons for Menu
 
     /**
@@ -28,6 +30,10 @@ public class MainMenu extends LevelManager implements MenuMaker
      */
     public MainMenu()
     {
+        if(new File("resources/common/back.png").isFile())
+        {
+            background = new GameObject(window.getViewZone().left, window.getViewZone().top, "resources/common/back.png", null);
+        }
         buttons[0] = new TextManager("Start",window.getViewZone().left+window.getViewZone().width*(float)0.1, window.getViewZone().top+(window.getViewZone().height*(float)0.5), 30);
         buttons[1] = new TextManager("Level Select",window.getViewZone().left+window.getViewZone().width*(float)0.1, window.getViewZone().top+(window.getViewZone().height*(float)0.6), 30);
         buttons[2] = new TextManager("Settings",window.getViewZone().left+window.getViewZone().width*(float)0.1, window.getViewZone().top+(window.getViewZone().height*(float)0.7), 30);
@@ -39,7 +45,7 @@ public class MainMenu extends LevelManager implements MenuMaker
     }
     
     @Override
-    public void displayMenu()
+    public int displayMenu()
     {
         // Creating Button
         while(window.isOpen())
@@ -50,14 +56,8 @@ public class MainMenu extends LevelManager implements MenuMaker
 
             FloatRect view = window.getViewZone();
 
-            if(new File("resources/common/back.png").isFile())
-            {
-                ArrayList<GameObject> background = new ArrayList<GameObject>();
-                background.add(new GameObject(0, 0, "resources/common/back.png", view));
-                for(GameObject a : background)
-                    window.draw(a);
-            }
-
+            window.draw(background);
+            
             for (TextManager button : buttons) {
                 window.draw(button);    // Draws all buttons
             }
@@ -81,6 +81,7 @@ public class MainMenu extends LevelManager implements MenuMaker
             }
 
         }
+        return 0;
     }
 
     @Override

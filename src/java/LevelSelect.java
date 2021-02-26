@@ -19,7 +19,8 @@ public class LevelSelect extends LevelManager implements MenuMaker
         buttons[3] = new TextManager("Back",window.getViewZone().left+window.getViewZone().width*(float)0.1, window.getViewZone().top+(window.getViewZone().height*(float)0.8), 30);
     }
 
-    public void displayMenu()
+    @Override
+    public int displayMenu()
     {
         open = true;
         
@@ -49,10 +50,11 @@ public class LevelSelect extends LevelManager implements MenuMaker
                 window.close();
                 //IMPORTANT CLOSES WINDOW UPON PRESSING CLOSE DO NOT ALTER
             }
-
         }
+        return 0;
     }
 
+    @Override
     public void checkButtons(float MouseX, float MouseY)
     {
         for (TextManager button : buttons)
