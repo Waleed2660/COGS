@@ -1,0 +1,7 @@
+Manual for The GAME:
+
+Right and Left arrow keys or A and D - moves the player right or left.
+Up arrow key or W key - jump
+Spacebar - shoot.
+
+Goal - get to the moon and defeat the Evil AI.
