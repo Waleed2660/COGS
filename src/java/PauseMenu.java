@@ -1,0 +1,116 @@
+import org.jsfml.graphics.Color;
+import org.jsfml.system.Vector2f;
+import org.jsfml.system.Vector2i;
+import org.jsfml.window.Mouse;
+import org.jsfml.window.event.Event;
+import org.jsfml.graphics.*;
+import java.util.ArrayList;
+import java.io.File;
+
+public class PauseMenu implements MenuMaker{
+    private TextManager buttons[] = new TextManager[3];
+    private MMWindow window;
+    private Boolean returnToMenu = false;
+
+    private Boolean pauseMenuIsOpen = true;
+
+    /**
+     * Constructs Pause Menu
+     */
+    public PauseMenu(MMWindow window){
+        this.window = window;
+        buttons[0] = new TextManager("Continue", window.getViewZone().left+window.getViewZone().width*(float)0.4, window.getViewZone().top+(window.getViewZone().height*(float)0.4), 50);
+        buttons[1] = new TextManager("Main Menu", window.getViewZone().left+window.getViewZone().width*(float)0.4, window.getViewZone().top+(window.getViewZone().height*(float)0.6), 50);
+        buttons[2] = new TextManager("Exit", window.getViewZone().left+window.getViewZone().width*(float)0.4, window.getViewZone().top+(window.getViewZone().height*(float)0.8), 50);
+    }
+
+
+    @Override
+    public void displayMenu() {
+
+        float mouseX = Mouse.getPosition(window).x + window.getViewZone().left
+                , mouseY = Mouse.getPosition(window).y + window.getViewZone().top;
+
+        window.clear(Color.BLACK);
+
+        FloatRect view = window.getViewZone();
+
+        if(new File("resources/common/back.png").isFile())
+        {
+            ArrayList<GameObject> background = new ArrayList<GameObject>();
+            background.add(new GameObject(0, 0, "resources/common/back.png", view));
+            for(GameObject a : background)
+                window.draw(a);
+        }
+
+        // Renders pMenu Buttons
+        for (TextManager b : buttons) 
+        {
+            window.draw(b);
+        }
+        
+        // Handles Mouse Input
+        for (Event event : window.pollEvents()) {
+            for (TextManager b : buttons) {
+                if (event.type == Event.Type.CLOSED) {
+                    //CLOSES WINDOW UPON PRESSING CLOSE DO NOT ALTER
+                    returnToMenu = true;
+                    window.close();
+                }
+                // Blinks Button
+                if (event.type == Event.Type.MOUSE_MOVED) {
+
+                    b.blinkButton(mouseX, mouseY, Color.RED);
+                }
+                // When Button is pressed
+                if (event.type == Event.Type.MOUSE_BUTTON_PRESSED) {
+                    checkButtons(mouseX, mouseY);
+                }
+            }
+        }
+        window.display();
+    }
+
+    @Override
+    public void checkButtons(float MouseX, float MouseY) {
+
+        for (TextManager b : buttons) {
+            if (b.buttonPressed(MouseX, MouseY, "Continue")) {
+                pauseMenuIsOpen = false;
+            }
+            else if (b.buttonPressed(MouseX, MouseY, "Main Menu")) {
+                returnToMenu = true;
+            }
+            else if (b.buttonPressed(MouseX, MouseY, "Exit")) {
+                returnToMenu = true;
+                window.close();
+            }
+        }
+    }
+
+    /**
+     * Used to check if pause menu is opened
+     * @return  boolean
+     */
+    public Boolean pauseMenuIsOpen() {
+        return pauseMenuIsOpen;
+    }
+
+    /**
+     * Used to terminate PauseMenu
+     * @return
+     */
+    public Boolean getReturnToMenu() { return returnToMenu; }
+
+    public void openPauseMenu(MMWindow window){
+
+        float yAxis = (float)0.2;
+
+        for (TextManager b : buttons) {
+            b.setPosition(window.getViewZone().left+window.getViewZone().width*(float)0.4, window.getViewZone().top+(window.getViewZone().height*yAxis));
+            System.out.println("Button Position: "+b.getPosition());
+            yAxis += (float)0.2;
+        }
+        pauseMenuIsOpen = true;
+    }
+}

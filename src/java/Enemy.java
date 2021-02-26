@@ -9,10 +9,8 @@ public class Enemy extends Entity
 {
     private float speedY = 0, speedX = 5, g = (float)-2.5;
     private int direction = -1;
-
-    public int hp = 100; //5 hits to ko 20 hp per hit  // enemies dog - 1 hit ko robot 2 - hit ko
-    int health = 0; // used to store health for iframes
     private boolean inAir = false;
+    private int hp;
 
     /**
      * Constructor for enemy object
@@ -32,6 +30,11 @@ public class Enemy extends Entity
         this.hp = hp;
     }
 
+    /**
+     * Damages enemy health
+     * 
+     * @return hp value if above 0 else returns 0
+     */
     public int dmghp()
     {
         hp -= 1;
@@ -48,23 +51,27 @@ public class Enemy extends Entity
      * @param objectsInView an array of the object that are in view and should be checked for collision.
      */
     @Override
-    public void movement(ArrayList<GameObject> objectsInView)
+    public void update(ArrayList<GameObject> objectsInView)
     {
         //falling flag
         boolean landed = false;
+        boolean edge = false;
         boolean diagCheck = true;
         float tempX = speedX;
 
         for(GameObject a : objectsInView)
         {
-            if(!a.equals(this) && a.getClass() != Enemy.class)
+            if(!a.equals(this) && a.getClass() != Enemy.class && a.getClass() != Player.class)
             {
                 //  Checks if the player collides with anything on the y axis and if it does checks if its above or bellow and changes the speed
                 //  so it ends up right next to it. Same for the x axis.
                 if(this.getFutureHitBox(0, speedY*-1).intersection(a.getHitBox()) != null)
                 {
                     diagCheck = false;
-
+                    if(this.getFutureHitBox(0, speedY*-1).intersection(a.getHitBox()).width != this.getLocalBounds().width)
+                    {
+                        edge = true;
+                    }
                     //if collides bellow
                     if(a.getHitBox().top >= this.getPosition().y+this.getLocalBounds().height)
                     {
@@ -108,9 +115,8 @@ public class Enemy extends Entity
         {
             speedY = 0;
         }
-        else //doesnt let to fall off a platform
+        if(edge)
         {
-            speedY = 0;
             direction *= -1;
         }
 
