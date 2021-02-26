@@ -15,7 +15,7 @@ public class MainMenu extends LevelManager implements MenuMaker
     private Dimension screenRes = Toolkit.getDefaultToolkit().getScreenSize();
     //private int width = screenRes.width, height = screenRes.height; //used for setting resolution of window
     private int width = 1024, height = 640; //used for setting resolution of window
-    private MMWindow window = new MMWindow(width,height,"Main menu", false);
+    private MMWindow window = new MMWindow(width,height,"Main menu", true);
     private LevelSelect levelSelect;
 
     private GameObject background;
