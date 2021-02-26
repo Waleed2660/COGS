@@ -335,12 +335,9 @@ public class GameRunner {
         int temp = player.getTextureNumber();
         if (temp == 1) {
             try {
-                /*Texture walk2 = new Texture();
-                Path walk2path = Paths.get("./resources/player/walk_2.png");*/
                 player.setTexture(walk2);
                 player.setTextureNumber(2);
                 temp = player.getTextureNumber();
-                System.out.println(player.getTextureNumber());
             }
             catch (Exception exception) {
                 exception.printStackTrace();
@@ -348,12 +345,9 @@ public class GameRunner {
         }
         else if (temp == 2) {
             try {
-                /*Texture walk3 = new Texture();
-                Path walk3path = Paths.get("./resources/player/walk_3.png");*/
                 player.setTexture(walk3);
                 player.setTextureNumber(3);
                 temp = player.getTextureNumber();
-                System.out.println(player.getTextureNumber());
             }
             catch (Exception exception) {
                 exception.printStackTrace();
@@ -361,12 +355,9 @@ public class GameRunner {
         }
         else if (temp == 3) {
             try {
-                /*Texture walk4 = new Texture();
-                Path walk4path = Paths.get("./resources/player/walk_4.png");*/
                 player.setTexture(walk4);
                 player.setTextureNumber(4);
                 temp = player.getTextureNumber();
-                System.out.println(player.getTextureNumber());
             }
             catch (Exception exception) {
                 exception.printStackTrace();
@@ -374,12 +365,9 @@ public class GameRunner {
         }
         else if (temp == 4) {
             try {
-                /*Texture walk1 = new Texture();
-                Path walk1path = Paths.get("./resources/player/walk_1.png");*/
                 player.setTexture(walk1);
                 player.setTextureNumber(1);
                 temp = player.getTextureNumber();
-                System.out.println(player.getTextureNumber());
             }
             catch (Exception exception) {
                 exception.printStackTrace();
