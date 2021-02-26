@@ -128,6 +128,15 @@ public class Enemy extends Entity
     }
 
     /**
+    * Sets speed
+    * 
+    * @param x new value of speed
+    */
+    public void setSpeed(int x) {
+        this.speedX = x;
+    }
+    
+    /**
     * Returns Bullet Object
      */
     public Bullet shoot()

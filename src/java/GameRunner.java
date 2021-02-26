@@ -274,7 +274,18 @@ public class GameRunner {
                         if (a instanceof Enemy) {
                             if (((Enemy) a).dmghp() <= 0) 
                             {
-                                level.enemies.remove(a);
+                                Texture cogTexture = new Texture();
+                                Path cogPath = Paths.get("./resources/enemies/outlinedcogs.png");
+                                try {
+                                    cogTexture.loadFromFile(cogPath);
+                                    a.setTexture(cogTexture);
+                                }
+                                catch (Exception exception) {
+                                    exception.printStackTrace();
+                                }   
+
+                                ((Enemy) a).setSpeed(0);
+                                //level.enemies.remove(a);
                                 break;
                             }
                         }
