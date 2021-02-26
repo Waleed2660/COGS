@@ -12,14 +12,14 @@ public class MMWindow extends RenderWindow
      * 
      * Used to create the window in the application.
     */
-    public MMWindow(int res1, int res2, String name, boolean fullscreen)
+    public MMWindow(int res1, int res2, String name, boolean screenMode)
     {
         super();
         // creates a new window at User's screensize with a window name "Main menu"
         // Window.style is set to 8 (Full Screen)
-        if(fullscreen)
+        if(screenMode)
         {
-            this.create(new VideoMode(res1, res2), name, 8);
+            this.create(new VideoMode(res1, res2), name, 1);
         }
         else
         {
