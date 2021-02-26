@@ -78,6 +78,7 @@ public class PauseMenu implements MenuMaker{
         for (TextManager b : buttons) {
             if (b.buttonPressed(MouseX, MouseY, "Continue")) {
                 pauseMenuIsOpen = false;
+                returnToMenu = 2;
             }
             else if (b.buttonPressed(MouseX, MouseY, "Main Menu")) {
                 pauseMenuIsOpen = false;

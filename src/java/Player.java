@@ -1,3 +1,6 @@
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import org.jsfml.window.event.Event;
 import org.jsfml.graphics.FloatRect;
@@ -5,6 +8,8 @@ import org.jsfml.graphics.Sprite;
 import org.jsfml.graphics.Texture;
 import org.jsfml.window.Keyboard;
 import org.jsfml.window.Keyboard.Key;
+import org.jsfml.audio.*;
+import java.util.Hashtable;
 
 /**
  * A class that represents the player entity. Extends GameObject.
@@ -223,6 +228,11 @@ public class Player extends Entity
      */
     public Bullet shoot()
     {
+        if(sounds.containsKey("shoot"))
+        {
+            sounds.get("shoot").play();
+        }
+        
         if (direction == 1) // Extended code so that bullet detect doesnt hit player and de-spawn player
             return new Bullet(direction, this.getPosition().x + this.getHitBox().width + 20, this.getPosition().y + this.getLocalBounds().height -65, 30, "resources/common/laser.png");
         else

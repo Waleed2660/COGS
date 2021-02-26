@@ -1,7 +1,15 @@
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Hashtable;
+
+import org.jsfml.audio.Sound;
+import org.jsfml.audio.SoundBuffer;
 
 public abstract class Entity extends GameObject
 {
+    protected Hashtable<String, Sound> sounds = new Hashtable<String, Sound>();
     private double lastBulletTime = System.currentTimeMillis();
     private double lastAnimation = System.currentTimeMillis();
 
@@ -26,6 +34,28 @@ public abstract class Entity extends GameObject
         }
         else{
             g = 0;
+        }
+    }
+
+    /**
+     * Adds a sound to the entinties sound list.
+     * 
+     * @param name name of the sound
+     * @param path path to the sound file
+     */
+    public void addSound(String name, String path)
+    {
+        if(new File(path).isFile())
+        {
+            
+            try {
+                SoundBuffer temp = new SoundBuffer();
+                temp.loadFromFile(Paths.get(path));
+                sounds.put(name, new Sound(temp));
+                //System.out.println(sounds.get(name));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 

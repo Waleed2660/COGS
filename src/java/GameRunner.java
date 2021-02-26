@@ -1,3 +1,4 @@
+import org.jsfml.audio.Music;
 import org.jsfml.graphics.*;
 import org.jsfml.window.Keyboard;
 import org.jsfml.window.event.Event;
@@ -6,7 +7,8 @@ import org.jsfml.system.*;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Timer;
-
+import java.io.File;
+import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -14,6 +16,7 @@ import java.nio.file.Paths;
  * Used to run the game
  */
 public class GameRunner {
+    private Music backgroundMusic = new Music();
     private ArrayList<Bullet> bullets = new ArrayList<>();
     private ArrayList<Bullet> hostileBullets = new ArrayList<>();
     private ArrayList<GameObject> cogList = new ArrayList<GameObject>();
@@ -38,6 +41,16 @@ public class GameRunner {
      * @param levelNum level number. Should be "Level1", "Level2", or "Level3"
      */
     public GameRunner(MMWindow window, String levelNum) {
+        if(new File("./resources/sound/"+ levelNum + " background.wav").isFile())
+        {
+            try{
+                backgroundMusic.openFromFile(Paths.get("./resources/sound/"+ levelNum + " background.wav"));
+                backgroundMusic.setLoop(true);
+            }catch(IOException e){
+                e.printStackTrace();
+            }
+            
+        }
         this.window = window;
         this.levelNum = levelNum;
         window.resetView();
@@ -70,6 +83,8 @@ public class GameRunner {
      * @return return 0 if return to menu, 1 if load next level, 2 if died and should reload
      */
     public int run() {
+        backgroundMusic.play();
+        
         hpBar.setFillColor(Color.RED);
         bossHpBar.setFillColor(Color.BLUE);
         float winSizeX = window.getSize().x, winSizeY = window.getSize().y; 
@@ -78,10 +93,15 @@ public class GameRunner {
         {
             ArrayList<GameObject> objectsInView = drawAll(level, window);
             ArrayList<GameObject> playerCollides = player.collides(objectsInView);
-    
-            if(this.controller(objectsInView) == 1)
+            int code = this.controller(objectsInView);
+
+            if(code == 1)
             {
                 return 0;
+            }
+            else if(code == 2)
+            {
+                backgroundMusic.play();
             }
             Event e = window.pollEvent();
             if (e != null) 
@@ -206,6 +226,7 @@ public class GameRunner {
             player.crouch();
         }
         if (Keyboard.isKeyPressed(Keyboard.Key.ESCAPE)) {
+            backgroundMusic.pause();
             return new PauseMenu(window).displayMenu();
         }
         player.update(blocks);
