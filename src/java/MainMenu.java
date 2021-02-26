@@ -20,7 +20,7 @@ public class MainMenu extends LevelManager implements MenuMaker
 
     private GameObject background;
 
-    private TextManager buttons[] = new TextManager[4];     // Hold buttons for Menu
+    private TextManager buttons[] = new TextManager[3];     // Hold buttons for Menu
 
     /**
      * Creates the main menu (for now very basic)
@@ -34,10 +34,9 @@ public class MainMenu extends LevelManager implements MenuMaker
         {
             background = new GameObject(window.getViewZone().left, window.getViewZone().top, "resources/common/back.png", null);
         }
-        buttons[0] = new TextManager("Start",window.getViewZone().left+window.getViewZone().width*(float)0.1, window.getViewZone().top+(window.getViewZone().height*(float)0.5), 30);
-        buttons[1] = new TextManager("Level Select",window.getViewZone().left+window.getViewZone().width*(float)0.1, window.getViewZone().top+(window.getViewZone().height*(float)0.6), 30);
-        buttons[2] = new TextManager("Settings",window.getViewZone().left+window.getViewZone().width*(float)0.1, window.getViewZone().top+(window.getViewZone().height*(float)0.7), 30);
-        buttons[3] = new TextManager("Exit",window.getViewZone().left+window.getViewZone().width*(float)0.1, window.getViewZone().top+(window.getViewZone().height*(float)0.8), 30);
+        buttons[0] = new TextManager("Start",window.getViewZone().left+window.getViewZone().width*(float)0.1, window.getViewZone().top+(window.getViewZone().height*(float)0.6), 30);
+        buttons[1] = new TextManager("Level Select",window.getViewZone().left+window.getViewZone().width*(float)0.1, window.getViewZone().top+(window.getViewZone().height*(float)0.7), 30);
+        buttons[2] = new TextManager("Exit",window.getViewZone().left+window.getViewZone().width*(float)0.1, window.getViewZone().top+(window.getViewZone().height*(float)0.8), 30);
 
         levelSelect = new LevelSelect(window, numOfLevels);
 
@@ -97,7 +96,6 @@ public class MainMenu extends LevelManager implements MenuMaker
             {
                 levelSelect.displayMenu();
             }
-            if (button.buttonPressed(MouseX, MouseY, "Settings"))  {}
             if (button.buttonPressed(MouseX, MouseY, "Exit"))  window.close();
         }
     }
