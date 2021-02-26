@@ -224,9 +224,9 @@ public class Player extends Entity
     public Bullet shoot()
     {
         if (direction == 1) // Extended code so that bullet detect doesnt hit player and de-spawn player
-            return new Bullet(direction, this.getPosition().x + this.getHitBox().width + 20, this.getPosition().y + this.getLocalBounds().height / 2, 30, "resources/common/laser.png");
+            return new Bullet(direction, this.getPosition().x + this.getHitBox().width + 20, this.getPosition().y + this.getLocalBounds().height -65, 30, "resources/common/laser.png");
         else
-            return new Bullet(direction, this.getPosition().x - 20, this.getPosition().y + this.getLocalBounds().height / 2, 30, "resources/common/laser.png");
+            return new Bullet(direction, this.getPosition().x - 20, this.getPosition().y + this.getLocalBounds().height -65, 30, "resources/common/laser.png");
     }
 
     /**

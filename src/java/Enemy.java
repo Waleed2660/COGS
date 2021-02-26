@@ -145,10 +145,10 @@ public class Enemy extends Entity
     public Bullet shoot()
     {
         if (direction == 1) { // Extended code so that bullet detect doesnt hit player and despawn player
-            return new Bullet(direction, this.getPosition().x + 40, this.getPosition().y + this.getLocalBounds().height / 2, 30, "resources/common/laser.png");
+            return new Bullet(direction, this.getPosition().x + 40, this.getPosition().y + this.getLocalBounds().height -95, 30, "resources/common/laser.png");
         }
         else {
-            return new Bullet(direction, this.getPosition().x - 20, this.getPosition().y + this.getLocalBounds().height / 2, 30, "resources/common/laser.png");
+            return new Bullet(direction, this.getPosition().x - 20, this.getPosition().y + this.getLocalBounds().height -95, 30, "resources/common/laser.png");
         }
     }
 
