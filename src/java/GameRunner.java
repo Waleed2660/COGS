@@ -66,7 +66,6 @@ public class GameRunner {
         {
             this.level = new Level(levelNum, (float) -1, (float)0.4, window);
             bossHpBar.setSize(new Vector2f(bossHp*2,60));
-            System.out.println("level3");
         }
         else
         {
@@ -130,6 +129,7 @@ public class GameRunner {
                         {
                             player.setHP(100);
                             window.resetView();
+                            backgroundMusic.stop();
                             return 2;
                         }
                     }
@@ -155,11 +155,11 @@ public class GameRunner {
                 if (a.getType().equals("portal")) 
                 {
                     window.resetView();
+                    backgroundMusic.pause();
                     return 1;
                 }
                 if (a instanceof Enemy)
                 {
-                    
                     if(System.currentTimeMillis() - invStart >5000)
                     {
                         if (System.currentTimeMillis() - lastHitTime > 500) 
@@ -173,13 +173,14 @@ public class GameRunner {
                         {
                             player.setHP(100);
                             window.resetView();
+                            backgroundMusic.stop();
                             return 2;
                         }
                     }
                 }
             }
         }
-            
+        backgroundMusic.stop();
         return 0;
     }
 

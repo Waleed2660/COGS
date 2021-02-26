@@ -27,6 +27,7 @@ public class Player extends Entity
     private FloatRect playArea;
     private MMWindow window;
     private int textureNumber = 0;
+    private float maxFallSpeed = 0;
 
     private Texture idle;
     private ArrayList<Texture> walkingAnim;
@@ -37,14 +38,16 @@ public class Player extends Entity
      * @param x position
      * @param y position
      * @param maxSpeedX max speed on the x axis
+     * @param maxFallSpeed the maximum speed of falling
      * @param jumpHeight the player jump height
      * @param level the level the player is in
      * @param texPath texture path
      */
-    public Player(float x, float y, float maxSpeedX, float jumpHeight, Level level, MMWindow window, String texPath, ArrayList<Texture> walkingAnim)
+    public Player(float x, float y, float maxSpeedX, float maxFallSpeed, float jumpHeight, Level level, MMWindow window, String texPath, ArrayList<Texture> walkingAnim)
     {
         super(x, y, texPath, maxSpeedX, level);
         idle = (Texture)this.getTexture();
+        this.maxFallSpeed = maxFallSpeed;
         this.jumpHeight = jumpHeight;
         this.window = window;
         this.friction = level.getFriction();
@@ -207,6 +210,10 @@ public class Player extends Entity
             inAir = true;
         }
         speedY += g;
+        if(speedY < maxFallSpeed*-1)
+        {
+            speedY = maxFallSpeed*-1;
+        }
         crouched = false;
 
         // reduces the speed gradually relative to the friction coefficient
