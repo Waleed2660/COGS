@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import org.jsfml.window.event.Event;
 import org.jsfml.graphics.FloatRect;
+import org.jsfml.graphics.Sprite;
 import org.jsfml.window.Keyboard;
 import org.jsfml.window.Keyboard.Key;
 
@@ -19,6 +20,7 @@ public class Player extends Entity
     private boolean crouched = false;
     private FloatRect playArea;
     private MMWindow window;
+    private int textureNumber = 1;
 
     /**
      * Constructor for player.
@@ -234,5 +236,21 @@ public class Player extends Entity
     public void setHP(int hp)
     {
         this.hp = hp;
+    }
+
+    /**
+     * Sets texture number (used when switching between sprites)
+     * 
+     * @param x new value of textureNumber
+     */
+    public void setTextureNumber(int x) {
+        this.textureNumber = x;
+    }
+
+    /**
+     * Returns value of textureNumber
+     */
+    public int getTextureNumber() {
+        return textureNumber;
     }
 }
