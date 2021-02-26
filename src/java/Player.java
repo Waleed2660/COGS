@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import org.jsfml.window.event.Event;
 import org.jsfml.graphics.FloatRect;
+import org.jsfml.graphics.Sprite;
 import org.jsfml.window.Keyboard;
 import org.jsfml.window.Keyboard.Key;
 
@@ -14,11 +15,12 @@ public class Player extends Entity
     private float jumpHeight, friction;
     private int direction = 1;
     private double lastBulletTime = System.currentTimeMillis();
-    private float hp = 100; //5 hits to ko 20 hp per hit  // enemies dog - 1 hit ko robot 2 - hit ko // fires 2 damage more often than enemy damage
+    private float hp = 100000; //5 hits to ko 20 hp per hit  // enemies dog - 1 hit ko robot 2 - hit ko // fires 2 damage more often than enemy damage
     private boolean inAir = false;
     private boolean crouched = false;
     private FloatRect playArea;
     private MMWindow window;
+    private int textureNumber = 1;
 
     /**
      * Constructor for player.
@@ -243,5 +245,21 @@ public class Player extends Entity
     public void setHP(float hp)
     {
         this.hp = hp;
+    }
+
+    /**
+     * Sets texture number (used when switching between sprites)
+     * 
+     * @param x new value of textureNumber
+     */
+    public void setTextureNumber(int x) {
+        this.textureNumber = x;
+    }
+
+    /**
+     * Returns value of textureNumber
+     */
+    public int getTextureNumber() {
+        return textureNumber;
     }
 }

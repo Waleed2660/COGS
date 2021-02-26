@@ -7,6 +7,8 @@ import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Timer;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 /**
  * Used to run the game
@@ -15,15 +17,17 @@ public class GameRunner {
     private ArrayList<Bullet> bullets = new ArrayList<>();
     private ArrayList<Bullet> hostileBullets = new ArrayList<>();
     private RectangleShape hpBar = new RectangleShape();
+    private RectangleShape bossHpBar = new RectangleShape();
     private double lastBulletTime = System.currentTimeMillis();
     private double lastHitTime = 0;
     private double lastBurnTime = 0;
     private MMWindow window;
+    private String levelNum;
     private Level level;
     private Player player;
     private PauseMenu pMenu;
     private double rpfStart = 0, invStart = 0;
-    private float check = 100, hpInc = 20;
+    private float check = 100, hpInc = 20, bossHp = 100;
     private boolean invincible = false, machinegun = false, hpPack = false;
 
     /**
@@ -34,6 +38,7 @@ public class GameRunner {
      */
     public GameRunner(MMWindow window, String levelNum) {
         this.window = window;
+        this.levelNum = levelNum;
         window.resetView();
         window.clear(Color.BLACK);
         window.draw(new TextManager("Loading ...", window.getViewZone().left+window.getViewZone().width*(float)0.1, window.getViewZone().top+(window.getViewZone().height*(float)0.8), 50));
@@ -46,6 +51,8 @@ public class GameRunner {
         if(levelNum.equals("Level3"))
         {
             this.level = new Level(levelNum, (float) -1, (float)0.4, window);
+            bossHpBar.setSize(new Vector2f(bossHp*2,60));
+            System.out.println("level3");
         }
         else
         {
@@ -63,6 +70,7 @@ public class GameRunner {
      */
     public int run() {
         hpBar.setFillColor(Color.RED);
+        bossHpBar.setFillColor(Color.BLUE);
         float winSizeX = window.getSize().x, winSizeY = window.getSize().y;
 
         while (window.isOpen())
@@ -189,11 +197,20 @@ public class GameRunner {
                 }
             }
         }
+
         if (Keyboard.isKeyPressed(Keyboard.Key.LEFT) || Keyboard.isKeyPressed(Keyboard.Key.A)) {
             player.walk(-1);
+            
+
+            //while (Keyboard.isKeyPressed(Keyboard.Key.LEFT) || Keyboard.isKeyPressed(Keyboard.Key.A)) {
+                animation();
+            //}
+            
+
         }
         if (Keyboard.isKeyPressed(Keyboard.Key.RIGHT) || Keyboard.isKeyPressed(Keyboard.Key.D)) {
             player.walk(1);
+            animation();
         }
         if (Keyboard.isKeyPressed(Keyboard.Key.UP) || Keyboard.isKeyPressed(Keyboard.Key.W)) {
             player.jump();
@@ -233,7 +250,13 @@ public class GameRunner {
                 window.draw(a);
             }
         }
-        hpBar.setPosition(window.getViewZone().left+100,600);
+        if(levelNum.equals("Level3"))
+        {
+            bossHpBar.setPosition(14824,100);
+            bossHpBar.setSize(new Vector2f(bossHp*2,60));
+        }
+        
+        hpBar.setPosition(window.getViewZone().left+100,window.getViewZone().top+600);
         hpBar.setSize(new Vector2f(check*2,20));
 
 
@@ -269,6 +292,90 @@ public class GameRunner {
         }
         window.display();
         return result;
+    }
+
+    /**
+     * Loads character sprites. Contains code for switching between sprites in order.
+     */
+    public void animation() {
+        //loads textures for player character animation
+        Texture walk1 = new Texture();
+        Path walk1path = Paths.get("./resources/player/walk_1.png");
+        Texture walk2 = new Texture();
+        Path walk2path = Paths.get("./resources/player/walk_2.png");
+        Texture walk3 = new Texture();
+        Path walk3path = Paths.get("./resources/player/walk_3.png");
+        Texture walk4 = new Texture();
+        Path walk4path = Paths.get("./resources/player/walk_4.png");
+        try {
+            walk1.loadFromFile(walk1path);
+        }
+        catch (Exception exception) {
+            exception.printStackTrace();
+        }
+        try {
+            walk2.loadFromFile(walk2path);
+        }
+        catch (Exception exception) {
+            exception.printStackTrace();
+        }
+        try {
+            walk3.loadFromFile(walk3path);
+        }
+        catch (Exception exception) {
+            exception.printStackTrace();
+        }
+        try {
+            walk4.loadFromFile(walk4path);
+        }
+        catch (Exception exception) {
+            exception.printStackTrace();
+        }
+        //manages switching between textures
+        int temp = player.getTextureNumber();
+        if (temp == 1) {
+            try {
+                player.setTexture(walk2);
+                player.setTextureNumber(2);
+                temp = player.getTextureNumber();
+            }
+            catch (Exception exception) {
+                exception.printStackTrace();
+            }
+        }
+        else if (temp == 2) {
+            try {
+                player.setTexture(walk3);
+                player.setTextureNumber(3);
+                temp = player.getTextureNumber();
+            }
+            catch (Exception exception) {
+                exception.printStackTrace();
+            }
+        }
+        else if (temp == 3) {
+            try {
+                player.setTexture(walk4);
+                player.setTextureNumber(4);
+                temp = player.getTextureNumber();
+            }
+            catch (Exception exception) {
+                exception.printStackTrace();
+            }
+        }
+        else if (temp == 4) {
+            try {
+                player.setTexture(walk1);
+                player.setTextureNumber(1);
+                temp = player.getTextureNumber();
+            }
+            catch (Exception exception) {
+                exception.printStackTrace();
+            }
+        }
+        else {
+            System.out.println("Error in animation() method in GameRunner.java");
+        }
     }
 
     /**
