@@ -1,4 +1,6 @@
 import org.jsfml.graphics.FloatRect;
+import org.jsfml.graphics.Texture;
+
 import java.util.ArrayList;
 
 /**
@@ -12,6 +14,8 @@ public class Enemy extends Entity
     private boolean inAir = false;
     private int hp;
 
+    private Texture corpse;
+
     /**
      * Constructor for enemy object
      * 
@@ -22,12 +26,13 @@ public class Enemy extends Entity
      * @param level the level that this enemy is on
      * @param hp the max hit points of the enemy
      */
-    public Enemy(float x, float y, String texPath, float speed, Level level, int hp)
+    public Enemy(float x, float y, String texPath, float speed, Level level, int hp, Texture corpse)
     {
         super(x, y, texPath, speed, null);
         this.speedX = speed;
         this.g = level.getGravity();
         this.hp = hp;
+        this.corpse = corpse;
     }
 
     /**
@@ -170,5 +175,19 @@ public class Enemy extends Entity
             return true;
         }
         return false;
+    }
+
+    public void animate()
+    {
+        if(direction == -1)
+        {
+            this.setOrigin((float)this.getLocalBounds().width, 0);
+            this.setScale((float)direction, (float)1);
+        }
+        else
+        {
+            this.setOrigin(0, 0);
+            this.setScale((float)direction, (float)1);
+        }
     }
 }

@@ -1,5 +1,7 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -46,6 +48,19 @@ public class Level
   private void addFromFile(String filePath, MMWindow window)
   {
     FloatRect view = window.getViewZone();
+    Texture robotCogs = null;
+    if(new File("./resources/enemies/cogs.png").isFile())
+    {
+      try {
+        robotCogs.loadFromFile(Paths.get("./resources/enemies/cogs.png"));
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+    }
+    else
+    {
+      //some error message for not being able to find the file
+    }
     try {
       File myObj = new File(filePath+levelNum+".txt");
       Scanner myReader = new Scanner(myObj);
@@ -63,9 +78,23 @@ public class Level
 
         if(name.contains("player"))
         {
+          ArrayList<Texture> walkAnim = new ArrayList<Texture>();
+          for(int i = 1; i <= 4; i++)
+          {
+            if(new File("./resources/player/walk_"+i+".png").isFile())
+            {
+              try {
+                Texture temp = new Texture();
+                temp.loadFromFile(Paths.get("./resources/player/walk_"+i+".png"));
+                walkAnim.add(temp);
+              } catch (IOException e) {
+                  e.printStackTrace();
+              }
+            }
+          }
           if(new File("./resources/player/"+name+".png").isFile())
           {
-            player = new Player(x, y, 15, 200, this, window, "./resources/player/player.png");
+            player = new Player(x, y, 15, 200, this, window, "./resources/player/player.png", walkAnim);
             objectList.add(player);
           }
           else
@@ -95,7 +124,7 @@ public class Level
         {
           if(new File("./resources/enemies/"+name+".png").isFile())
           {
-            Enemy temp = new Enemy(x, y, "./resources/enemies/"+name+".png", 5, this, 1);
+            Enemy temp = new Enemy(x, y, "./resources/enemies/"+name+".png", 5, this, 1, robotCogs);
             enemies.add(temp);
           }
           else
@@ -107,7 +136,7 @@ public class Level
         {
           if(new File("./resources/enemies/"+name+".png").isFile())
           {
-            Enemy temp = new Enemy(x, y, "./resources/enemies/"+name+".png", 5, this, 1);
+            Enemy temp = new Enemy(x, y, "./resources/enemies/"+name+".png", 5, this, 1, robotCogs);
             enemies.add(temp);
           }
           else

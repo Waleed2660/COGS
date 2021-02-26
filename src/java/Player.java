@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import org.jsfml.window.event.Event;
 import org.jsfml.graphics.FloatRect;
 import org.jsfml.graphics.Sprite;
+import org.jsfml.graphics.Texture;
 import org.jsfml.window.Keyboard;
 import org.jsfml.window.Keyboard.Key;
 
@@ -20,7 +21,10 @@ public class Player extends Entity
     private boolean crouched = false;
     private FloatRect playArea;
     private MMWindow window;
-    private int textureNumber = 1;
+    private int textureNumber = 0;
+
+    private Texture idle;
+    private ArrayList<Texture> walkingAnim;
 
     /**
      * Constructor for player.
@@ -32,13 +36,15 @@ public class Player extends Entity
      * @param level the level the player is in
      * @param texPath texture path
      */
-    public Player(float x, float y, float maxSpeedX, float jumpHeight, Level level, MMWindow window, String texPath)
+    public Player(float x, float y, float maxSpeedX, float jumpHeight, Level level, MMWindow window, String texPath, ArrayList<Texture> walkingAnim)
     {
         super(x, y, texPath, maxSpeedX, level);
+        idle = (Texture)this.getTexture();
         this.jumpHeight = jumpHeight;
         this.window = window;
         this.friction = level.getFriction();
         this.playArea = level.getPlayArea();
+        this.walkingAnim = walkingAnim;
     }
 
     /**
@@ -248,27 +254,36 @@ public class Player extends Entity
     }
 
     /**
-     * Sets texture number (used when switching between sprites)
-     * 
-     * @param x new value of textureNumber
-     */
-    public void setTextureNumber(int x) {
-        this.textureNumber = x;
-    }
-
-    /**
-     * Returns value of textureNumber
-     */
-    public int getTextureNumber() {
-        return textureNumber;
-    }
-
-    /**
      * Returns value of direction
      * 1 = player facing right
      * -1 = player facing left
      */
     public int getDirection() {
         return direction;
+    }
+
+    /**
+     * Loads character sprites. Contains code for switching between sprites in order.
+     */
+    public void animation()
+    {
+        this.setTexture(walkingAnim.get(textureNumber));
+        if(direction == -1)
+        {
+            this.setOrigin((float)this.getLocalBounds().width, 0);
+            this.setScale((float)direction, (float)1);
+        }
+        else
+        {
+            this.setOrigin(0, 0);
+            this.setScale((float)direction, (float)1);
+        }
+    
+        System.out.println(this.getOrigin());
+        textureNumber += 1;
+        if(textureNumber > walkingAnim.size()-1)
+        {
+            textureNumber = 0;
+        }
     }
 }
