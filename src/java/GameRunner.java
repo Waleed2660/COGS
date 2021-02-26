@@ -351,7 +351,8 @@ public class GameRunner {
 
                 // Enemy only shoots if player is in range
                 if (a.lookForPlayer(player) && a.shoot() != null) {
-                    hostileBullets.add(a.shoot());
+                    if (!a.getName().equals("dog"))
+                        hostileBullets.add(a.shoot());
                 }
 
                 // Renders Enemies
@@ -359,5 +360,7 @@ public class GameRunner {
                 window.draw(a);
             }
         }
+
+        // Boss
     }
 }

@@ -2,6 +2,7 @@ import org.jsfml.graphics.FloatRect;
 import org.jsfml.graphics.Texture;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * A class that represents an enemy entity. Can be either dog or robot. Extends GameObject.
@@ -13,6 +14,8 @@ public class Enemy extends Entity
     private int direction = -1;
     private boolean inAir = false;
     private int hp;
+    private String name;
+
 
     /**
      * Constructor for enemy object
@@ -30,6 +33,10 @@ public class Enemy extends Entity
         this.speedX = speed;
         this.g = level.getGravity();
         this.hp = hp;
+
+        String[] nameList = texPath.split("/");
+        String fileName = nameList[nameList.length-1];
+        this.name = fileName.split("\\.")[0];
     }
 
     /**
@@ -187,5 +194,13 @@ public class Enemy extends Entity
             this.setOrigin(0, 0);
             this.setScale((float)direction, (float)1);
         }
+    }
+
+    /**
+     * Returns name of current enemy
+     * @return
+     */
+    public String getName() {
+        return name;
     }
 }
