@@ -16,11 +16,13 @@ import java.nio.file.Paths;
 public class GameRunner {
     private ArrayList<Bullet> bullets = new ArrayList<>();
     private ArrayList<Bullet> hostileBullets = new ArrayList<>();
+    public ArrayList<GameObject> cogList = new ArrayList<GameObject>();
     private RectangleShape hpBar = new RectangleShape();
     private RectangleShape bossHpBar = new RectangleShape();
     private double lastBulletTime = System.currentTimeMillis();
     private double lastHitTime = 0;
     private double lastBurnTime = 0;
+    Texture cogTexture = new Texture();
     private MMWindow window;
     private String levelNum;
     private Level level;
@@ -71,7 +73,18 @@ public class GameRunner {
     public int run() {
         hpBar.setFillColor(Color.RED);
         bossHpBar.setFillColor(Color.BLUE);
-        float winSizeX = window.getSize().x, winSizeY = window.getSize().y;
+        
+        try
+        {
+            Path cogPath = Paths.get("./resources/enemies/outlinedcogs.png");
+            cogTexture.loadFromFile(cogPath);
+        }
+        catch (Exception exception) 
+        {
+            exception.printStackTrace();
+        }
+
+        float winSizeX = window.getSize().x, winSizeY = window.getSize().y; 
 
         while (window.isOpen())
         {
@@ -146,6 +159,7 @@ public class GameRunner {
                 }
                 if (a instanceof Enemy)
                 {
+                    
                     if(System.currentTimeMillis() - invStart >5000)
                     {
                         if (System.currentTimeMillis() - lastHitTime > 500) 
@@ -238,6 +252,13 @@ public class GameRunner {
                 window.draw(b);
             }
         }
+        for(GameObject c : cogList)
+        {
+            if(viewZone.intersection(c.getHitBox()) !=null)
+            {
+                window.draw(c);
+            }
+        }
         for (GameObject a : level.objectList) {
             if (viewZone.intersection(a.getHitBox()) != null) {
                 result.add(a);
@@ -274,18 +295,9 @@ public class GameRunner {
                         if (a instanceof Enemy) {
                             if (((Enemy) a).dmghp() <= 0) 
                             {
-                                Texture cogTexture = new Texture();
-                                Path cogPath = Paths.get("./resources/enemies/outlinedcogs.png");
-                                try {
-                                    cogTexture.loadFromFile(cogPath);
-                                    a.setTexture(cogTexture);
-                                }
-                                catch (Exception exception) {
-                                    exception.printStackTrace();
-                                }   
-
+                                cogList.add(new GameObject(a.getPosition().x, a.getPosition().y, "./resources/enemies/outlinedcogs.png", new FloatRect(0, 0,32,32)));
                                 ((Enemy) a).setSpeed(0);
-                                //level.enemies.remove(a);
+                                level.enemies.remove(a);
                                 break;
                             }
                         }
@@ -320,7 +332,8 @@ public class GameRunner {
         Path walk3bpath = Paths.get("./resources/player/walk_3b.png");
         Texture walk4b = new Texture();
         Path walk4bpath = Paths.get("./resources/player/walk_4b.png");
-
+        for(int p = 0;p<=3;p++)
+    
         try {
             walk1.loadFromFile(walk1path);
             walk2.loadFromFile(walk2path);
