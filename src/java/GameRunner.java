@@ -72,26 +72,17 @@ public class GameRunner {
     public int run() {
         hpBar.setFillColor(Color.RED);
         bossHpBar.setFillColor(Color.BLUE);
-
         float winSizeX = window.getSize().x, winSizeY = window.getSize().y; 
 
         while (window.isOpen())
         {
             ArrayList<GameObject> objectsInView = drawAll(level, window);
             ArrayList<GameObject> playerCollides = player.collides(objectsInView);
-            if (this.controller(objectsInView) == 1) {
-                // Sets new location for buttons as ViewZone changes
-                pMenu.openPauseMenu(window);
-                while (pMenu.pauseMenuIsOpen()){
-                    // Renders Menu
-                    pMenu.displayMenu();
-                    // Returns to Main Menu
-                    if (pMenu.getReturnToMenu()){
-                        return 0;
-                    }
-                }
+    
+            if(this.controller(objectsInView) == 1)
+            {
+                return 0;
             }
-
             Event e = window.pollEvent();
             if (e != null) 
             {
@@ -215,7 +206,7 @@ public class GameRunner {
             player.crouch();
         }
         if (Keyboard.isKeyPressed(Keyboard.Key.ESCAPE)) {
-            return 1;
+            return new PauseMenu(window).displayMenu();
         }
         player.update(blocks);
         return 0;
