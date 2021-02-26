@@ -262,4 +262,13 @@ public class Player extends Entity
     public int getTextureNumber() {
         return textureNumber;
     }
+
+    /**
+     * Returns value of direction
+     * 1 = player facing right
+     * -1 = player facing left
+     */
+    public int getDirection() {
+        return direction;
+    }
 }
