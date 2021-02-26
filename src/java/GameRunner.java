@@ -200,13 +200,7 @@ public class GameRunner {
 
         if (Keyboard.isKeyPressed(Keyboard.Key.LEFT) || Keyboard.isKeyPressed(Keyboard.Key.A)) {
             player.walk(-1);
-            
-
-            //while (Keyboard.isKeyPressed(Keyboard.Key.LEFT) || Keyboard.isKeyPressed(Keyboard.Key.A)) {
-                animation();
-            //}
-            
-
+            animation();
         }
         if (Keyboard.isKeyPressed(Keyboard.Key.RIGHT) || Keyboard.isKeyPressed(Keyboard.Key.D)) {
             player.walk(1);
@@ -280,7 +274,18 @@ public class GameRunner {
                         if (a instanceof Enemy) {
                             if (((Enemy) a).dmghp() <= 0) 
                             {
-                                level.enemies.remove(a);
+                                Texture cogTexture = new Texture();
+                                Path cogPath = Paths.get("./resources/enemies/outlinedcogs.png");
+                                try {
+                                    cogTexture.loadFromFile(cogPath);
+                                    a.setTexture(cogTexture);
+                                }
+                                catch (Exception exception) {
+                                    exception.printStackTrace();
+                                }   
+
+                                ((Enemy) a).setSpeed(0);
+                                //level.enemies.remove(a);
                                 break;
                             }
                         }
@@ -307,74 +312,120 @@ public class GameRunner {
         Path walk3path = Paths.get("./resources/player/walk_3.png");
         Texture walk4 = new Texture();
         Path walk4path = Paths.get("./resources/player/walk_4.png");
+        Texture walk1b = new Texture();
+        Path walk1bpath = Paths.get("./resources/player/walk_1b.png");
+        Texture walk2b = new Texture();
+        Path walk2bpath = Paths.get("./resources/player/walk_2b.png");
+        Texture walk3b = new Texture();
+        Path walk3bpath = Paths.get("./resources/player/walk_3b.png");
+        Texture walk4b = new Texture();
+        Path walk4bpath = Paths.get("./resources/player/walk_4b.png");
+
         try {
             walk1.loadFromFile(walk1path);
-        }
-        catch (Exception exception) {
-            exception.printStackTrace();
-        }
-        try {
             walk2.loadFromFile(walk2path);
-        }
-        catch (Exception exception) {
-            exception.printStackTrace();
-        }
-        try {
             walk3.loadFromFile(walk3path);
-        }
-        catch (Exception exception) {
-            exception.printStackTrace();
-        }
-        try {
             walk4.loadFromFile(walk4path);
+            walk1b.loadFromFile(walk1bpath);
+            walk2b.loadFromFile(walk2bpath);
+            walk3b.loadFromFile(walk3bpath);
+            walk4b.loadFromFile(walk4bpath);
         }
         catch (Exception exception) {
             exception.printStackTrace();
         }
+
         //manages switching between textures
         int temp = player.getTextureNumber();
-        if (temp == 1) {
-            try {
-                player.setTexture(walk2);
-                player.setTextureNumber(2);
-                temp = player.getTextureNumber();
+        if (player.getDirection() == -1) {  //player facing left
+            if (temp == 1) {
+                try {
+                    player.setTexture(walk2b);
+                    player.setTextureNumber(2);
+                    temp = player.getTextureNumber();
+                }
+                catch (Exception exception) {
+                    exception.printStackTrace();
+                }
             }
-            catch (Exception exception) {
-                exception.printStackTrace();
+            else if (temp == 2) {
+                try {
+                    player.setTexture(walk3b);
+                    player.setTextureNumber(3);
+                    temp = player.getTextureNumber();
+                }
+                catch (Exception exception) {
+                    exception.printStackTrace();
+                }
+            }
+            else if (temp == 3) {
+                try {
+                    player.setTexture(walk4b);
+                    player.setTextureNumber(4);
+                    temp = player.getTextureNumber();
+                }
+                catch (Exception exception) {
+                    exception.printStackTrace();
+                }
+            }
+            else if (temp == 4) {
+                try {
+                    player.setTexture(walk1b);
+                    player.setTextureNumber(1);
+                    temp = player.getTextureNumber();
+                }
+                catch (Exception exception) {
+                    exception.printStackTrace();
+                }
+            }
+            else {
+                System.out.println("Error in animation() method in GameRunner.java");
             }
         }
-        else if (temp == 2) {
-            try {
-                player.setTexture(walk3);
-                player.setTextureNumber(3);
-                temp = player.getTextureNumber();
+        else {  //player facing right
+            if (temp == 1) {
+                try {
+                    player.setTexture(walk2);
+                    player.setTextureNumber(2);
+                    temp = player.getTextureNumber();
+                }
+                catch (Exception exception) {
+                    exception.printStackTrace();
+                }
             }
-            catch (Exception exception) {
-                exception.printStackTrace();
+            else if (temp == 2) {
+                try {
+                    player.setTexture(walk3);
+                    player.setTextureNumber(3);
+                    temp = player.getTextureNumber();
+                }
+                catch (Exception exception) {
+                    exception.printStackTrace();
+                }
             }
-        }
-        else if (temp == 3) {
-            try {
-                player.setTexture(walk4);
-                player.setTextureNumber(4);
-                temp = player.getTextureNumber();
+            else if (temp == 3) {
+                try {
+                    player.setTexture(walk4);
+                    player.setTextureNumber(4);
+                    temp = player.getTextureNumber();
+                }
+                catch (Exception exception) {
+                    exception.printStackTrace();
+                }
             }
-            catch (Exception exception) {
-                exception.printStackTrace();
+            else if (temp == 4) {
+                try {
+                    player.setTexture(walk1);
+                    player.setTextureNumber(1);
+                    temp = player.getTextureNumber();
+                }
+                catch (Exception exception) {
+                    exception.printStackTrace();
+                }
             }
-        }
-        else if (temp == 4) {
-            try {
-                player.setTexture(walk1);
-                player.setTextureNumber(1);
-                temp = player.getTextureNumber();
+            else {
+                System.out.println("Error in animation() method in GameRunner.java");
             }
-            catch (Exception exception) {
-                exception.printStackTrace();
-            }
-        }
-        else {
-            System.out.println("Error in animation() method in GameRunner.java");
         }
     }
 
