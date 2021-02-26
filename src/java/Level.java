@@ -81,7 +81,7 @@ public class Level
           }
           if(new File("./resources/player/"+name+".png").isFile())
           {
-            player = new Player(x, y, 15, 200, this, window, "./resources/player/player.png", walkAnim);
+            player = new Player(x, y, 15, 30, 200, this, window, "./resources/player/player.png", walkAnim);
             player.addSound("shoot", "./resources/sound/Shooting.wav");
             player.addSound("damaged", "./resources/sound/Player damage.wav");
             player.addSound("dead", "./resources/sound/Player dies.wav");
