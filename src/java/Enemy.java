@@ -55,9 +55,10 @@ public class Enemy extends Entity
     {
         //falling flag
         boolean landed = false;
-        boolean edge = false;
+        boolean edge = true;
         boolean diagCheck = true;
         float tempX = speedX;
+        float tempY = speedY;
 
         for(GameObject a : objectsInView)
         {
@@ -65,13 +66,14 @@ public class Enemy extends Entity
             {
                 //  Checks if the player collides with anything on the y axis and if it does checks if its above or bellow and changes the speed
                 //  so it ends up right next to it. Same for the x axis.
+                if(this.getFutureHitBox(speedX*2*direction, tempY*-1).intersection(a.getHitBox()) != null)
+                {
+                    edge = false;
+                }
                 if(this.getFutureHitBox(0, speedY*-1).intersection(a.getHitBox()) != null)
                 {
                     diagCheck = false;
-                    if(this.getFutureHitBox(0, speedY*-1).intersection(a.getHitBox()).width != this.getLocalBounds().width)
-                    {
-                        edge = true;
-                    }
+                    
                     //if collides bellow
                     if(a.getHitBox().top >= this.getPosition().y+this.getLocalBounds().height)
                     {
