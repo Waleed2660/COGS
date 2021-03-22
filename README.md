@@ -1,4 +1,6 @@
-# 210_Project
+# C.O.G.S
+
+- Run "buildme.sh" and "runme.sh" to compile & run the game.
 
 Compiling and running:
 
